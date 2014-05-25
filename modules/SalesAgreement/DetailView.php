@@ -105,17 +105,21 @@ $focus->markAsViewed($current_user->id);
 
 
 /* FIXME: Edit here */
-$emails = array(0=>'gideorosales@gmail.com');
+$contacts_focus = CRMEntity::getInstance('SHContacts');
+$contacts_focus->id = $focus->column_fields['customer'];
+$contacts_focus->retrieve_entity_info($focus->column_fields['customer'], 'SHContacts');
+	
+$emails = array(0=>$contacts_focus->column_fields['email']);
 $smarty->assign('EMAILS',$emails);
+
 $smarty->assign('SENDMAILBUTTON','permitted');
 $cond="LTrim('%s') !=''";
 $condition=array();
 foreach($emails as $key => $value) {
 	$condition[]=sprintf($cond,$value);
 }
-
 $condition_str=implode("||",$condition);
-$js="if(".$condition_str."){fnvshobj(this,'sendmail_cont');sendmail('".$currentModule."',".$_REQUEST['record'].");}else{OpenCompose('','create');}";
+$js="if(".$condition_str."){fnvshobj(this,'sendmail_cont');sendmail('SHContacts','".$focus->column_fields['customer']."');}else{OpenCompose('','create');}";
 $smarty->assign('JS',$js);
 /* FIXME: Edit here */
 

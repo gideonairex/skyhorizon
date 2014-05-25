@@ -856,19 +856,29 @@ function getOutputHtml($uitype, $fieldname, $fieldlabel, $maxlength, $col_fields
 		{
 			$homeowner_selected = 'selected';
 		}
-		
+		elseif($pmodule == 'SHContacts')
+		{
+			$sa_selected = 'selected';
+		}
+		elseif($pmodule == 'SHSupplier')
+		{
+			$po_selected = 'selected';
+		}
+
 		if(isset($_REQUEST['emailids']) && $_REQUEST['emailids'] != '')
 		{
+
 			$parent_id = $_REQUEST['emailids'];
 			$parent_name='';
-
 			$myids=explode("|",$parent_id);
+			
 			for ($i=0;$i<(count($myids)-1);$i++)
 			{
 				$realid=explode("@",$myids[$i]);
 				$entityid=$realid[0];
+				
 				$nemail=count($realid);
-
+				
 				if ($pmodule=='Accounts'){
 					require_once('modules/Accounts/Accounts.php');
 					$myfocus = new Accounts();
@@ -903,6 +913,18 @@ function getOutputHtml($uitype, $fieldname, $fieldlabel, $maxlength, $col_fields
 					$fullname=$lname.' '.$fname;
 					$homeowner_selected = 'selected';
 				}
+				elseif ($pmodule=='SalesAgreement'){
+					require_once('modules/SHContacts/SHContacts.php');
+					$myfocus = new SHContacts();
+					$myfocus->retrieve_entity_info($entityid,"SHContacts");
+					$fname=br2nl($myfocus->column_fields['firstname']);
+					$lname=br2nl($myfocus->column_fields['lastname']);
+					$fullname=$lname.' '.$fname;
+					$sa_selected = 'selected';
+					
+		
+				}
+				
 				
 				for ($j=1;$j<$nemail;$j++){
 					$querystr='select columnname from vtiger_field where fieldid=? and vtiger_field.presence in (0,2)';
@@ -933,6 +955,7 @@ function getOutputHtml($uitype, $fieldname, $fieldlabel, $maxlength, $col_fields
 		}
 		else
 		{
+			
 			if($_REQUEST['record'] != '' && $_REQUEST['record'] != NULL)
 			{
 				$parent_name='';
@@ -941,6 +964,7 @@ function getOutputHtml($uitype, $fieldname, $fieldlabel, $maxlength, $col_fields
 				$mysql = "select crmid from vtiger_seactivityrel where activityid=?";
 				$myresult = $adb->pquery($mysql, array($myemailid));
 				$mycount=$adb->num_rows($myresult);
+
 				if($mycount >0)
 				{
 					for ($i=0;$i<$mycount;$i++)
@@ -1006,6 +1030,7 @@ function getOutputHtml($uitype, $fieldname, $fieldlabel, $maxlength, $col_fields
 							$parent_name .= $homeowner_name.'<'.$myemail.'>; ';
 							$homeowner_selected = 'selected';
 						}
+	
 					}
 				}
 			}
@@ -1027,10 +1052,13 @@ function getOutputHtml($uitype, $fieldname, $fieldlabel, $maxlength, $col_fields
 					);
 			gideon 	*/
 			$editview_label[] = array(
-					'HomeOwner'=>$homeowner_selected
+					'SHContacts'=>$sa_selected,
+					'SHSupplier'=>$po_selected
 					);
+			
 			$fieldvalue[] =$parent_name;
 			$fieldvalue[] = $parent_id;
+			
 		}
 	}
 	//end of rdhital/Raju
@@ -1982,7 +2010,7 @@ function getBlockInformation($module, $result, $col_fields,$tabid,$block_label,$
 			$moveAddress = "<td rowspan='6' valign='middle' align='center'><input title='Copy billing address to shipping address'  class='button' onclick='return copyAddressRight(EditView)'  type='button' name='copyright' value='&raquo;' style='padding:0px 2px 0px 2px;font-size:12px'><br><br>
 				<input title='Copy shipping address to billing address'  class='button' onclick='return copyAddressLeft(EditView)'  type='button' name='copyleft' value='&laquo;' style='padding:0px 2px 0px 2px;font-size:12px'></td>";
 	}
-
+	
 	for($i=0; $i<$noofrows; $i++) {
 
 		$fieldtablename = $adb->query_result($result,$i,"tablename");
@@ -1995,7 +2023,6 @@ function getBlockInformation($module, $result, $col_fields,$tabid,$block_label,$
 		$generatedtype = $adb->query_result($result,$i,"generatedtype");
 		$typeofdata = $adb->query_result($result,$i,"typeofdata");
 		$defaultvalue = $adb->query_result($result,$i,"defaultvalue");
-	
 		if(($mode == '' || ($module == 'Users' && $mode == 'create')) && empty($col_fields[$fieldname])) {//ed edited
 			$col_fields[$fieldname] = $defaultvalue;
 		}

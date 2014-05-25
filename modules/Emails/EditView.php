@@ -79,13 +79,12 @@ if(isset($_REQUEST['record']) && $_REQUEST['record'] !='')
 }
 elseif(isset($_REQUEST['sendmail']) && $_REQUEST['sendmail'] !='')
 {
-	
 	$mailids = get_to_emailids($_REQUEST['pmodule']);
 	if($mailids['mailds'] != '')
 		$to_add = trim($mailids['mailds'],",").",";
 	$smarty->assign('TO_MAIL',$to_add);
 	$smarty->assign('IDLISTS',$mailids['idlists']);	
-	
+
 	$focus->mode = '';
 }
 
@@ -253,7 +252,6 @@ $image_path=$theme_path."images/";
 $disp_view = getView($focus->mode);
 $details = getBlocks($currentModule,$disp_view,$mode,$focus->column_fields);
 //changed this below line to view description in all language - bharath
-
 $smarty->assign("BLOCKS",$details[$mod_strings['LBL_EMAIL_INFORMATION']]); 
 
 $smarty->assign("MODULE",$currentModule);
@@ -313,7 +311,6 @@ if($focus->mode == 'edit')
 }
 
 // Unimplemented until jscalendar language vtiger_files are fixed
-
 $smarty->assign("CALENDAR_LANG", $app_strings['LBL_JSCALENDAR_LANG']);
 $smarty->assign("CALENDAR_DATEFORMAT", parse_calendardate($app_strings['NTC_DATE_FORMAT']));
 

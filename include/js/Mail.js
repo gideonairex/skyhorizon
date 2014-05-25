@@ -149,12 +149,16 @@ function validate_sendmail(idlist,module){
 	}
 }
 function sendmail(module,idstrings,url) {
+	var body = "module=Emails&return_module="+module+"&action=EmailsAjax&file=mailSelect&idlist="+idstrings;
+	if(url)
+		body += url;
+		
 	new Ajax.Request(
 		'index.php',
 		{
 			queue: {position: 'end', scope: 'command'},
 			method: 'post',
-			postBody: "module=Emails&return_module="+module+"&action=EmailsAjax&file=mailSelect&idlist="+idstrings+url,
+			postBody: body,
 			onComplete: function(response) {
 				if(response.responseText == "Mail Ids not permitted" || response.responseText == "No Mail Ids")
 				{

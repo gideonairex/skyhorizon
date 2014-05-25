@@ -522,6 +522,7 @@ function sendfile_email()
 														</tr>
 													{/if}
 													
+													
 													{if $MODULE eq 'HomeOwner'}
 														<tr>
 															<td align="left" style="padding-left:10px;">
@@ -615,7 +616,7 @@ function sendfile_email()
 																</td>
 															</tr>
 														{/if}
-													{elseif $TODO_PERMISSION eq 'true' || $EVENT_PERMISSION eq 'true' || $CONTACT_PERMISSION eq 'true'|| $MODULE eq 'Contacts' || ($MODULE eq 'Documents') || $MODULE eq 'HomeOwner' || $MODULE eq 'SalesAgreement'}
+													{elseif $TODO_PERMISSION eq 'true' || $EVENT_PERMISSION eq 'true' || $CONTACT_PERMISSION eq 'true'|| $MODULE eq 'Contacts' || ($MODULE eq 'Documents') || $MODULE eq 'HomeOwner' || $MODULE eq 'SalesAgreement'  || $MODULE eq 'PO'}
 
 														{if $MODULE eq 'Contacts'}
 															{assign var=subst value="contact_id"}
@@ -625,7 +626,7 @@ function sendfile_email()
 															{assign var=acc value=""}
 														{/if}
 
-														{if $MODULE eq 'Leads' || $MODULE eq 'Contacts' || $MODULE eq 'Accounts' || $MODULE eq 'HomeOwner' || $MODULE eq 'SalesAgreement'}
+														{if $MODULE eq 'Leads' || $MODULE eq 'Contacts' || $MODULE eq 'Accounts' || $MODULE eq 'HomeOwner' || $MODULE eq 'SalesAgreement' || $MODULE eq 'PO'}
 															{if $SENDMAILBUTTON eq 'permitted'}
 																<tr>
 																	<td align="left" style="padding-left:10px;">
@@ -964,10 +965,9 @@ getTagCloud();
   var fielddatatype = new Array({$VALIDATION_DATA_FIELDDATATYPE});
 </script>
 </td>
-
 	<td align=right valign=top><img src="{'showPanelTopRight.gif'|@vtiger_imageurl:$THEME}"></td>
 </tr></table>
 
-{if $MODULE eq 'Leads' or $MODULE eq 'Contacts' or $MODULE eq 'Accounts' or $MODULE eq 'Campaigns' or $MODULE eq 'Vendors' or $MODULE eq 'HomeOwner' or $MODULE eq 'SalesAgreement'}
+{if $MODULE eq 'Leads' or $MODULE eq 'Contacts' or $MODULE eq 'Accounts' or $MODULE eq 'Campaigns' or $MODULE eq 'Vendors' or $MODULE eq 'HomeOwner' or $MODULE eq 'SalesAgreement' or $MODULE eq 'PO'}
 	<form name="SendMail"><div id="sendmail_cont" style="z-index:100001;position:absolute;"></div></form>
 {/if}

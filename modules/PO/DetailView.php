@@ -103,6 +103,24 @@ $smarty->assign('CUSTOM_LINKS', Vtiger_Link::getAllByType(getTabid($currentModul
 $focus->markAsViewed($current_user->id);
 // END
 
+
+$supplier_focus = CRMEntity::getInstance('SHSupplier');
+$supplier_focus->id = $focus->column_fields['suplier'];
+$supplier_focus->retrieve_entity_info($focus->column_fields['suplier'], 'SHSupplier');
+$emails = array(0=>$supplier_focus->column_fields['email']);
+$smarty->assign('EMAILS',$emails);
+
+$smarty->assign('SENDMAILBUTTON','permitted');
+$cond="LTrim('%s') !=''";
+$condition=array();
+foreach($emails as $key => $value) {
+	$condition[]=sprintf($cond,$value);
+}
+$condition_str=implode("||",$condition);
+$js="if(".$condition_str."){fnvshobj(this,'sendmail_cont');sendmail('SHSupplier','".$focus->column_fields['suplier']."');}else{OpenCompose('','create');}";
+$smarty->assign('JS',$js);
+/* FIXME: Edit here */
+
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
 $smarty->display('DetailView.tpl');

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-17 15:50:43
+<?php /* Smarty version 2.6.18, created on 2014-05-25 11:20:27
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -653,6 +653,7 @@ unset($_smarty_tpl_vars);
 														</tr>
 													<?php endif; ?>
 													
+													
 													<?php if ($this->_tpl_vars['MODULE'] == 'HomeOwner'): ?>
 														<tr>
 															<td align="left" style="padding-left:10px;">
@@ -800,7 +801,7 @@ unset($_smarty_tpl_vars);
 																</td>
 															</tr>
 														<?php endif; ?>
-													<?php elseif ($this->_tpl_vars['TODO_PERMISSION'] == 'true' || $this->_tpl_vars['EVENT_PERMISSION'] == 'true' || $this->_tpl_vars['CONTACT_PERMISSION'] == 'true' || $this->_tpl_vars['MODULE'] == 'Contacts' || ( $this->_tpl_vars['MODULE'] == 'Documents' ) || $this->_tpl_vars['MODULE'] == 'HomeOwner' || $this->_tpl_vars['MODULE'] == 'SalesAgreement'): ?>
+													<?php elseif ($this->_tpl_vars['TODO_PERMISSION'] == 'true' || $this->_tpl_vars['EVENT_PERMISSION'] == 'true' || $this->_tpl_vars['CONTACT_PERMISSION'] == 'true' || $this->_tpl_vars['MODULE'] == 'Contacts' || ( $this->_tpl_vars['MODULE'] == 'Documents' ) || $this->_tpl_vars['MODULE'] == 'HomeOwner' || $this->_tpl_vars['MODULE'] == 'SalesAgreement' || $this->_tpl_vars['MODULE'] == 'PO'): ?>
 
 														<?php if ($this->_tpl_vars['MODULE'] == 'Contacts'): ?>
 															<?php $this->assign('subst', 'contact_id'); ?>
@@ -810,7 +811,7 @@ unset($_smarty_tpl_vars);
 															<?php $this->assign('acc', ""); ?>
 														<?php endif; ?>
 
-														<?php if ($this->_tpl_vars['MODULE'] == 'Leads' || $this->_tpl_vars['MODULE'] == 'Contacts' || $this->_tpl_vars['MODULE'] == 'Accounts' || $this->_tpl_vars['MODULE'] == 'HomeOwner' || $this->_tpl_vars['MODULE'] == 'SalesAgreement'): ?>
+														<?php if ($this->_tpl_vars['MODULE'] == 'Leads' || $this->_tpl_vars['MODULE'] == 'Contacts' || $this->_tpl_vars['MODULE'] == 'Accounts' || $this->_tpl_vars['MODULE'] == 'HomeOwner' || $this->_tpl_vars['MODULE'] == 'SalesAgreement' || $this->_tpl_vars['MODULE'] == 'PO'): ?>
 															<?php if ($this->_tpl_vars['SENDMAILBUTTON'] == 'permitted'): ?>
 																<tr>
 																	<td align="left" style="padding-left:10px;">
@@ -1305,11 +1306,10 @@ getTagCloud();
 );
 </script>
 </td>
-
 	<td align=right valign=top><img src="<?php echo vtiger_imageurl('showPanelTopRight.gif', $this->_tpl_vars['THEME']); ?>
 "></td>
 </tr></table>
 
-<?php if ($this->_tpl_vars['MODULE'] == 'Leads' || $this->_tpl_vars['MODULE'] == 'Contacts' || $this->_tpl_vars['MODULE'] == 'Accounts' || $this->_tpl_vars['MODULE'] == 'Campaigns' || $this->_tpl_vars['MODULE'] == 'Vendors' || $this->_tpl_vars['MODULE'] == 'HomeOwner' || $this->_tpl_vars['MODULE'] == 'SalesAgreement'): ?>
+<?php if ($this->_tpl_vars['MODULE'] == 'Leads' || $this->_tpl_vars['MODULE'] == 'Contacts' || $this->_tpl_vars['MODULE'] == 'Accounts' || $this->_tpl_vars['MODULE'] == 'Campaigns' || $this->_tpl_vars['MODULE'] == 'Vendors' || $this->_tpl_vars['MODULE'] == 'HomeOwner' || $this->_tpl_vars['MODULE'] == 'SalesAgreement' || $this->_tpl_vars['MODULE'] == 'PO'): ?>
 	<form name="SendMail"><div id="sendmail_cont" style="z-index:100001;position:absolute;"></div></form>
 <?php endif; ?>

@@ -1137,7 +1137,7 @@ function getBlocks($module, $disp_view, $mode, $col_fields = '', $info_type = ''
 			}
 		}
 		$result = $adb->pquery($sql, $params);
-		
+
 		$getBlockInfo = getBlockInformation($module, $result, $col_fields, $tabid, $block_label, $mode);
 	}
 	$log->debug("Exiting getBlocks method ...");

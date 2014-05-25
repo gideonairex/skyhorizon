@@ -557,6 +557,16 @@ function get_to_emailids($module) {global $log;$log->fatal($_REQUEST);
 				  FROM vtiger_homeowner
 				  INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_homeowner.homeownerid
 				  WHERE vtiger_crmentity.deleted=0 AND vtiger_homeowner.homeownerid IN ('.generateQuestionMarks($idlist).')';
+	} else if ($module == 'SHContacts'){
+		$query = 'SELECT firstname,lastname,'.implode(",", $emailFields).',vtiger_shcontacts.shcontactsid as id
+				  FROM vtiger_shcontacts
+				  INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_shcontacts.shcontactsid
+				  WHERE vtiger_crmentity.deleted=0 AND vtiger_shcontacts.shcontactsid IN ('.generateQuestionMarks($idlist).')';
+	} else if ($module == 'SHSupplier'){
+		$query = 'SELECT supplier_name,'.implode(",", $emailFields).',vtiger_shsupplier.shsupplierid as id
+				  FROM vtiger_shsupplier
+				  INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_shsupplier.shsupplierid
+				  WHERE vtiger_crmentity.deleted=0 AND vtiger_shsupplier.shsupplierid IN ('.generateQuestionMarks($idlist).')';
 	} 
 	else {
 		$query = 'SELECT vtiger_account.accountname, '.implode(",", $emailFields).',vtiger_account.accountid as id FROM vtiger_account

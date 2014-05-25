@@ -96,7 +96,29 @@ if($single_record && count($columnlists) > 0)
 				if($con_eval != "") $val_cnt++;
 			}	
 			$entity_name = $adb->query_result($result,0,'homeownername');
+			break;
+		case 'SHContacts':
+			$query = 'select concat(firstname," ",lastname) as contactname,'.implode(",",$columnlists).' from vtiger_shcontacts where vtiger_shcontacts.shcontactsid = ?';
+			$result=$adb->pquery($query, array($idlist));
+		        foreach($columnlists as $columnname)	
+			{
+				$con_eval = $adb->query_result($result,0,$columnname);
+				$field_value[$count++] = $con_eval;
+				if($con_eval != "") $val_cnt++;
+			}	
+			$entity_name = $adb->query_result($result,0,'contactname');
 			break;	
+		case 'SHSupplier':
+			$query = 'select supplier_name ,'.implode(",",$columnlists).' from vtiger_shsupplier where vtiger_shsupplier.shsupplierid = ?';
+			$result=$adb->pquery($query, array($idlist));
+		        foreach($columnlists as $columnname)	
+			{
+				$con_eval = $adb->query_result($result,0,$columnname);
+				$field_value[$count++] = $con_eval;
+				if($con_eval != "") $val_cnt++;
+			}	
+			$entity_name = $adb->query_result($result,0,'supplier_name');
+			break;
 	}	
 }
 
