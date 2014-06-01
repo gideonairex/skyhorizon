@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-25 11:20:27
+<?php /* Smarty version 2.6.18, created on 2014-06-01 10:43:00
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -649,6 +649,64 @@ unset($_smarty_tpl_vars);
 " hspace="5" align="absmiddle"  border="0"/></a>
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
 ">Add Purchase Order</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=AccountsReceivable&action=EditView&sales_no=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=AccountsReceivable&action=EditView&sales_no=<?php echo $this->_tpl_vars['ID']; ?>
+">Add Accounts Receivable</a>
+															</td>
+														</tr>
+													<?php endif; ?>
+													
+													<?php if ($this->_tpl_vars['MODULE'] == 'PO'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no=<?php echo $this->_tpl_vars['ID']; ?>
+">Add Accounts Payable</a>
+															</td>
+														</tr>
+													<?php endif; ?>
+													
+													
+													<?php if ($this->_tpl_vars['MODULE'] == 'SHExpenses'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no=<?php echo $this->_tpl_vars['ID']; ?>
+">Add Accounts Payable</a>
+															</td>
+														</tr>
+													<?php endif; ?>
+													
+													<?php if ($this->_tpl_vars['MODULE'] == 'AccountsReceivable'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=Collection&action=EditView&ar_no=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=Collection&action=EditView&ar_no=<?php echo $this->_tpl_vars['ID']; ?>
+">Add Collection</a>
+															</td>
+														</tr>
+													<?php endif; ?>
+													
+													<?php if ($this->_tpl_vars['MODULE'] == 'AccountsPayable'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=Disbursement&action=EditView&ap_no=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=Disbursement&action=EditView&ap_no=<?php echo $this->_tpl_vars['ID']; ?>
+">Add Disbursement</a>
 															</td>
 														</tr>
 													<?php endif; ?>

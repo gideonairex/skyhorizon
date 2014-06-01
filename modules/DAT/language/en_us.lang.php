@@ -9,8 +9,8 @@
  ************************************************************************************/
 
 $mod_strings = Array(
-	'DAT' => 'Domestice Airline Ticketing',
-	'SINGLE_DAT' => 'Domestice Airline Ticketing',
+	'DAT' => 'Domestic Airline Ticketing',
+	'SINGLE_DAT' => 'Domestic Airline Ticketing',
 	'ModuleName ID' => 'Module Name ID',
 
 	'LBL_CUSTOM_INFORMATION' => 'Custom Information',
