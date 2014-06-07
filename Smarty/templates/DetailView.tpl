@@ -520,41 +520,8 @@ function sendfile_email()
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}">Add Purchase Order</a>
 															</td>
 														</tr>
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=AccountsReceivable&action=EditView&sales_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=AccountsReceivable&action=EditView&sales_no={$ID}">Add Accounts Receivable</a>
-															</td>
-														</tr>
 													{/if}
-													
-													{if $MODULE eq 'PO'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no={$ID}">Add Accounts Payable</a>
-															</td>
-														</tr>
-													{/if}
-													
-													
-													{if $MODULE eq 'SHExpenses'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=AccountsPayable&action=EditView&payable_no={$ID}">Add Accounts Payable</a>
-															</td>
-														</tr>
-													{/if}
-													
-													{if $MODULE eq 'AccountsReceivable'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=Collection&action=EditView&ar_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=Collection&action=EditView&ar_no={$ID}">Add Collection</a>
-															</td>
-														</tr>
-													{/if}
+												
 													
 													{if $MODULE eq 'AccountsPayable'}
 														<tr>

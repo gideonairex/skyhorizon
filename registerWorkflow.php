@@ -16,4 +16,9 @@ $emm = new VTEntityMethodManager($adb);
 //$emm->addEntityMethod("House", "updateHouseInfo", "include/custom_workflows/House.php", "updateHouseInfo");
 //$emm->addEntityMethod("Cars", "updateCarsInfo", "include/custom_workflows/Cars.php", "updateCarsInfo");
 //$emm->addEntityMethod("ReportsKHA", "createClass", "include/custom_workflows/ReportsKHA.php", "createClass");
+
+
+//$emm->addEntityMethod("SalesAgreement", "createAR", "include/custom_workflows/SalesAgreement.php", "createAR");
+//$emm->addEntityMethod("PO", "createAP", "include/custom_workflows/PO.php", "createAP");
+//$emm->addEntityMethod("SHExpenses", "createAP", "include/custom_workflows/SHExpenses.php", "createAP");
 ?>

@@ -5,7 +5,7 @@
 		$this->db = PearDatabase::getInstance();
 		$this->log = $log;
 	}
-
+			function setColumns ( $module ) {		$this->column_fields = getColumnFields($module);	}	
 	function getSortOrder() {
 		global $currentModule;
 
