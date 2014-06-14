@@ -25,6 +25,7 @@ else
 
 $focus = CRMEntity::getInstance($currentModule);
 
+
 if($mode == 'delete') {
 	// Split the string of ids
 	$ids = explode (";",$idlist);
@@ -42,5 +43,6 @@ if($mode == 'delete') {
 		$focus->save_related_module($currentModule, $forCRMRecord, $destinationModule, $ids);
 	}
 }
+
 header("Location: index.php?module=$currentModule&record=$forCRMRecord&action=$action&parenttab=$parenttab");
 ?>

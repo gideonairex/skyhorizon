@@ -62,6 +62,7 @@
    	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
+	
     <!-- asterisk Integration -->
 {if $USE_ASTERISK eq 'true'}
 	<script type="text/javascript" src="include/js/asterisk.js"></script>

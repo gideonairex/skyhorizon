@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-10 14:13:03
+<?php /* Smarty version 2.6.18, created on 2014-06-13 14:22:28
          compiled from RelatedListNew.tpl */ ?>
 <script language="JavaScript" type="text/javascript" src="modules/PriceBooks/PriceBooks.js"></script>
 <script language="JavaScript" type="text/javascript" src="include/js/ListView.js"></script>

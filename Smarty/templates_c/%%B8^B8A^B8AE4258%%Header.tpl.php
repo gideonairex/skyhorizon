@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-01-14 14:11:27
+<?php /* Smarty version 2.6.18, created on 2014-06-13 11:20:41
          compiled from Header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Header.tpl', 15, false),array('modifier', 'vtiger_imageurl', 'Header.tpl', 85, false),array('modifier', 'escape', 'Header.tpl', 176, false),array('modifier', 'vtlib_purify', 'Header.tpl', 372, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Header.tpl', 15, false),array('modifier', 'vtiger_imageurl', 'Header.tpl', 86, false),array('modifier', 'escape', 'Header.tpl', 177, false),array('modifier', 'vtlib_purify', 'Header.tpl', 373, false),)), $this); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,6 +65,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslat
    	<script type="text/javascript">
 		jQuery.noConflict();
 	</script>
+	
     <!-- asterisk Integration -->
 <?php if ($this->_tpl_vars['USE_ASTERISK'] == 'true'): ?>
 	<script type="text/javascript" src="include/js/asterisk.js"></script>

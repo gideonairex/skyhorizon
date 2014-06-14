@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-10 15:35:40
+<?php /* Smarty version 2.6.18, created on 2014-06-13 15:39:33
          compiled from modules/ModComments/widgets/DetailViewBlockCommentItem.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'nl2br', 'modules/ModComments/widgets/DetailViewBlockCommentItem.tpl', 10, false),)), $this); ?>

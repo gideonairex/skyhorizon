@@ -428,6 +428,7 @@ if(isset($action) && isset($module))
 		{
 			$viewAttachment = true;
 		}
+		
 		if(($action == ' Delete ') && (!$entityDel))
 		{
 			$skipHeaders=false;
@@ -458,7 +459,6 @@ if(isset($action) && isset($module))
 }
 elseif(isset($module))
 {
-	
 	$currentModule = $module;
 	$currentModuleFile = $moduleDefaultFile[$currentModule];
 }
@@ -627,6 +627,13 @@ if($_REQUEST['module'] == 'Documents' && $action == 'DownloadFile')
 {
 	include('modules/Documents/DownloadFile.php');
 	exit;
+}
+
+
+
+//gideon
+if( $action == 'MCollection' || $action == 'MProcess' ) {
+	$skipHeaders = true;
 }
 
 //skip headers for popups, deleting, saving, importing and other actions
