@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-02 18:34:36
+<?php /* Smarty version 2.6.18, created on 2014-06-15 18:40:28
          compiled from com_vtiger_workflow/Footer.tpl */ ?>
 </div>
 </td>

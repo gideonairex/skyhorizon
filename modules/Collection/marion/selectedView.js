@@ -18,15 +18,18 @@ define( function ( require ){
 			var total = 0;
 			for( var i = 0 ; i < this.collection.length ; i++){
 				var sales = this.collection.models[i].get('sales');
-				total = total + parseInt(sales);
+				var payment = this.collection.models[i].get('payment');
+				total = total + parseInt(sales) - parseInt(payment);
 
 			}
+			
 			this.$el.find('.total-sales').html(total);
 		},
 		subtractTotal : function( model ){
 			var total = parseInt(this.$el.find('.total-sales').html());
 			var diff = parseInt( model.get('sales') );
-			var newTotal = total - diff;
+			var payment = parseInt( model.get('payment') );
+			var newTotal = total - diff + payment;
 			this.$el.find('.total-sales').html(newTotal);
 			model.destroy();
 		},

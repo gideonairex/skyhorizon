@@ -34,7 +34,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 			  inner join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
 			  left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status = "Pending"';
+			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Pending","Partial")';
 			   
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
@@ -52,10 +52,11 @@ if( $_REQUEST['func'] == 'searchAR'){
 			$data[$i]['sales'] = $adb->query_result($result, $i, "sales");
 			$data[$i]['sales_no'] = $adb->query_result($result, $i, "sales_no");
 			$data[$i]['ar_status'] = $adb->query_result($result, $i, "ar_status");
-			
+			$data[$i]['payment'] = $adb->query_result($result, $i, "payment");
 			$data[$i]['account_name'] = $adb->query_result($result, $i, "account_name");
 			$data[$i]['contact'] = $adb->query_result($result, $i, "firstname").' '.$adb->query_result($result, $i, "lastname");
 			$data[$i]['pax'] = $adb->query_result($result, $i, "pax");
+			$data[$i]['awt'] = $adb->query_result($result, $i, "awt");
 			
 		}
 		
@@ -65,7 +66,9 @@ if( $_REQUEST['func'] == 'searchAR'){
 }else if( $_REQUEST['func'] == 'updateRelations' ){
 	require_once("modules/Collection/Collection.php");
 	$focus = new Collection();
-
+	$payment = $_REQUEST['payment'];
+	
+	
 	$entityBody = file_get_contents('php://input');
 	$arIds = array();
 	$data = json_decode($entityBody,true);
@@ -79,13 +82,43 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"ModifiedTime" => "",
 								"assigned_user_id" => $_SESSION['authenticated_user_id'],
 								"c_payment_method" => "cash",
-								"payment" => $_REQUEST['payment']
+								"payment" => $payment
 							);
 							
 	$focus->save( 'Collection' );
 	$return_id = $focus->id;
 	
+	
+	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
+	$ar_obj = new AccountsReceivable();
+	$ar_obj->setColumns('AccountsReceivable');
+	
 	if(!empty($arIds)) {
+		
+		for( $i = 0 ; $i < count($arIds) ; $i++){
+			
+			if( $payment > 0 ){
+				$id = $arIds[$i];
+				$ar_obj->mode = 'edit';
+				$ar_obj->id = $id;
+				$ar_obj->retrieve_entity_info($id, 'AccountsReceivable');
+				
+				$neededPayment = $ar_obj->column_fields['sales'] - $ar_obj->column_fields['payment'];
+				
+
+				if( $payment >= $neededPayment){
+					$payment -=  $neededPayment;
+					$ar_obj->column_fields['payment'] = $neededPayment + $ar_obj->column_fields['payment'];
+				}else{
+					$ar_obj->column_fields['payment'] = $payment;
+				}
+
+				$ar_obj->save('AccountsReceivable');
+			}
+			
+		}
+		
+	
 		$focus->save_related_module('Collection', $return_id, 'AccountsReceivable', $arIds);
 	}
 	

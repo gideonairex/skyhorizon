@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-04 15:17:17
+<?php /* Smarty version 2.6.18, created on 2014-06-15 18:41:00
          compiled from com_vtiger_workflow/EditWorkflowTriggerTypes.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageURL', 'com_vtiger_workflow/EditWorkflowTriggerTypes.tpl', 19, false),)), $this); ?>
