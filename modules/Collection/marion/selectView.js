@@ -8,8 +8,20 @@ define( function ( require ){
 	var selectView = Marionette.ItemView.extend({
 		template : _.template( template ),
 		tagName : 'tr',
+		'ui' : {
+			'payment' : '.payment',
+			'awt' : '.awt'
+		},
 		'events' : {
-			'click #delete' : 'removeMe'
+			'click #delete' : 'removeMe',
+			'change input.payment' : 'updatePayment',
+			'change input.awt' : 'updateAWT'
+		},
+		'updatePayment' : function(){
+			this.model.set('payment',this.ui.payment.val());
+		},
+		'updateAWT' : function(){
+			this.model.set('awt',this.ui.awt.val());
 		},
 		'removeMe' : function(){
 			this.trigger("do:removeme",this.model);

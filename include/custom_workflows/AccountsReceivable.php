@@ -1,12 +1,15 @@
 <?php
 function updateStatus($entity){
 	
-	if( $entity->data['payment'] == 0 ){
+	$payment = $entity->data['payment'] + $entity->data['awt'];
+	
+	
+	if( $payment == 0 ){
 		$status = 'Pending';
 	}else{
 		$status = 'Paid';
 		
-		if( $entity->data['payment'] < $entity->data['sales'] ){
+		if( $payment < $entity->data['sales'] ){
 			$status = 'Partial'; 
 		}
 	

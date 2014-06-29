@@ -123,6 +123,38 @@ $smarty->assign('JS',$js);
 
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
+if( ($current_user->roleid == SUPERVISOR 
+	|| $current_user->roleid == RESERVATION 
+	|| $current_user->roleid == ADMIN) 
+	&& $focus->column_fields['po_status'] == 'Pending' ){
+	$smarty->assign('SUBMIT_CONFIRMATION', 'true');
+}
+
+if( ($current_user->roleid == SUPERVISOR 
+	|| $current_user->roleid == ADMIN)
+	&& $focus->column_fields['po_status'] == 'Pending for Confirmation'){
+	$smarty->assign('CONFIRM', 'true');
+}
+
+if( ( $current_user->roleid == ACCOUNTING || $current_user->roleid == ADMIN ) 
+	&& $focus->column_fields['po_status'] == 'Confirmed' ){
+	$smarty->assign('ACKNOWLEDGE', 'true');
+}
+
+if( ($current_user->roleid == SUPERVISOR 
+	|| $current_user->roleid == RESERVATION 
+	|| $current_user->roleid == ADMIN )
+	&& $focus->column_fields['po_status'] == 'Acknowledge') {
+	$smarty->assign('APPROVE', 'true');
+}
+
+
+if ( $focus->column_fields['po_status'] != 'Pending'){
+	$smarty->assign('EDIT_DUPLICATE', 'not_permitted');
+	$smarty->assign('DELETE', 'not_permitted');
+}
+
+
 $smarty->display('DetailView.tpl');
 
 ?>

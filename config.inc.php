@@ -203,4 +203,9 @@ $MINIMUM_CRON_FREQUENCY = 15;
 define("GOOGLE_API_KEY", "AIzaSyCrycnRa8fxv7QR5aaCY590k25His2vUMg"); 
 define("LATCENTER", 14.617222346451792); 
 define("LNGCENTER", 121.12362384796143); 
+
+define("ADMIN", "H2");
+define("SUPERVISOR", "H7");
+define("RESERVATION", "H8");
+define("ACCOUNTING", "H9");
 ?>

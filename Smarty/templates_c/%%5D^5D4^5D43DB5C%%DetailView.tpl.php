@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-13 14:22:24
+<?php /* Smarty version 2.6.18, created on 2014-06-29 11:34:37
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -315,12 +315,12 @@ unset($_smarty_tpl_vars);
 &nbsp;">&nbsp;
 												<?php endif; ?>
 												<?php if ($this->_tpl_vars['EDIT_DUPLICATE'] == 'permitted' && $this->_tpl_vars['MODULE'] != 'Documents'): ?>
-													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
+													<!-- input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
 " accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_KEY']; ?>
 " class="crmbutton small create" onclick="DetailView.return_module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
 '; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
 '; submitFormForAction('DetailView','EditView');" type="button" name="Duplicate" value="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_LABEL']; ?>
-">&nbsp;
+" &nbsp;--> 
 												<?php endif; ?>
 												<?php if ($this->_tpl_vars['DELETE'] == 'permitted'): ?>
 													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_TITLE']; ?>
@@ -645,12 +645,67 @@ unset($_smarty_tpl_vars);
 														<tr>
 															<td align="left" style="padding-left:10px;">
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
+&no_of_pax=<?php echo $this->_tpl_vars['NOPAX']; ?>
+&pax=<?php echo $this->_tpl_vars['PAX']; ?>
 "><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
 " hspace="5" align="absmiddle"  border="0"/></a>
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
+&no_of_pax=<?php echo $this->_tpl_vars['NOPAX']; ?>
+&pax=<?php echo $this->_tpl_vars['PAX']; ?>
 ">Add Purchase Order</a>
 															</td>
 														</tr>
+													<?php endif; ?>
+													
+													<?php if ($this->_tpl_vars['MODULE'] == 'PO'): ?>
+													
+														<?php if ($this->_tpl_vars['SUBMIT_CONFIRMATION'] == 'true'): ?>
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record=<?php echo $this->_tpl_vars['ID']; ?>
+">Submit for Confirmation</a>
+																</td>
+															</tr>
+														<?php endif; ?>
+														
+														<?php if ($this->_tpl_vars['CONFIRM'] == 'true'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record=<?php echo $this->_tpl_vars['ID']; ?>
+">Confirm</a>
+															</td>
+														</tr>
+														<?php endif; ?>
+														
+														<?php if ($this->_tpl_vars['ACKNOWLEDGE'] == 'true'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record=<?php echo $this->_tpl_vars['ID']; ?>
+">Acknowledge</a>
+															</td>
+														</tr>
+														<?php endif; ?>
+														
+														<?php if ($this->_tpl_vars['APPROVE'] == 'true'): ?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
+">Approve</a>
+															</td>
+														</tr>
+														<?php endif; ?>
 													<?php endif; ?>
 												
 													
@@ -1217,12 +1272,12 @@ _indicator");
 &nbsp;">&nbsp;
 												<?php endif; ?>
 												<?php if ($this->_tpl_vars['EDIT_DUPLICATE'] == 'permitted' && $this->_tpl_vars['MODULE'] != 'Documents'): ?>
-													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
+													<!-- input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
 " accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_KEY']; ?>
 " class="crmbutton small create" onclick="DetailView.return_module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
 '; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
 '; submitFormForAction('DetailView','EditView');" type="submit" name="Duplicate" value="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_LABEL']; ?>
-">&nbsp;
+" &nbsp; -->
 												<?php endif; ?>
 												<?php if ($this->_tpl_vars['DELETE'] == 'permitted'): ?>
 													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_TITLE']; ?>

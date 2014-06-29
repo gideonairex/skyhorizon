@@ -35,9 +35,9 @@ define( function ( require ){
 		},
 		createCollection : function ( e ) {
 			e.preventDefault();
-			var data = Backbone.Syphon.serialize(this);
+			//var data = Backbone.Syphon.serialize(this);
 			this.$el.find('.create-collection').attr("disabled", "disabled");
-			App.trigger('collections:create-collections',this.collection,data);
+			App.trigger('collections:create-collections',this.collection);
 		}
 		
 	});

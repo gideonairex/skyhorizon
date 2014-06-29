@@ -56,10 +56,10 @@ define( function ( require ) {
 			var collection = new Collection( );
 			return collection;
 		},
-		'updateRelation' : function ( collection, data ){
-			collection.url +=  '&func=updateRelations&payment='+data.payment;
+		'updateRelation' : function ( collection ){
+			collection.url +=  '&func=updateRelations';
 			var defer = $.Deferred();
-
+			
 			collection.save({
 				error:   function(collection, xhr, options){
 				   console.log(xhr.responseText);

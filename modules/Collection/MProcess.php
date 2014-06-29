@@ -70,10 +70,31 @@ if( $_REQUEST['func'] == 'searchAR'){
 	
 	
 	$entityBody = file_get_contents('php://input');
-	$arIds = array();
 	$data = json_decode($entityBody,true);
+	
+	$payment = 0;
+	$awt = 0;
+	
+	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
+	$ar_obj = new AccountsReceivable();
+	$ar_obj->setColumns('AccountsReceivable');
+	
+	$arIds = array();
 	foreach ( $data as $ar ){
+
+		$payment += $ar['payment'];
+		$awt += $ar['awt'];
+		
 		$arIds[] = $ar['id'];
+		$id = $ar['id'];
+		$ar_obj->mode = 'edit';
+		$ar_obj->id = $id;
+		$ar_obj->retrieve_entity_info($id, 'AccountsReceivable');
+		
+		$ar_obj->column_fields['payment'] +=  $ar['payment'];
+		$ar_obj->column_fields['awt'] +=  $ar['awt'];
+		$ar_obj->save('AccountsReceivable');
+		
 	}
 	
 	$focus->column_fields = Array
@@ -82,49 +103,23 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"ModifiedTime" => "",
 								"assigned_user_id" => $_SESSION['authenticated_user_id'],
 								"c_payment_method" => "cash",
-								"payment" => $payment
+								"payment" => $payment,
+								"awt" => $awt
 							);
 							
 	$focus->save( 'Collection' );
 	$return_id = $focus->id;
 	
 	
-	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
-	$ar_obj = new AccountsReceivable();
-	$ar_obj->setColumns('AccountsReceivable');
-	
-	if(!empty($arIds)) {
-		
-		for( $i = 0 ; $i < count($arIds) ; $i++){
-			
-			if( $payment > 0 ){
-				$id = $arIds[$i];
-				$ar_obj->mode = 'edit';
-				$ar_obj->id = $id;
-				$ar_obj->retrieve_entity_info($id, 'AccountsReceivable');
-				
-				$neededPayment = $ar_obj->column_fields['sales'] - $ar_obj->column_fields['payment'];
-				
-
-				if( $payment >= $neededPayment){
-					$payment -=  $neededPayment;
-					$ar_obj->column_fields['payment'] = $neededPayment + $ar_obj->column_fields['payment'];
-				}else{
-					$ar_obj->column_fields['payment'] = $payment;
-				}
-
-				$ar_obj->save('AccountsReceivable');
-			}
-			
-		}
-		
+	if(!empty($data)) {
 	
 		$focus->save_related_module('Collection', $return_id, 'AccountsReceivable', $arIds);
+		
 	}
 	
 	//echo json_encode($HTTP_RAW_POST_DATA);
 	echo json_encode( array( 'id' => $focus->id ) );
-
+	
 }else{
 	echo json_encode(array('error'=>'invalid action'));
 }

@@ -40,6 +40,8 @@ $smarty->assign('CATEGORY', $category);
 $smarty->assign('IMAGE_PATH', "themes/$theme/images/");
 $smarty->assign('THEME', $theme);
 $smarty->assign('ID', $focus->id);
+$smarty->assign('PAX', $focus->column_fields['pax']);
+$smarty->assign('NOPAX', $focus->column_fields['quantity']);
 $smarty->assign('MODE', $focus->mode);
 
 $recordName = array_values(getEntityName($currentModule, $focus->id));

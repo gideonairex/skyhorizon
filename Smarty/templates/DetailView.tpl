@@ -268,7 +268,7 @@ function sendfile_email()
 													<input title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" class="crmbutton small edit" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.return_id.value='{$ID}';DetailView.module.value='{$MODULE}';submitFormForAction('DetailView','EditView');" type="button" name="Edit" value="&nbsp;{$APP.LBL_EDIT_BUTTON_LABEL}&nbsp;">&nbsp;
 												{/if}
 												{if $EDIT_DUPLICATE eq 'permitted' && $MODULE neq 'Documents'}
-													<input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="crmbutton small create" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='{$MODULE}'; submitFormForAction('DetailView','EditView');" type="button" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}">&nbsp;
+													<!-- input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="crmbutton small create" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='{$MODULE}'; submitFormForAction('DetailView','EditView');" type="button" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}" &nbsp;--> 
 												{/if}
 												{if $DELETE eq 'permitted'}
 													<input title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" class="crmbutton small delete" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='index'; {if $MODULE eq 'Accounts'} var confirmMsg = '{$APP.NTC_ACCOUNT_DELETE_CONFIRMATION}' {else} var confirmMsg = '{$APP.NTC_DELETE_CONFIRMATION}' {/if}; submitFormForActionWithConfirmation('DetailView', 'Delete', confirmMsg);" type="button" name="Delete" value="{$APP.LBL_DELETE_BUTTON_LABEL}">&nbsp;
@@ -516,10 +516,49 @@ function sendfile_email()
 													{if $MODULE eq 'SalesAgreement'}
 														<tr>
 															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}">Add Purchase Order</a>
+																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}&pax={$PAX}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}&pax={$PAX}">Add Purchase Order</a>
 															</td>
 														</tr>
+													{/if}
+													
+													{if $MODULE eq 'PO'}
+													
+														{if $SUBMIT_CONFIRMATION eq 'true'}
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record={$ID}">Submit for Confirmation</a>
+																</td>
+															</tr>
+														{/if}
+														
+														{if $CONFIRM eq 'true'}
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record={$ID}">Confirm</a>
+															</td>
+														</tr>
+														{/if}
+														
+														{if $ACKNOWLEDGE eq 'true'}
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record={$ID}">Acknowledge</a>
+															</td>
+														</tr>
+														{/if}
+														
+														{if $APPROVE eq 'true'}
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record={$ID}">Approve</a>
+															</td>
+														</tr>
+														{/if}
 													{/if}
 												
 													
@@ -915,7 +954,7 @@ function sendfile_email()
 													<input title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" class="crmbutton small edit" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.return_id.value='{$ID}';DetailView.module.value='{$MODULE}';submitFormForAction('DetailView','EditView');" type="submit" name="Edit" value="&nbsp;{$APP.LBL_EDIT_BUTTON_LABEL}&nbsp;">&nbsp;
 												{/if}
 												{if $EDIT_DUPLICATE eq 'permitted' && $MODULE neq 'Documents'}
-													<input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="crmbutton small create" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='{$MODULE}'; submitFormForAction('DetailView','EditView');" type="submit" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}">&nbsp;
+													<!-- input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="crmbutton small create" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='{$MODULE}'; submitFormForAction('DetailView','EditView');" type="submit" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}" &nbsp; -->
 												{/if}
 												{if $DELETE eq 'permitted'}
 													<input title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" class="crmbutton small delete" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='index'; {if $MODULE eq 'Accounts'} var confirmMsg = '{$APP.NTC_ACCOUNT_DELETE_CONFIRMATION}' {else} var confirmMsg = '{$APP.NTC_DELETE_CONFIRMATION}' {/if}; submitFormForActionWithConfirmation('DetailView', 'Delete', confirmMsg);" type="button" name="Delete" value="{$APP.LBL_DELETE_BUTTON_LABEL}">&nbsp;
