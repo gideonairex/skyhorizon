@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-15 18:40:27
+<?php /* Smarty version 2.6.18, created on 2014-07-02 14:13:19
          compiled from com_vtiger_workflow/ModuleTitle.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'com_vtiger_workflow/ModuleTitle.tpl', 4, false),array('modifier', 'getTranslatedString', 'com_vtiger_workflow/ModuleTitle.tpl', 7, false),)), $this); ?>

@@ -13,7 +13,8 @@ requirejs.config({
 		marionette : 'include/components/marionette/lib/core/amd/backbone.marionette',
 		collection : 'modules/Collection/marion/app',
 		text : 'include/components/text/text',
-		bootstrap : 'include/components/bootstrap/dist/js/bootstrap' 
+		bootstrap : 'include/components/bootstrap/dist/js/bootstrap',
+		'bootstrap-datepicker' : 'include/components/bootstrap-datepicker/js/bootstrap-datepicker'
     },
 	
 	shim : {
@@ -29,8 +30,11 @@ requirejs.config({
 		'bootstrap' : {
 			'deps' : [ 'jquery' ]
 		},
+		'bootstrap-datepicker' : {
+			'deps' : [ 'jquery' ]
+		},
 		'marionette': {
-			'deps' : [ 'backbone', 'backbone.wreqr', 'backbone.babysitter', 'backbone.syphon', 'backbone.validation', 'bootstrap' ]
+			'deps' : [ 'backbone', 'backbone.wreqr', 'backbone.babysitter', 'backbone.syphon', 'backbone.validation', 'bootstrap', 'bootstrap-datepicker' ]
 		},
 		'collection' : {
 			'deps' : [ 'marionette' ]

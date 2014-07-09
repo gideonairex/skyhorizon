@@ -5,7 +5,7 @@ function updateStatus($entity){
 	
 	
 	if( $payment == 0 ){
-		$status = 'Pending';
+		$status = 'Unpaid';
 	}else{
 		$status = 'Paid';
 		

@@ -19,9 +19,11 @@ define( function ( require ){
 		},
 		'updatePayment' : function(){
 			this.model.set('payment',this.ui.payment.val());
+			this.trigger('do:updatePayment',this.model);
 		},
 		'updateAWT' : function(){
 			this.model.set('awt',this.ui.awt.val());
+			this.trigger('do:updatePayment',this.model);
 		},
 		'removeMe' : function(){
 			this.trigger("do:removeme",this.model);

@@ -22,7 +22,9 @@ $tobeCleaned = array(
 'Collection',
 'AccountsPayable',
 'Disbursement',
-'Documents'
+'Documents',
+'APChecks',
+'ARChecks'
 );
 
 $db = PearDatabase::getInstance();
@@ -41,5 +43,6 @@ $db->pquery($delete_crmentity,array());
 $delete_crmentityrel = "delete from vtiger_crmentityrel";
 $db->pquery($delete_crmentityrel,array());
 
+$db->completeTransaction();
 $db->println("Succesful Clean Up");
 ?>

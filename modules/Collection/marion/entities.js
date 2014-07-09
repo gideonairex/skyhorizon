@@ -14,7 +14,6 @@ define( function ( require ) {
 		url : 'index.php?module=Collection&action=MProcess',
 	} );
 	
-	
 	var SelectedModel = Backbone.Model.extend( {
 		idAttribute: 'id'
 		// add validation for arno
@@ -28,7 +27,6 @@ define( function ( require ) {
 			Backbone.sync("create", this , options );
 		}
 	} );
-	
 	
     var API = {
 		'searchAR' : function( data ){
@@ -56,8 +54,8 @@ define( function ( require ) {
 			var collection = new Collection( );
 			return collection;
 		},
-		'updateRelation' : function ( collection ){
-			collection.url +=  '&func=updateRelations';
+		'updateRelation' : function ( collection, data ){
+			collection.url +=  '&func=updateRelations&'+ data;
 			var defer = $.Deferred();
 			
 			collection.save({

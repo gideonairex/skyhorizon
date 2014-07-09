@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-15 18:37:22
+<?php /* Smarty version 2.6.18, created on 2014-07-06 08:55:12
          compiled from modules/PickList/ShowRoleSelect.tpl */ ?>
 <b><?php echo $this->_tpl_vars['MOD']['LBL_SELECT_ROLES']; ?>
 </b><br>

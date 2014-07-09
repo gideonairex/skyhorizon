@@ -5,39 +5,76 @@ define( function ( require ){
 	var _ = require( 'underscore' );
 	var template = require( 'text!modules/Collection/marion/templates/selectedView.html' );
 	var selectView  = require( 'modules/Collection/marion/selectView' );
+	var $ = require( 'jquery' );
 	
 	var selectedView = Marionette.CompositeView.extend({
 		template : _.template( template ),
 		itemView : selectView,
 		itemViewContainer : 'table.here',
-		events : {
-			'submit form' : 'createCollection'
+		ui : {
+			'dateOfCheck' : '.date-of-check',
+			'paymentType' : '.payment_type',
+			'form' : 'form',
+			'checkDetails' : '.check-details'
 		},
-		sumTotal : function(){
+		events : {
+			'submit form' : 'createCollection',
+			'change @ui.paymentType' : 'toggleCheckDetails'
+		},
 			
-			var total = 0;
+		onRender : function () {
+			this.toggleCheckDetails();
+			this.ui.dateOfCheck.datepicker({
+				'format' : 'yyyy-mm-dd'
+			});
+		},
+		
+		toggleCheckDetails : function() {
+			if( this.ui.paymentType.val() == 'Check') {
+				this.ui.checkDetails.css('display','')
+			}else {
+				this.ui.checkDetails.css('display','none')
+			}
+		},
+		
+		
+		updateBalance : function(){
+			
+			var totalBalance = 0;
 			for( var i = 0 ; i < this.collection.length ; i++){
 				var sales = this.collection.models[i].get('sales');
 				var payment = this.collection.models[i].get('payment');
-				total = total + parseInt(sales) - parseInt(payment);
-
+				totalBalance = totalBalance + parseFloat(sales) - parseFloat(payment);
 			}
 			
-			this.$el.find('.total-sales').html(total);
+			this.$el.find('.total-balance').html(totalBalance);
 		},
+		
+		updatePayment : function( model ){
+			var totalPayment = 0;
+			for( var i = 0 ; i < this.collection.length ; i++){
+				var payment = this.collection.models[i].get('payment');
+				var ewt = this.collection.models[i].get('awt');
+				totalPayment = totalPayment + parseFloat(ewt) + parseFloat(payment);
+			}
+			this.$el.find('.total-payment').html(totalPayment);
+		},
+		
 		subtractTotal : function( model ){
-			var total = parseInt(this.$el.find('.total-sales').html());
-			var diff = parseInt( model.get('sales') );
-			var payment = parseInt( model.get('payment') );
+			var total = parseFloat(this.$el.find('.total-sales').html());
+			var diff = parseFloat( model.get('sales') );
+			var payment = parseFloat( model.get('payment') );
 			var newTotal = total - diff + payment;
 			this.$el.find('.total-sales').html(newTotal);
 			model.destroy();
 		},
+		
+		
 		createCollection : function ( e ) {
 			e.preventDefault();
-			//var data = Backbone.Syphon.serialize(this);
+			var data = this.ui.form.serialize();
 			this.$el.find('.create-collection').attr("disabled", "disabled");
-			App.trigger('collections:create-collections',this.collection);
+			App.trigger('collections:create-collections',this.collection,data);
 		}
 		
 	});

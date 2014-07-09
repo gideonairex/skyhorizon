@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-29 11:34:37
+<?php /* Smarty version 2.6.18, created on 2014-07-02 14:18:37
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -659,53 +659,35 @@ unset($_smarty_tpl_vars);
 													
 													<?php if ($this->_tpl_vars['MODULE'] == 'PO'): ?>
 													
-														<?php if ($this->_tpl_vars['SUBMIT_CONFIRMATION'] == 'true'): ?>
+														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
 															<tr>
 																<td align="left" style="padding-left:10px;">
-																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record=<?php echo $this->_tpl_vars['ID']; ?>
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
 "><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
 " hspace="5" align="absmiddle"  border="0"/></a>
-																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record=<?php echo $this->_tpl_vars['ID']; ?>
-">Submit for Confirmation</a>
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
+">Approve</a>
 																</td>
 															</tr>
 														<?php endif; ?>
 														
-														<?php if ($this->_tpl_vars['CONFIRM'] == 'true'): ?>
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record=<?php echo $this->_tpl_vars['ID']; ?>
+													<?php endif; ?>
+													
+													
+													<?php if ($this->_tpl_vars['MODULE'] == 'SHExpenses'): ?>
+													
+														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=SHExpenses&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
 "><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
 " hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record=<?php echo $this->_tpl_vars['ID']; ?>
-">Confirm</a>
-															</td>
-														</tr>
-														<?php endif; ?>
-														
-														<?php if ($this->_tpl_vars['ACKNOWLEDGE'] == 'true'): ?>
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record=<?php echo $this->_tpl_vars['ID']; ?>
-"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
-" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record=<?php echo $this->_tpl_vars['ID']; ?>
-">Acknowledge</a>
-															</td>
-														</tr>
-														<?php endif; ?>
-														
-														<?php if ($this->_tpl_vars['APPROVE'] == 'true'): ?>
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
-"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
-" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
+																	<a class="webMnu" href="index.php?module=SHExpenses&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
 ">Approve</a>
-															</td>
-														</tr>
+																</td>
+															</tr>
 														<?php endif; ?>
+														
 													<?php endif; ?>
 												
 													

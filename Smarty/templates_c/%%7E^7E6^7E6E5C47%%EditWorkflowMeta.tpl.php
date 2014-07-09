@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-15 18:41:00
+<?php /* Smarty version 2.6.18, created on 2014-07-02 14:13:26
          compiled from com_vtiger_workflow/EditWorkflowMeta.tpl */ ?>
 
 <table class="listTableTopButtons" width="100%" border="0" cellspacing="0" cellpadding="5">

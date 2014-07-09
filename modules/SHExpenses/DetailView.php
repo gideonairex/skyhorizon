@@ -105,6 +105,17 @@ $focus->markAsViewed($current_user->id);
 
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
+
+if ( $current_user->roleid == ADMIN && $focus->column_fields['expense_status'] == 'Pending' ) {
+	$smarty->assign('SUBMIT_APRROVED', 'true');
+}
+
+if ( $current_user->roleid != ADMIN && $focus->column_fields['expense_status'] == 'Approved' ) {
+	$smarty->assign('EDIT_DUPLICATE', 'not_permitted');
+	$smarty->assign('DELETE', 'not_permitted');
+}
+
+
 $smarty->display('DetailView.tpl');
 
 ?>

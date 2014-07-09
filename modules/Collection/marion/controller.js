@@ -11,13 +11,16 @@ define( function ( require ) {
 	var layout = new bodyView();
 	App.content.show( layout )
 	
-	
 	var selected = new selectedView( {
 										collection : App.request( 'selected:init-collection' )
 									} ) 
 	selected.on("itemview:do:removeme", function(ViewInstance,model){
 		selected.subtractTotal( model );
 	}); 
+	
+	selected.on("itemview:do:updatePayment", function(ViewInstance,model){
+		selected.updatePayment();
+	});
 	
 	var Router = Marionette.AppRouter.extend({
 		appRoutes : {
@@ -53,13 +56,12 @@ define( function ( require ) {
 					
 				}
 				
-
 			} );
 		},
 		
 		'addSelected' : function( model ){
 			selected.collection.add( model )
-			selected.sumTotal();
+			selected.updateBalance();
 		},
 
 		'createCollection' : function( selectedCollection, data ){

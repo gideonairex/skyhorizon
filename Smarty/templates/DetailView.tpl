@@ -524,41 +524,29 @@ function sendfile_email()
 													
 													{if $MODULE eq 'PO'}
 													
-														{if $SUBMIT_CONFIRMATION eq 'true'}
+														{if $SUBMIT_APRROVED eq 'true'}
 															<tr>
 																<td align="left" style="padding-left:10px;">
-																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																	<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirmation&record={$ID}">Submit for Confirmation</a>
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record={$ID}">Approve</a>
 																</td>
 															</tr>
 														{/if}
 														
-														{if $CONFIRM eq 'true'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForConfirm&record={$ID}">Confirm</a>
-															</td>
-														</tr>
+													{/if}
+													
+													
+													{if $MODULE eq 'SHExpenses'}
+													
+														{if $SUBMIT_APRROVED eq 'true'}
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=SHExpenses&action=SubmitForApprove&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=SHExpenses&action=SubmitForApprove&record={$ID}">Approve</a>
+																</td>
+															</tr>
 														{/if}
 														
-														{if $ACKNOWLEDGE eq 'true'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForAcknowledge&record={$ID}">Acknowledge</a>
-															</td>
-														</tr>
-														{/if}
-														
-														{if $APPROVE eq 'true'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=SubmitForApprove&record={$ID}">Approve</a>
-															</td>
-														</tr>
-														{/if}
 													{/if}
 												
 													

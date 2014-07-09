@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-15 18:37:17
+<?php /* Smarty version 2.6.18, created on 2014-07-06 08:55:04
          compiled from modules/PickList/AssignPicklistValues.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'modules/PickList/AssignPicklistValues.tpl', 31, false),)), $this); ?>

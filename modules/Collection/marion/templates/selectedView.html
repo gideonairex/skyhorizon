@@ -1,5 +1,5 @@
-<div class="col-md-2" ></div>
-<div class="col-md-8" >
+<div class="col-md-1" ></div>
+<div class="col-md-10" >
 
 	<h3>Selected ARs <small>list</small></h3>
 	<table class="table table-hover here">
@@ -8,19 +8,59 @@
 			<th> Sales No </th>
 			<th> Status </th>
 			<th> Sales </th>
+			<th> Total Payment </th>
+			<th> Balance </th>
 			<th> Payment </th>
-			<th> Payment </th>
-			<th> AWT </th>
+			<th> EWT </th>
 			<th> Action </th>
 	    </tr>
 	</table>
 	
+	<h3>Payment Details</h3>
 	<form>
 		<table class="table table-hover">
 			<tr>
-				<th style="text-align:right"> <b>Total:</b> </th>
-				<th class="total-sales"> 0.00 </th>
+				<td  class="text-right"> Payment Type </td>
+				<td> 
+					<select name="payment_type" class="form-control payment_type">
+						<option value="Cash on hand">Cash on hand</option>
+						<option value="Cash online">Cash online</option>
+						<option value="Check">Check</option>
+					</select>
+				</td>
 			</tr>
+			
+			<tr class="check-details">
+				<td class="text-right"> Check No </td>
+				<td> 
+					<input class="form-control check-no" name="check_no" placeholder="Enter Check no">
+				</td>
+			</tr>
+			
+			<tr class="check-details">
+				<td class="text-right"> Date of Check </td>
+				<td> 
+					<input class="form-control date-of-check" name="date_of_check" placeholder="Enter Date of Check">
+				</td>
+			</tr>
+			
+			<tr class="check-details">
+				<td class="text-right"> Bank </td>
+				<td> 
+					<input class="form-control bank" name="bank" placeholder="Enter Bank Name">
+				</td>
+			</tr>
+			
+			<tr>
+				<th class="text-right"> <b>Total Balance:</b> </th>
+				<th class="total-balance"> 0.00 </th>
+			</tr>
+			
+			<tr>
+				<th class="text-right"> <b>Total Payment:</b> </th>
+				<th class="total-payment"> 0.00 </th>
+			</tr>
+			
 			<tr>
 				<td colspan=2 style="text-align:center"> <button type="submit" class="btn btn-success create-collection">Create Collection</button> </td>
 			</tr>
@@ -29,4 +69,4 @@
 	</form>
 	
 </div>
-<div class="col-md-2" ></div>
+<div class="col-md-1" ></div>

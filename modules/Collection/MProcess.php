@@ -34,7 +34,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 			  inner join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
 			  left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Pending","Partial")';
+			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial")';
 			   
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
@@ -53,6 +53,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 			$data[$i]['sales_no'] = $adb->query_result($result, $i, "sales_no");
 			$data[$i]['ar_status'] = $adb->query_result($result, $i, "ar_status");
 			$data[$i]['payment'] = $adb->query_result($result, $i, "payment");
+			$data[$i]['balance'] = $adb->query_result($result, $i, "sales") - ( $adb->query_result($result, $i, "payment") + $adb->query_result($result, $i, "awt") );
 			$data[$i]['account_name'] = $adb->query_result($result, $i, "account_name");
 			$data[$i]['contact'] = $adb->query_result($result, $i, "firstname").' '.$adb->query_result($result, $i, "lastname");
 			$data[$i]['pax'] = $adb->query_result($result, $i, "pax");
@@ -63,11 +64,14 @@ if( $_REQUEST['func'] == 'searchAR'){
 		echo json_encode($data);
 	}
 
-}else if( $_REQUEST['func'] == 'updateRelations' ){
-	require_once("modules/Collection/Collection.php");
-	$focus = new Collection();
-	$payment = $_REQUEST['payment'];
+} else if( $_REQUEST['func'] == 'updateRelations' ){
+
+	require_once ("modules/Collection/Collection.php");
+	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
+	require_once ("modules/ARChecks/ARChecks.php");
 	
+	$focus = new Collection();
+	$payment_type = $_REQUEST['payment_type'];
 	
 	$entityBody = file_get_contents('php://input');
 	$data = json_decode($entityBody,true);
@@ -75,7 +79,6 @@ if( $_REQUEST['func'] == 'searchAR'){
 	$payment = 0;
 	$awt = 0;
 	
-	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
 	$ar_obj = new AccountsReceivable();
 	$ar_obj->setColumns('AccountsReceivable');
 	
@@ -102,7 +105,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"CreatedTime" => "",
 								"ModifiedTime" => "",
 								"assigned_user_id" => $_SESSION['authenticated_user_id'],
-								"c_payment_method" => "cash",
+								"c_payment_method" => $payment_type,
 								"payment" => $payment,
 								"awt" => $awt
 							);
@@ -110,6 +113,24 @@ if( $_REQUEST['func'] == 'searchAR'){
 	$focus->save( 'Collection' );
 	$return_id = $focus->id;
 	
+	
+	$archeck_obj = new ARChecks();
+	$archeck_obj->setColumns('ARChecks');
+	$archeck_obj->column_fields = Array
+							(
+								"CreatedTime" => "",
+								"ModifiedTime" => "",
+								"assigned_user_id" => $_SESSION['authenticated_user_id'],
+								
+								"collection_no" => $focus->id,
+								"chk_no" => $_REQUEST['check_no'],
+								"bank" => $_REQUEST['bank'],
+								"date_of_chk" =>  $_REQUEST['date_of_check'],
+								"arhk_status" => "Released",
+								"amount" => $payment
+							);
+	
+	$archeck_obj->save( 'ARChecks' );
 	
 	if(!empty($data)) {
 	
@@ -123,8 +144,6 @@ if( $_REQUEST['func'] == 'searchAR'){
 }else{
 	echo json_encode(array('error'=>'invalid action'));
 }
-
-
 
 exit();
 ?>
