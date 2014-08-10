@@ -632,7 +632,11 @@ if($_REQUEST['module'] == 'Documents' && $action == 'DownloadFile')
 
 
 //gideon
-if( $action == 'MCollection' || $action == 'MProcess' ) {
+if( $action == 'MCollection' 
+	|| $action == 'MProcess' 
+	|| $action == 'MDisbursement'
+	|| $action == 'MReports' 
+	|| $action == 'PrintTemplate' ) {
 	$skipHeaders = true;
 }
 

@@ -9,8 +9,8 @@
  ************************************************************************************/
 
 $mod_strings = Array(
-	'ModuleName' => 'Module Name',
-	'SINGLE_ModuleName' => 'Module Name',
+	'APChecks' => 'AP Checks',
+	'SINGLE_APChecks' => 'AP Check',
 	'ModuleName ID' => 'Module Name ID',
 
 	'LBL_CUSTOM_INFORMATION' => 'Custom Information',

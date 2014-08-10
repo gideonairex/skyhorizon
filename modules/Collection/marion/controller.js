@@ -69,7 +69,13 @@ define( function ( require ) {
 			var request = App.request( 'selected:create-collection' , selectedCollection, data );
 			
 			$.when( request ).done( function( collection ){
-				window.location.assign("index.php?module=Collection&record="+collection.id+"&action=DetailView");
+				if ( collection.error ) {
+					alert( collection.error );
+					selected.enableCreate();
+				} else {
+					window.location.assign("index.php?module=Collection&record="+collection.id+"&action=DetailView");
+				}
+			
 			});
 		}
 		

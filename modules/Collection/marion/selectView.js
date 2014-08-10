@@ -10,19 +10,19 @@ define( function ( require ){
 		tagName : 'tr',
 		'ui' : {
 			'payment' : '.payment',
-			'awt' : '.awt'
+			'ewt' : '.ewt'
 		},
 		'events' : {
 			'click #delete' : 'removeMe',
 			'change input.payment' : 'updatePayment',
-			'change input.awt' : 'updateAWT'
+			'change input.ewt' : 'updateAWT'
 		},
 		'updatePayment' : function(){
 			this.model.set('payment',this.ui.payment.val());
 			this.trigger('do:updatePayment',this.model);
 		},
 		'updateAWT' : function(){
-			this.model.set('awt',this.ui.awt.val());
+			this.model.set('ewt',this.ui.ewt.val());
 			this.trigger('do:updatePayment',this.model);
 		},
 		'removeMe' : function(){

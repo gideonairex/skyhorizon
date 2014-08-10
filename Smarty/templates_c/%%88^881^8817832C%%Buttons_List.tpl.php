@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-29 11:12:24
+<?php /* Smarty version 2.6.18, created on 2014-08-01 16:48:42
          compiled from Buttons_List.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Buttons_List.tpl', 18, false),array('modifier', 'vtiger_imageurl', 'Buttons_List.tpl', 34, false),)), $this); ?>
@@ -29,11 +29,27 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslat
 				<table border=0 cellspacing=0 cellpadding=5>
 				<tr>
 					<?php if ($this->_tpl_vars['CHECK']['EditView'] == 'yes' && $this->_tpl_vars['MODULE'] != 'Emails' && $this->_tpl_vars['MODULE'] != 'Webmails'): ?>
-			        		<?php if ($this->_tpl_vars['MODULE'] == 'Calendar'): ?>
-		                      	        	<td style="padding-right:0px;padding-left:10px;"><img src="<?php echo vtiger_imageurl('btnL3Add-Faded.gif', $this->_tpl_vars['THEME']); ?>
+						<?php if ($this->_tpl_vars['MODULE'] == 'Calendar'): ?>
+									<td style="padding-right:0px;padding-left:10px;"><img src="<?php echo vtiger_imageurl('btnL3Add-Faded.gif', $this->_tpl_vars['THEME']); ?>
 " border=0></td>
-                	   			 <?php else: ?>
-	                        		       	<td style="padding-right:0px;padding-left:10px;"><a href="index.php?module=<?php echo $this->_tpl_vars['MODULE']; ?>
+						<?php elseif ($this->_tpl_vars['MODULE'] == 'Collection'): ?>
+							<td style="padding-right:0px;padding-left:10px;"><a href="index.php?module=<?php echo $this->_tpl_vars['MODULE']; ?>
+&action=MCollection"><img src="<?php echo $this->_tpl_vars['IMAGE_PATH']; ?>
+btnL3Add.gif" alt="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']; ?>
+ <?php echo ((is_array($_tmp=$this->_tpl_vars['SINGLE_MOD'])) ? $this->_run_mod_handler('getTranslatedString', true, $_tmp, $this->_tpl_vars['MODULE']) : getTranslatedString($_tmp, $this->_tpl_vars['MODULE'])); ?>
+..." title="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']; ?>
+ <?php echo ((is_array($_tmp=$this->_tpl_vars['SINGLE_MOD'])) ? $this->_run_mod_handler('getTranslatedString', true, $_tmp, $this->_tpl_vars['MODULE']) : getTranslatedString($_tmp, $this->_tpl_vars['MODULE'])); ?>
+..." border=0></a></td>
+						<?php elseif ($this->_tpl_vars['MODULE'] == 'Disbursement'): ?>
+							<td style="padding-right:0px;padding-left:10px;"><a href="index.php?module=<?php echo $this->_tpl_vars['MODULE']; ?>
+&action=MDisbursement"><img src="<?php echo $this->_tpl_vars['IMAGE_PATH']; ?>
+btnL3Add.gif" alt="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']; ?>
+ <?php echo ((is_array($_tmp=$this->_tpl_vars['SINGLE_MOD'])) ? $this->_run_mod_handler('getTranslatedString', true, $_tmp, $this->_tpl_vars['MODULE']) : getTranslatedString($_tmp, $this->_tpl_vars['MODULE'])); ?>
+..." title="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']; ?>
+ <?php echo ((is_array($_tmp=$this->_tpl_vars['SINGLE_MOD'])) ? $this->_run_mod_handler('getTranslatedString', true, $_tmp, $this->_tpl_vars['MODULE']) : getTranslatedString($_tmp, $this->_tpl_vars['MODULE'])); ?>
+..." border=0></a></td>
+						<?php else: ?>
+							<td style="padding-right:0px;padding-left:10px;"><a href="index.php?module=<?php echo $this->_tpl_vars['MODULE']; ?>
 &action=EditView&return_action=DetailView&parenttab=<?php echo $this->_tpl_vars['CATEGORY']; ?>
 "><img src="<?php echo $this->_tpl_vars['IMAGE_PATH']; ?>
 btnL3Add.gif" alt="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']; ?>
@@ -41,7 +57,7 @@ btnL3Add.gif" alt="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']
 ..." title="<?php echo $this->_tpl_vars['APP']['LBL_CREATE_BUTTON_LABEL']; ?>
  <?php echo ((is_array($_tmp=$this->_tpl_vars['SINGLE_MOD'])) ? $this->_run_mod_handler('getTranslatedString', true, $_tmp, $this->_tpl_vars['MODULE']) : getTranslatedString($_tmp, $this->_tpl_vars['MODULE'])); ?>
 ..." border=0></a></td>
-			                       	<?php endif; ?>
+						<?php endif; ?>
 					<?php else: ?>
 						<td style="padding-right:0px;padding-left:10px;"><img src="<?php echo vtiger_imageurl('btnL3Add-Faded.gif', $this->_tpl_vars['THEME']); ?>
 " border=0></td>	

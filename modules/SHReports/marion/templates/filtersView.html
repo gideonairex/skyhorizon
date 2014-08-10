@@ -1,0 +1,93 @@
+<div class="col-md-2" ></div>
+
+<div class="col-md-8" >
+	<form class="form-horizontal" role="form">
+	
+	  <div class="form-group">
+		<label class="col-md-3 control-label">Report Name</label>
+		<div class="col-md-6">
+			<select name="report_name" class="form-control report_name">
+				<option value="sales" > Sales </option>
+				<option value="ar" > Accounts Receivable </option>
+				<option value="ap" > Accounts Payable </option>
+				<option value="expenses" > Purchases </option>
+				<option value="collection" > Collection </option>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	   <div class="form-group users">
+		<label class="col-md-3 control-label">User</label>
+		<div class="col-md-6">
+			<select name="user" class="form-control">
+				<option value="0"> All </option>
+				 <% _.each(users, function(item){ %>
+					<option value="<%= item.id %>"> <%= item.name %> </option>
+					<% }); %>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	  <div class="form-group accounts">
+		<label class="col-md-3 control-label">Accounts</label>
+		<div class="col-md-6">
+			<select name="accounts" class="form-control">
+				<option value="0"> All </option>
+				 <% _.each(accounts, function(item2){ %>
+					<option value="<%= item2.id %>"> <%= item2.name %> </option>
+					<% }); %>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	   <div class="form-group  suppliers">
+		<label class="col-md-3 control-label">Suppliers</label>
+		<div class="col-md-6">
+			<select name="suppliers" class="form-control">
+				<option value="0"> All </option>
+				 <% _.each(suppliers, function(item2){ %>
+					<option value="<%= item2.id %>"> <%= item2.name %> </option>
+					<% }); %>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	   <div class="form-group  conversion">
+		<label class="col-md-3 control-label">Conversion</label>
+		<div class="col-md-6">
+			<select name="conversion" class="form-control">
+				 <% _.each(conversion, function(item2){ %>
+					<option value="<%= item2.name %>"> <%= item2.name %> </option>
+					<% }); %>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	   <div class="form-group year">
+		<label class="col-md-3 control-label">Date</label>
+		<div class="col-md-6">  <input name="date" class="form-control date"  placeholder="Select"> </div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	  <div class="form-group">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="col-md-6">
+				<button type="submit" class="success btn btn-default">Generate</button>
+			</div>
+			<div class="col-md-6">
+			<a class="success btn btn-default print">Print</a>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	  
+	</form>
+</div>
+
+<div class="col-md-2" ></div>

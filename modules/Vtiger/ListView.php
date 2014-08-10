@@ -57,6 +57,7 @@ $smarty->assign('MODULE', $currentModule);
 $smarty->assign('SINGLE_MOD', getTranslatedString('SINGLE_'.$currentModule));
 $smarty->assign('CATEGORY', $category);
 $smarty->assign('BUTTONS', $list_buttons);
+
 $smarty->assign('CHECK', $tool_buttons);
 $smarty->assign('THEME', $theme);
 $smarty->assign('IMAGE_PATH', "themes/$theme/images/");

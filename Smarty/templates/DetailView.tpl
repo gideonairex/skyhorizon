@@ -503,6 +503,16 @@ function sendfile_email()
 												<table width="100%" border="0" cellpadding="5" cellspacing="0">
 													<tr><td align="left" class="genHeaderSmall">{$APP.LBL_ACTIONS}</td></tr>
 													
+													{if $MODULE eq 'Disbursement'}
+													
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=Disbursement&action=PrintTemplate&record={$ID}" target="_blank" ><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=Disbursement&action=PrintTemplate&record={$ID}" target="_blank" >Print Voucher</a>
+																</td>
+															</tr>
+														
+													{/if}
 													
 													{if $MODULE eq 'SHContacts'}
 														<tr>
@@ -516,14 +526,39 @@ function sendfile_email()
 													{if $MODULE eq 'SalesAgreement'}
 														<tr>
 															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}&pax={$PAX}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}&pax={$PAX}">Add Purchase Order</a>
+																<a class="webMnu" href="index.php?module=SalesAgreement&action=PrintTemplate&record={$ID}&template=1" target="_blank"><img src="{'actionGenerateSalesOrder.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SalesAgreement&action=PrintTemplate&record={$ID}&template=1" target="_blank">Print Template 1</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SalesAgreement&action=PrintTemplate&record={$ID}&template=2" target="_blank"><img src="{'actionGenerateSalesOrder.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SalesAgreement&action=PrintTemplate&record={$ID}&template=2" target="_blank">Print Template 2</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SalesAgreement&action=PrintTemplate&record={$ID}&template=3" target="_blank"><img src="{'actionGenerateSalesOrder.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SalesAgreement&action=PrintTemplate&record={$ID}&template=3" target="_blank">Print Template 3</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}">Add Purchase Order</a>
 															</td>
 														</tr>
 													{/if}
 													
 													{if $MODULE eq 'PO'}
 													
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=PrintTemplate&record={$ID}&template=1" target="_blank"><img src="{'actionGenerateSalesOrder.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=PO&action=PrintTemplate&record={$ID}&template=1" target="_blank">Print Template</a>
+															</td>
+														</tr>
+														
 														{if $SUBMIT_APRROVED eq 'true'}
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -535,6 +570,18 @@ function sendfile_email()
 														
 													{/if}
 													
+													{if $MODULE eq 'AccountsPayable'}
+													
+														{if $SUBMIT_APRROVED eq 'true'}
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=AccountsPayable&action=SubmitForApprove&record={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=AccountsPayable&action=SubmitForApprove&record={$ID}">Approve</a>
+																</td>
+															</tr>
+														{/if}
+														
+													{/if}
 													
 													{if $MODULE eq 'SHExpenses'}
 													
@@ -548,17 +595,6 @@ function sendfile_email()
 														{/if}
 														
 													{/if}
-												
-													
-													{if $MODULE eq 'AccountsPayable'}
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=Disbursement&action=EditView&ap_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=Disbursement&action=EditView&ap_no={$ID}">Add Disbursement</a>
-															</td>
-														</tr>
-													{/if}
-													
 													
 													{if $MODULE eq 'HomeOwner'}
 														<tr>

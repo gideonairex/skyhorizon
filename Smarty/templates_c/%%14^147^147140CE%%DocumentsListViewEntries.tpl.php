@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-14 09:58:21
+<?php /* Smarty version 2.6.18, created on 2014-08-01 16:02:36
          compiled from DocumentsListViewEntries.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'DocumentsListViewEntries.tpl', 115, false),array('modifier', 'count', 'DocumentsListViewEntries.tpl', 137, false),array('function', 'html_options', 'DocumentsListViewEntries.tpl', 320, false),)), $this); ?>

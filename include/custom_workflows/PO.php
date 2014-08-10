@@ -23,10 +23,14 @@ function createAP($entity){
 		$ap_obj->id = $adb->query_result( $result, 0 , 'accountspayableid');
 	}
 	
+	$supplier_id = explode('x',$entity->data['suplier']);
+	
 	$ap_obj->column_fields['assigned_user_id'] = $assigned_user_id[1];
 	$ap_obj->column_fields['payable_no'] = $id[1];
 	$ap_obj->column_fields['ap_status'] = 'Pending'; 
+	$ap_obj->column_fields['supplier'] = $supplier_id[1];
 	$ap_obj->column_fields['payable'] = $entity->data['grand_total']; 
+	$ap_obj->column_fields['conversion_ap'] = $entity->data['conversion_po']; 
 	
 
 	$ap_obj->save('AccountsPayable');

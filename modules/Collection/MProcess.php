@@ -34,7 +34,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 			  inner join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
 			  left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial")';
+			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial") and conversion_ar="'.$_REQUEST['conversion'].'"';
 			   
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
@@ -48,9 +48,11 @@ if( $_REQUEST['func'] == 'searchAR'){
 		for( $i = 0 ; $i < $num_rows; $i++){
 			$data[$i]['result'] = 1;
 			$data[$i]['id'] = $adb->query_result($result, $i, "accountsreceivableid");
+			$data[$i]['conversion_ar'] = $adb->query_result($result, $i, "conversion_ar");
 			$data[$i]['ar_no'] = $adb->query_result($result, $i, "ar_no");
 			$data[$i]['sales'] = $adb->query_result($result, $i, "sales");
-			$data[$i]['sales_no'] = $adb->query_result($result, $i, "sales_no");
+			$data[$i]['link'] = "index.php?action=DetailView&module=SalesAgreement&record=".$adb->query_result($result, $i, "salesagreementid");
+			$data[$i]['sales_no'] = $adb->query_result($result, $i, "sa_no");
 			$data[$i]['ar_status'] = $adb->query_result($result, $i, "ar_status");
 			$data[$i]['payment'] = $adb->query_result($result, $i, "payment");
 			$data[$i]['balance'] = $adb->query_result($result, $i, "sales") - ( $adb->query_result($result, $i, "payment") + $adb->query_result($result, $i, "awt") );
@@ -72,6 +74,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 	
 	$focus = new Collection();
 	$payment_type = $_REQUEST['payment_type'];
+	$receipt_type = $_REQUEST['receipt_type'];
 	
 	$entityBody = file_get_contents('php://input');
 	$data = json_decode($entityBody,true);
@@ -83,10 +86,26 @@ if( $_REQUEST['func'] == 'searchAR'){
 	$ar_obj->setColumns('AccountsReceivable');
 	
 	$arIds = array();
+	
+	$i = 0;
+	foreach ( $data as $ar ){
+		if ( $i == 0 ){
+			$conversion = $ar['conversion_ar'];
+			$i++;
+		} else {
+			if ( $ar['conversion_ar'] == $conversion ) {
+				continue;
+			} else {
+				echo json_encode( array( 'error' => 'Should have the same conversions') );
+				die();
+			}
+		}
+	}
+	
 	foreach ( $data as $ar ){
 
 		$payment += $ar['payment'];
-		$awt += $ar['awt'];
+		$awt += $ar['ewt'];
 		
 		$arIds[] = $ar['id'];
 		$id = $ar['id'];
@@ -95,7 +114,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 		$ar_obj->retrieve_entity_info($id, 'AccountsReceivable');
 		
 		$ar_obj->column_fields['payment'] +=  $ar['payment'];
-		$ar_obj->column_fields['awt'] +=  $ar['awt'];
+		$ar_obj->column_fields['awt'] +=  $ar['ewt'];
 		$ar_obj->save('AccountsReceivable');
 		
 	}
@@ -107,37 +126,41 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"assigned_user_id" => $_SESSION['authenticated_user_id'],
 								"c_payment_method" => $payment_type,
 								"payment" => $payment,
-								"awt" => $awt
+								"awt" => $awt,
+								"receipt_type" => $receipt_type,
+								"conversion_c" => $conversion
 							);
 							
 	$focus->save( 'Collection' );
 	$return_id = $focus->id;
 	
-	
-	$archeck_obj = new ARChecks();
-	$archeck_obj->setColumns('ARChecks');
-	$archeck_obj->column_fields = Array
-							(
-								"CreatedTime" => "",
-								"ModifiedTime" => "",
-								"assigned_user_id" => $_SESSION['authenticated_user_id'],
-								
-								"collection_no" => $focus->id,
-								"chk_no" => $_REQUEST['check_no'],
-								"bank" => $_REQUEST['bank'],
-								"date_of_chk" =>  $_REQUEST['date_of_check'],
-								"arhk_status" => "Released",
-								"amount" => $payment
-							);
-	
-	$archeck_obj->save( 'ARChecks' );
+	if ( $payment_type == 'Check') {
+		$archeck_obj = new ARChecks();
+		$archeck_obj->setColumns('ARChecks');
+		$archeck_obj->column_fields = Array
+								(
+									"CreatedTime" => "",
+									"ModifiedTime" => "",
+									"assigned_user_id" => $_SESSION['authenticated_user_id'],
+									"collection_no" => $focus->id,
+									"chk_no" => $_REQUEST['check_no'],
+									"bank" => $_REQUEST['bank'],
+									"date_of_chk" =>  $_REQUEST['date_of_check'],
+									"arhk_status" => "Released",
+									"amount" => $payment,
+									"conversion_rc" => $conversion
+								);
+		
+		$archeck_obj->save( 'ARChecks' );
+	}
+
 	
 	if(!empty($data)) {
 	
 		$focus->save_related_module('Collection', $return_id, 'AccountsReceivable', $arIds);
 		
 	}
-	
+
 	//echo json_encode($HTTP_RAW_POST_DATA);
 	echo json_encode( array( 'id' => $focus->id ) );
 	

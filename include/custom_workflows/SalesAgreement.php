@@ -23,9 +23,10 @@ function createAR($entity){
 	
 	$ar_obj->column_fields['assigned_user_id'] = $assigned_user_id[1];
 	$ar_obj->column_fields['sales_no'] = $id[1];
-	$ar_obj->column_fields['ar_status'] = 'Pending'; 
+	$ar_obj->column_fields['ar_status'] = 'Unpaid'; 
 	$ar_obj->column_fields['sales'] = $entity->data['grand_total']; 
 	$ar_obj->column_fields['pax'] = $entity->data['pax']; 
+	$ar_obj->column_fields['conversion_ar'] = $entity->data['conversion']; 
 	
 	$customer = explode('x',$entity->data['customer']);
 	$ar_obj->column_fields['contact'] = $customer[1]; 

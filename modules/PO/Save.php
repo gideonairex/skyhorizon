@@ -26,6 +26,9 @@ if($_REQUEST['assigntype'] == 'U') {
 	$focus->column_fields['assigned_user_id'] = $_REQUEST['assigned_group_id'];
 }
 
+$focus->column_fields['rate_per_pax'] = $focus->column_fields['cost'] - $focus->column_fields['discount'] + $focus->column_fields['service_fee'];
+$focus->column_fields['grand_total'] = $focus->column_fields['rate_per_pax'] * $focus->column_fields['no_of_pax'];
+ 
 $focus->save($currentModule);
 $return_id = $focus->id;
 

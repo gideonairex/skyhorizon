@@ -44,7 +44,14 @@ define( function ( require ){
 			for( var i = 0 ; i < this.collection.length ; i++){
 				var sales = this.collection.models[i].get('sales');
 				var payment = this.collection.models[i].get('payment');
-				totalBalance = totalBalance + parseFloat(sales) - parseFloat(payment);
+				var awt = this.collection.models[i].get('awt');
+				
+				if ( !awt )
+					awt = 0;
+				if ( !payment )
+					awt = 0;
+					
+				totalBalance = totalBalance + parseFloat(sales) - parseFloat(payment) - parseFloat(awt);
 			}
 			
 			this.$el.find('.total-balance').html(totalBalance);
@@ -54,7 +61,7 @@ define( function ( require ){
 			var totalPayment = 0;
 			for( var i = 0 ; i < this.collection.length ; i++){
 				var payment = this.collection.models[i].get('payment');
-				var ewt = this.collection.models[i].get('awt');
+				var ewt = this.collection.models[i].get('ewt');
 				totalPayment = totalPayment + parseFloat(ewt) + parseFloat(payment);
 			}
 			this.$el.find('.total-payment').html(totalPayment);
@@ -75,6 +82,10 @@ define( function ( require ){
 			var data = this.ui.form.serialize();
 			this.$el.find('.create-collection').attr("disabled", "disabled");
 			App.trigger('collections:create-collections',this.collection,data);
+		},
+		
+		enableCreate : function ( ) {
+			this.$el.find('.create-collection').removeAttr("disabled");
 		}
 		
 	});

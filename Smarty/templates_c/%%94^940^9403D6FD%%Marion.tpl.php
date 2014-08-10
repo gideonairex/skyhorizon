@@ -1,6 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-29 11:12:14
+<?php /* Smarty version 2.6.18, created on 2014-07-21 09:21:40
          compiled from Marion.tpl */ ?>
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
+<link type="text/css" rel="stylesheet" href="include/components/bootstrap-datepicker/css/datepicker.css" />
 
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
@@ -12,7 +13,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php?module=Collection&action=index">Collection</a>
+      <a class="navbar-brand" href="index.php?module=<?php echo $this->_tpl_vars['MODULE']; ?>
+&action=index"><?php echo $this->_tpl_vars['MODULE']; ?>
+</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,4 +31,5 @@
 <div id="main-content"></div>
 <div id="footer"></div>
 
-<script data-main="modules/Collection/marion/main.js" src="include/components/requirejs/require.js"></script>
+<script data-main="modules/<?php echo $this->_tpl_vars['MODULE']; ?>
+/marion/main.js" src="include/components/requirejs/require.js"></script>

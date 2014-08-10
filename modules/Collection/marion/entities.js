@@ -30,9 +30,8 @@ define( function ( require ) {
 	
     var API = {
 		'searchAR' : function( data ){
-
 			var collection = new SearchCollection();
-			collection.url += '&func=searchAR&searchString='+data.searchString+'&filter='+data.arFilter;
+			collection.url += '&func=searchAR&searchString='+data.searchString+'&filter='+data.arFilter+'&conversion='+data.conversion;
 			
 			var defer = $.Deferred();
 			

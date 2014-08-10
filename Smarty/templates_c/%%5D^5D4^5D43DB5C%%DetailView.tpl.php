@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-07-02 14:18:37
+<?php /* Smarty version 2.6.18, created on 2014-08-10 10:41:50
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -628,6 +628,19 @@ unset($_smarty_tpl_vars);
 													<tr><td align="left" class="genHeaderSmall"><?php echo $this->_tpl_vars['APP']['LBL_ACTIONS']; ?>
 </td></tr>
 													
+													<?php if ($this->_tpl_vars['MODULE'] == 'Disbursement'): ?>
+													
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=Disbursement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+" target="_blank" ><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=Disbursement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+" target="_blank" >Print Voucher</a>
+																</td>
+															</tr>
+														
+													<?php endif; ?>
 													
 													<?php if ($this->_tpl_vars['MODULE'] == 'SHContacts'): ?>
 														<tr>
@@ -644,14 +657,39 @@ unset($_smarty_tpl_vars);
 													<?php if ($this->_tpl_vars['MODULE'] == 'SalesAgreement'): ?>
 														<tr>
 															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SalesAgreement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=1" target="_blank"><img src="<?php echo vtiger_imageurl('actionGenerateSalesOrder.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SalesAgreement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=1" target="_blank">Print Template 1</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SalesAgreement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=2" target="_blank"><img src="<?php echo vtiger_imageurl('actionGenerateSalesOrder.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SalesAgreement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=2" target="_blank">Print Template 2</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SalesAgreement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=3" target="_blank"><img src="<?php echo vtiger_imageurl('actionGenerateSalesOrder.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SalesAgreement&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=3" target="_blank">Print Template 3</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
 &no_of_pax=<?php echo $this->_tpl_vars['NOPAX']; ?>
-&pax=<?php echo $this->_tpl_vars['PAX']; ?>
 "><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
 " hspace="5" align="absmiddle"  border="0"/></a>
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
 &no_of_pax=<?php echo $this->_tpl_vars['NOPAX']; ?>
-&pax=<?php echo $this->_tpl_vars['PAX']; ?>
 ">Add Purchase Order</a>
 															</td>
 														</tr>
@@ -659,6 +697,16 @@ unset($_smarty_tpl_vars);
 													
 													<?php if ($this->_tpl_vars['MODULE'] == 'PO'): ?>
 													
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=PO&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=1" target="_blank"><img src="<?php echo vtiger_imageurl('actionGenerateSalesOrder.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=PO&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
+&template=1" target="_blank">Print Template</a>
+															</td>
+														</tr>
+														
 														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -673,6 +721,21 @@ unset($_smarty_tpl_vars);
 														
 													<?php endif; ?>
 													
+													<?php if ($this->_tpl_vars['MODULE'] == 'AccountsPayable'): ?>
+													
+														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
+															<tr>
+																<td align="left" style="padding-left:10px;">
+																	<a class="webMnu" href="index.php?module=AccountsPayable&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																	<a class="webMnu" href="index.php?module=AccountsPayable&action=SubmitForApprove&record=<?php echo $this->_tpl_vars['ID']; ?>
+">Approve</a>
+																</td>
+															</tr>
+														<?php endif; ?>
+														
+													<?php endif; ?>
 													
 													<?php if ($this->_tpl_vars['MODULE'] == 'SHExpenses'): ?>
 													
@@ -689,20 +752,6 @@ unset($_smarty_tpl_vars);
 														<?php endif; ?>
 														
 													<?php endif; ?>
-												
-													
-													<?php if ($this->_tpl_vars['MODULE'] == 'AccountsPayable'): ?>
-														<tr>
-															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=Disbursement&action=EditView&ap_no=<?php echo $this->_tpl_vars['ID']; ?>
-"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
-" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=Disbursement&action=EditView&ap_no=<?php echo $this->_tpl_vars['ID']; ?>
-">Add Disbursement</a>
-															</td>
-														</tr>
-													<?php endif; ?>
-													
 													
 													<?php if ($this->_tpl_vars['MODULE'] == 'HomeOwner'): ?>
 														<tr>
