@@ -8,6 +8,7 @@ define( function( require ) {
 	var ar = require('text!modules/SHReports/marion/templates/arView.html');
 	var expenses = require('text!modules/SHReports/marion/templates/expensesView.html');
 	var ap = require('text!modules/SHReports/marion/templates/apView.html');
+	var collection = require('text!modules/SHReports/marion/templates/collectionView.html');
 	var model = Backbone.Model.extend({});
 
 	return Marionette.CompositeView.extend( {
@@ -18,6 +19,7 @@ define( function( require ) {
 		templateexpenses: _.template( expenses ),
 		templatesales: _.template( sales ),
 		templateap : _.template( ap ),
+		templatecollection : _.template( collection ),
 		model : new model(),
 		
 		// this is for summarry
@@ -276,8 +278,9 @@ define( function( require ) {
 		
 			$(".apHeader").css('display','block');
 		},
+		generatecollection : function () {
+		},
 		onBeforeRender : function () {
-
 			this.template = this[ "template"+this.options.report ];
 			this.paramVar = 'sales';
 			
@@ -559,8 +562,18 @@ define( function( require ) {
 					this.model.set( this.params[paramVar][j] , results[this.params[paramVar][j]] );
 				}
 			}
+		},
+		beforeRendercollection : function () {
+			var self = this;
+			var summary = this.collection.models[0].get( 'summary' );
+			var gt = this.collection.models[0].get( 'summary' ).Summary;
+			_.each( summary, function( obj ) {
+				self.model.set( obj.c_payment_method, obj );
+			} );
+			
+			self.model.set( 'GT', gt );
+			
 		}
-	
 	} );
 	
 	

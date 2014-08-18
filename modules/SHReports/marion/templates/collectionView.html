@@ -1,0 +1,115 @@
+<div class="row" >
+	<div class="col-md-2" ></div>
+	<div class="col-md-8" >
+		<h3>Summary</h3>
+		<table class="table table-hover results">
+			<tr>
+				<th>  Cash Collection</th>
+				<td>  <%- Cash_on_hand.payment %> </td>
+			</tr>
+			<tr>
+				<th class="text-right">  Less: EWT </th>
+				<td>  <%- Cash_on_hand.awt %> </td>
+			</tr>
+			<tr>
+				<th class="text-right">  Less: Bank Charge </th>
+				<td>  <%- Cash_on_hand.bc %> </td>
+			</tr>
+			<tr>
+				<th> Check Collection </th>
+				<td>  <%- Check.payment %> </td>
+			</tr>
+			<tr>
+				<th class="text-right">  Less: EWT </th>
+				<td>  <%- Check.awt %> </td>
+			</tr>
+			<tr>
+				<th class="text-right">  Less: Bank Charge </th>
+				<td>  <%- Check.bc %> </td>
+			</tr>
+			<tr>
+				<th> Cash Online Collection </th>
+				<td>  <%- Cash_online.payment %> </td>
+			</tr>
+			<tr>
+				<th class="text-right">  Less: EWT </th>
+				<td>  <%- Cash_online.awt %> </td>
+			</tr>
+			<tr>
+				<th class="text-right">  Less: Bank Charge </th>
+				<td>  <%- Cash_online.bc %> </td>
+			</tr>
+			<tr>
+				<th> Total Collection </th>
+				<td>  <%- GT.payment %> </td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-2" ></div>
+
+	<% if ( Cash_on_hand ) { %>
+		<div class="col-md-12" >
+		<h3>Cash Transactions</h3>
+		<table class="table table-hover results">
+		<tr>
+			<th> AR No. </td>
+			<th> Sales No.</td>
+			<th> Amount </td>
+		</tr>
+		<% _.each ( Cash_on_hand.details, function ( obj ) { %>
+			<% _.each ( obj.ar, function ( ar ) { %>
+				<tr>
+					<td> <%= ar.ar_no %></td>
+					<td> <%= ar.sa_no %></td>
+					<td> <%= ar.sales %></td>
+				</tr>
+			<% } ); %>
+		<% } ); %>
+		</table>
+		</div>
+	<% } %>
+	
+	<% if ( Check ) { %>
+		<div class="col-md-12" >
+		<h3>Check Transactions</h3>
+		<table class="table table-hover results">
+		<tr>
+			<th> AR No. </td>
+			<th> Sales No.</td>
+			<th> Amount </td>
+		</tr>
+		<% _.each ( Check.details, function ( obj ) { %>
+			<% _.each ( obj.ar, function ( ar ) { %>
+				<tr>
+					<td> <%= ar.ar_no %></td>
+					<td> <%= ar.sa_no %></td>
+					<td> <%= ar.sales %></td>
+				</tr>
+			<% } ); %>
+		<% } ); %>
+		</table>
+		</div>
+	<% } %>
+	
+	<% if ( Cash_online ) { %>
+		<div class="col-md-12" >
+		<h3>Cash Online Transactions</h3>
+		<table class="table table-hover results">
+		<tr>
+			<th> AR No. </td>
+			<th> Sales No.</td>
+			<th> Amount </td>
+		</tr>
+		<% _.each ( Cash_online.details, function ( obj ) { %>
+			<% _.each ( obj.ar, function ( ar ) { %>
+				<tr>
+					<td> <%= ar.ar_no %></td>
+					<td> <%= ar.sa_no %></td>
+					<td> <%= ar.sales %></td>
+				</tr>
+			<% } ); %>
+		<% } ); %>
+		</table>
+		</div>
+	<% } %>
+</div>

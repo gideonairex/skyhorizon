@@ -17,7 +17,7 @@ define( function ( require ) {
 			$.when(users).done(function( usersModel ){
 
 				layout.filters.show( new filterView( { model : usersModel } ) );
-				//layout.results.show( new resultView() );
+
 			} );
 
 		},

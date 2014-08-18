@@ -7,6 +7,7 @@ define( function( require ) {
 	var ar = require('text!modules/SHReports/marion/templates/arResultView.html');
 	var expenses = require('text!modules/SHReports/marion/templates/expensesResultView.html');
 	var ap = require('text!modules/SHReports/marion/templates/apResultView.html');
+	var collection = require('text!modules/SHReports/marion/templates/collectionResultView.html');
 	
 	return Marionette.ItemView.extend( {
 		
@@ -14,6 +15,7 @@ define( function( require ) {
 		templateexpenses: _.template( expenses ),
 		templatesales: _.template( sales ),
 		templateap: _.template( ap ),
+		templatecollection: _.template( collection ),
 		tagName : 'tr',
 		onBeforeRender : function () {
 			this.template = this[ "template"+this.options.report ];	

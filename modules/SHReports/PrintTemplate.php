@@ -8,8 +8,7 @@ $_REQUEST['mode'] = 'print';
 require('modules/SHReports/Reports/'.$_REQUEST['report_name'].'.php');
 require('modules/SHReports/TemplateMaker/'.$_REQUEST['report_name'].'.php');
 
-
-if ( $_REQUEST['accounts'] != 0  &&  $_REQUEST['report_name'] == 'sales' ){
+if ( $_REQUEST['accounts'] != 0  &&  ( $_REQUEST['report_name'] == 'sales' || $_REQUEST['report_name'] == 'ar')  ){
 	$query = 'select * from vtiger_shaccounts 
 			  inner join vtiger_crmentity on vtiger_shaccounts.shaccountsid = vtiger_crmentity.crmid
 			  where deleted = 0 and ( shaccountsid = '.$_REQUEST['accounts'].' || main = '.$_REQUEST['accounts'].' )';

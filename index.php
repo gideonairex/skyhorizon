@@ -200,6 +200,7 @@ if(isset($_REQUEST['action']))
 {
 	$action = $_REQUEST['action'];
 }
+
 if($action == 'Export')
 {
         include ('include/utils/export.php');
@@ -472,6 +473,7 @@ else {
     exit();
 }
 
+
 $log->info("current page is $currentModuleFile");	
 $log->info("current module is $currentModule ");	
 
@@ -640,6 +642,12 @@ if( $action == 'MCollection'
 	|| $action == 'PrintTemplate' ) {
 	$skipHeaders = true;
 }
+
+if($action == 'index' && $_REQUEST['module'] == 'SHReports'){
+	$action = 'MReports';
+	$skipHeaders=true;
+}
+
 
 //skip headers for popups, deleting, saving, importing and other actions
 if(!$skipHeaders) {
