@@ -4,6 +4,18 @@ global $mod_strings, $app_strings, $currentModule, $current_user, $theme, $singl
 $smarty = new vtigerCRM_Smarty();
 $smarty->assign('MODULE', $currentModule);
 
+
+$query = 'select * from vtiger_users where status= "Active"';
+			   
+$result = $adb->pquery($query,array());
+$num_rows = $adb->num_rows($result);
+$users = array();
+
+for( $i = 0 ; $i < $num_rows; $i++){
+	$users[$adb->query_result($result, $i, "id")] = $adb->query_result($result, $i, "first_name").' '.$adb->query_result($result, $i, "last_name");
+}
+
+
 $id = $_REQUEST['record'];
 
 $query = "select * from vtiger_po
@@ -15,6 +27,7 @@ $query = "select * from vtiger_po
 $result = $adb->pquery($query,array());
 $num_rows = $adb->num_rows($result);
 $data = array();
+
 if($num_rows == 0){
 	//echo json_encode(0);
 }else{
@@ -24,16 +37,15 @@ if($num_rows == 0){
 	$data['description'] = $adb->query_result($result, 0, "description");
 	$data['supplier'] =  $adb->query_result($result, 0, "supplier_name");
 	$data['discount'] =  $adb->query_result($result, 0, "discount");
-	
-	
 	$data['cost'] =  $adb->query_result($result, 0, "cost");
 	$data['discount'] =  $adb->query_result($result, 0, "discount");
 	$data['service_fee'] =  $adb->query_result($result, 0, "service_fee");
 	$data['rate_per_pax'] =  $adb->query_result($result, 0, "rate_per_pax");
 	$data['grand_total'] =  $adb->query_result($result, 0, "grand_total");
 	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, $i, "modifiedtime") ) );
-	
+	$data['conversion_po'] =  $adb->query_result($result, 0, "conversion_po");
 	$data['confirmation'] = $adb->query_result($result, 0, "confirmation");
+	$data['user'] =  $users[$adb->query_result($result, 0, "smownerid")];
 	if ( $data['confirmation'] == ''){
 		$data['confirmation'] = 'Not Confirmed';
 	}

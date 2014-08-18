@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-29 11:34:45
+<?php /* Smarty version 2.6.18, created on 2014-08-16 10:46:38
          compiled from RelatedListDataContents.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', 'RelatedListDataContents.tpl', 16, false),array('modifier', 'getTranslatedString', 'RelatedListDataContents.tpl', 53, false),)), $this); ?>

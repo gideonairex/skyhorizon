@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-03 19:48:29
+<?php /* Smarty version 2.6.18, created on 2014-08-16 10:45:46
          compiled from ReportTemplates/disbursement.tpl */ ?>
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
 	<div class="container-fluid">
@@ -76,9 +76,8 @@ unset($_smarty_tpl_vars);
 				<tr>
 					<th>AP No</th>
 					<th>Payable No</th>
-					<th>Payable</th>
+					<th>Amount</th>
 					<th>Balance</th>
-					<th>Status</th>
 					<th>Supplier</th>
 				</tr>
 			<?php $_from = $this->_tpl_vars['ARS']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
@@ -99,8 +98,6 @@ unset($_smarty_tpl_vars);
 					<td><?php echo $this->_tpl_vars['payable']; ?>
 </td>
 					<td><?php echo $this->_tpl_vars['balance']; ?>
-</td>
-					<td><?php echo $this->_tpl_vars['ap_status']; ?>
 </td>
 					<td><?php echo $this->_tpl_vars['supplier_name']; ?>
 </td>

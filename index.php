@@ -383,7 +383,8 @@ if(isset($action) && isset($module))
 		preg_match("/^AddBlockFieldToDB/", $action) ||
 		preg_match("/^AddBlockToDB/", $action)  ||
 		preg_match("/^MassEditSave/", $action) ||
-		preg_match("/^iCalExport/",$action)
+		preg_match("/^iCalExport/",$action) ||
+		preg_match("/^SubmitForApprove/",$action)
 		)
 	{
 		$skipHeaders=true;

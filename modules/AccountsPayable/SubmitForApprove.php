@@ -1,5 +1,4 @@
 <?php
-
 global $currentModule;
 $focus = CRMEntity::getInstance($currentModule);
 $record = $_REQUEST['record'];
@@ -11,4 +10,5 @@ $focus->column_fields['confirmation'] = random_text('alnum',15);
 $focus->save($currentModule);
 
 header("Location: index.php?action=DetailView&module=$currentModule&record=$record");
+die();
 ?>

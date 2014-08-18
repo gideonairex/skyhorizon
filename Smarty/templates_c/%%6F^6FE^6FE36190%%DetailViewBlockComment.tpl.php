@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-30 17:03:43
+<?php /* Smarty version 2.6.18, created on 2014-08-16 09:51:19
          compiled from modules/ModComments/widgets/DetailViewBlockComment.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'modules/ModComments/widgets/DetailViewBlockComment.tpl', 16, false),)), $this); ?>

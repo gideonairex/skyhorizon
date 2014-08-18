@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-10 10:02:14
+<?php /* Smarty version 2.6.18, created on 2014-08-16 10:17:10
          compiled from ReportTemplates/salesagreement/template1.tpl */ ?>
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
 	<div class="container-fluid">
@@ -38,11 +38,18 @@ unset($_smarty_tpl_vars);
 				<?php $this->assign('vatsale', $this->_tpl_vars['DATA']['vatsale']); ?>
 				<?php $this->assign('gt', $this->_tpl_vars['DATA']['gt']); ?>
 				<?php $this->assign('date', $this->_tpl_vars['DATA']['date']); ?>
-
+				<?php $this->assign('account_name', $this->_tpl_vars['DATA']['account_name']); ?>
+				<?php $this->assign('conversion', $this->_tpl_vars['DATA']['conversion']); ?>
+				
 				<table class="table">
 					<tr>
 						<td> SA No </td>
 						<td> <?php echo $this->_tpl_vars['sa_no']; ?>
+ </td>
+					</tr>
+					<tr>
+						<td> Account Name </td>
+						<td> <?php echo $this->_tpl_vars['account_name']; ?>
  </td>
 					</tr>
 					<tr>
@@ -61,7 +68,7 @@ unset($_smarty_tpl_vars);
 			<div class="col-xs-8">
 				<h3>Particulars</h3>
 				<div class="panel panel-default">
-				  <div class="panel-heading"><strong>PAX</strong></div>
+				  <div class="panel-heading"><strong>Name of Passengers</strong></div>
 				  <div class="panel-body">
 					<?php echo $this->_tpl_vars['pax']; ?>
 
@@ -87,7 +94,8 @@ unset($_smarty_tpl_vars);
 					</tr>
 					<tr>
 						<th>Amount Fee</th>
-						<td><?php echo $this->_tpl_vars['af']; ?>
+						<td><?php echo $this->_tpl_vars['conversion']; ?>
+ <?php echo $this->_tpl_vars['af']; ?>
 </td>
 					</tr>
 					<tr>
@@ -110,8 +118,9 @@ unset($_smarty_tpl_vars);
 					
 					<tr>
 						<th>Grand Total</th>
-						<td><?php echo $this->_tpl_vars['gt']; ?>
-</td>
+						<td><?php echo $this->_tpl_vars['conversion']; ?>
+ <strong><?php echo $this->_tpl_vars['gt']; ?>
+</strong></td>
 					</tr>
 				</table>
 			</div>

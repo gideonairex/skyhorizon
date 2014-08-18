@@ -61,9 +61,8 @@
 				<tr>
 					<th>AP No</th>
 					<th>Payable No</th>
-					<th>Payable</th>
+					<th>Amount</th>
 					<th>Balance</th>
-					<th>Status</th>
 					<th>Supplier</th>
 				</tr>
 			{foreach key=ID item=AR from=$ARS}
@@ -79,7 +78,6 @@
 					<td>{$payable_no}</td>
 					<td>{$payable}</td>
 					<td>{$balance}</td>
-					<td>{$ap_status}</td>
 					<td>{$supplier_name}</td>
 				</tr>
 			{/foreach}

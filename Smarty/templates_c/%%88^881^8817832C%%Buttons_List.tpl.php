@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-01 16:48:42
+<?php /* Smarty version 2.6.18, created on 2014-08-16 10:05:14
          compiled from Buttons_List.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Buttons_List.tpl', 18, false),array('modifier', 'vtiger_imageurl', 'Buttons_List.tpl', 34, false),)), $this); ?>

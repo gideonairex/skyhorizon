@@ -35,14 +35,14 @@
 				{assign var=grand_total value=$DATA.grand_total}
 				{assign var=date value=$DATA.date}
 				{assign var=confirmation value=$DATA.confirmation}
-				
-				
+				{assign var=conversion_po value=$DATA.conversion_po}
+				{assign var=user value=$DATA.user}
 				
 				
 				<table class="table">
 					<tr>
 						<td> Purchase Number </td>
-						<td> {$po_no} </td>
+						<td> <strong> {$po_no} </strong> </td>
 					</tr>
 					<tr>
 						<td> Supplier </td>
@@ -54,8 +54,12 @@
 						<td> {$date} </td>
 					</tr>
 					<tr>
-						<td> Confirmation No </td>
-						<td> {$confirmation} </td>
+						<td> Confirmation Code </td>
+						<td> <strong> {$confirmation} </strong> </td>
+					</tr>
+					<tr>
+						<td> Prepared By: </td>
+						<td> {$user} </td>
 					</tr>
 				</table>
 			</div>
@@ -63,7 +67,7 @@
 			<div class="col-xs-8">
 				<h3>Particulars</h3>
 				<div class="panel panel-default">
-				  <div class="panel-heading"><strong>PAX</strong></div>
+				  <div class="panel-heading"><strong>Name of Passengers</strong></div>
 				  <div class="panel-body">
 					{$pax}
 				  </div>
@@ -83,7 +87,7 @@
 
 					<tr>
 						<th>Cost</th>
-						<td>{$cost}</td>
+						<td>{$conversion_po} {$cost}</td>
 					</tr>
 					
 					<tr>
@@ -106,20 +110,24 @@
 					</tr>
 					<tr>
 						<th>Grand Total</th>
-						<td>{$grand_total}</td>
+						<td>{$conversion_po} {$grand_total}</td>
 					</tr>
 				</table>
 			</div>
 			
 			<div class="col-xs-8">
 				<p>
-					<strong> Important Notice: </strong> After issuance of Tickets & Hotel Voucher. In case of voluntary cancellations or revisions of airline tickets & voucher. I hereby agree to pay all the penalties that applies. Thank you
+					<strong> To our valued suppliers: </strong> We are strictly implementing a no P.O. number issuance policy. Please avoid issuance or finalizing transactions without the <strong> Confirmation Code </strong>.
+				</p>
+				<p class="text-right">
+					Thank you for your cooperation.
+				</p>
+				<p  class="text-right">
+					 <strong> Management </strong>
 				</p>
 			</div>
 			<div class="col-xs-4">
-				<p> Name of Flight Details Verfified Correct: </p>
-				<br>
-				<p style="border-top:1px solid black" class="text-center"> Signed over Printed Name Date</p>
+				
 			</div>
 		</div>
 	</div>

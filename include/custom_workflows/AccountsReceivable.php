@@ -1,7 +1,7 @@
 <?php
 function updateStatus($entity){
 	
-	$payment = $entity->data['payment'] + $entity->data['awt'];
+	$payment = $entity->data['payment'] + $entity->data['awt']  + $entity->data['bc'];
 	
 	
 	if( $payment == 0 ){

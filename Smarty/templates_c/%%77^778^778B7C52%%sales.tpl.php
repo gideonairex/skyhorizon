@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-03 20:43:24
+<?php /* Smarty version 2.6.18, created on 2014-08-16 10:57:25
          compiled from ReportTemplates/sales.tpl */ ?>
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
 	<div class="container-fluid">

@@ -60,7 +60,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 			$data[$i]['contact'] = $adb->query_result($result, $i, "firstname").' '.$adb->query_result($result, $i, "lastname");
 			$data[$i]['pax'] = $adb->query_result($result, $i, "pax");
 			$data[$i]['awt'] = $adb->query_result($result, $i, "awt");
-			
+			$data[$i]['bc'] = $adb->query_result($result, $i, "bc");
 		}
 		
 		echo json_encode($data);
@@ -106,6 +106,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 
 		$payment += $ar['payment'];
 		$awt += $ar['ewt'];
+		$bc += $ar['bc'];
 		
 		$arIds[] = $ar['id'];
 		$id = $ar['id'];
@@ -115,6 +116,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 		
 		$ar_obj->column_fields['payment'] +=  $ar['payment'];
 		$ar_obj->column_fields['awt'] +=  $ar['ewt'];
+		$ar_obj->column_fields['bc'] +=  $ar['bc'];
 		$ar_obj->save('AccountsReceivable');
 		
 	}
@@ -128,12 +130,14 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"payment" => $payment,
 								"awt" => $awt,
 								"receipt_type" => $receipt_type,
-								"conversion_c" => $conversion
+								"conversion_c" => $conversion,
+								"bc" => $bc
 							);
 							
 	$focus->save( 'Collection' );
 	$return_id = $focus->id;
 	
+	$total_amount = $payment + $awt + $bc;
 	if ( $payment_type == 'Check') {
 		$archeck_obj = new ARChecks();
 		$archeck_obj->setColumns('ARChecks');
@@ -147,7 +151,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 									"bank" => $_REQUEST['bank'],
 									"date_of_chk" =>  $_REQUEST['date_of_check'],
 									"arhk_status" => "Released",
-									"amount" => $payment,
+									"amount" => $total_amount,
 									"conversion_rc" => $conversion
 								);
 		

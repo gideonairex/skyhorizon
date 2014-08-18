@@ -45,13 +45,16 @@ define( function ( require ){
 				var sales = this.collection.models[i].get('sales');
 				var payment = this.collection.models[i].get('payment');
 				var awt = this.collection.models[i].get('awt');
+				var bc = this.collection.models[i].get('bc');
 				
 				if ( !awt )
 					awt = 0;
 				if ( !payment )
 					awt = 0;
+				if ( !bc )
+					bc = 0;
 					
-				totalBalance = totalBalance + parseFloat(sales) - parseFloat(payment) - parseFloat(awt);
+				totalBalance = totalBalance + parseFloat(sales) - parseFloat(payment) - parseFloat(awt) - parseFloat(bc);
 			}
 			
 			this.$el.find('.total-balance').html(totalBalance);
@@ -62,7 +65,8 @@ define( function ( require ){
 			for( var i = 0 ; i < this.collection.length ; i++){
 				var payment = this.collection.models[i].get('payment');
 				var ewt = this.collection.models[i].get('ewt');
-				totalPayment = totalPayment + parseFloat(ewt) + parseFloat(payment);
+				var bc = this.collection.models[i].get('bc');
+				totalPayment = totalPayment + parseFloat(ewt) + parseFloat(payment) + parseFloat(bc);
 			}
 			this.$el.find('.total-payment').html(totalPayment);
 		},

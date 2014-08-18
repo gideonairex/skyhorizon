@@ -33,12 +33,17 @@
 				{assign var=gt value=$DATA.gt}
 				{assign var=date value=$DATA.date}
 				{assign var=rate_per_pax value=$DATA.rate_per_pax}
-				
+				{assign var=account_name value=$DATA.account_name}
+				{assign var=conversion value=$DATA.conversion}
 
 				<table class="table">
 					<tr>
 						<td> SA No </td>
 						<td> {$sa_no} </td>
+					</tr>
+					<tr>
+						<td> Account Name </td>
+						<td> {$account_name} </td>
 					</tr>
 					<tr>
 						<td> Contact </td>
@@ -55,7 +60,7 @@
 			<div class="col-xs-8">
 				<h3>Particulars</h3>
 				<div class="panel panel-default">
-				  <div class="panel-heading"><strong>PAX</strong></div>
+				  <div class="panel-heading"><strong>Name of Passengers</strong></div>
 				  <div class="panel-body">
 					{$pax}
 				  </div>
@@ -79,12 +84,12 @@
 					</tr>
 					<tr>
 						<th>Rate per Pax</th>
-						<td>{$rate_per_pax}</td>
+						<td>{$conversion} {$rate_per_pax}</td>
 					</tr>
 					
 					<tr>
 						<th>Grand Total</th>
-						<td>{$gt}</td>
+						<td>{$conversion} <strong>{$gt}</strong></td>
 					</tr>
 				</table>
 			</div>

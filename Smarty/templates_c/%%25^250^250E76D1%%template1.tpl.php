@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-10 10:48:23
+<?php /* Smarty version 2.6.18, created on 2014-08-16 10:32:04
          compiled from ReportTemplates/po/template1.tpl */ ?>
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
 	<div class="container-fluid">
@@ -41,15 +41,15 @@ unset($_smarty_tpl_vars);
 				<?php $this->assign('grand_total', $this->_tpl_vars['DATA']['grand_total']); ?>
 				<?php $this->assign('date', $this->_tpl_vars['DATA']['date']); ?>
 				<?php $this->assign('confirmation', $this->_tpl_vars['DATA']['confirmation']); ?>
-				
-				
+				<?php $this->assign('conversion_po', $this->_tpl_vars['DATA']['conversion_po']); ?>
+				<?php $this->assign('user', $this->_tpl_vars['DATA']['user']); ?>
 				
 				
 				<table class="table">
 					<tr>
 						<td> Purchase Number </td>
-						<td> <?php echo $this->_tpl_vars['po_no']; ?>
- </td>
+						<td> <strong> <?php echo $this->_tpl_vars['po_no']; ?>
+ </strong> </td>
 					</tr>
 					<tr>
 						<td> Supplier </td>
@@ -63,8 +63,13 @@ unset($_smarty_tpl_vars);
  </td>
 					</tr>
 					<tr>
-						<td> Confirmation No </td>
-						<td> <?php echo $this->_tpl_vars['confirmation']; ?>
+						<td> Confirmation Code </td>
+						<td> <strong> <?php echo $this->_tpl_vars['confirmation']; ?>
+ </strong> </td>
+					</tr>
+					<tr>
+						<td> Prepared By: </td>
+						<td> <?php echo $this->_tpl_vars['user']; ?>
  </td>
 					</tr>
 				</table>
@@ -73,7 +78,7 @@ unset($_smarty_tpl_vars);
 			<div class="col-xs-8">
 				<h3>Particulars</h3>
 				<div class="panel panel-default">
-				  <div class="panel-heading"><strong>PAX</strong></div>
+				  <div class="panel-heading"><strong>Name of Passengers</strong></div>
 				  <div class="panel-body">
 					<?php echo $this->_tpl_vars['pax']; ?>
 
@@ -95,7 +100,8 @@ unset($_smarty_tpl_vars);
 
 					<tr>
 						<th>Cost</th>
-						<td><?php echo $this->_tpl_vars['cost']; ?>
+						<td><?php echo $this->_tpl_vars['conversion_po']; ?>
+ <?php echo $this->_tpl_vars['cost']; ?>
 </td>
 					</tr>
 					
@@ -123,7 +129,8 @@ unset($_smarty_tpl_vars);
 					</tr>
 					<tr>
 						<th>Grand Total</th>
-						<td><?php echo $this->_tpl_vars['grand_total']; ?>
+						<td><?php echo $this->_tpl_vars['conversion_po']; ?>
+ <?php echo $this->_tpl_vars['grand_total']; ?>
 </td>
 					</tr>
 				</table>
@@ -131,13 +138,17 @@ unset($_smarty_tpl_vars);
 			
 			<div class="col-xs-8">
 				<p>
-					<strong> Important Notice: </strong> After issuance of Tickets & Hotel Voucher. In case of voluntary cancellations or revisions of airline tickets & voucher. I hereby agree to pay all the penalties that applies. Thank you
+					<strong> To our valued suppliers: </strong> We are strictly implementing a no P.O. number issuance policy. Please avoid issuance or finalizing transactions without the <strong> Confirmation Code </strong>.
+				</p>
+				<p class="text-right">
+					Thank you for your cooperation.
+				</p>
+				<p  class="text-right">
+					 <strong> Management </strong>
 				</p>
 			</div>
 			<div class="col-xs-4">
-				<p> Name of Flight Details Verfified Correct: </p>
-				<br>
-				<p style="border-top:1px solid black" class="text-center"> Signed over Printed Name Date</p>
+				
 			</div>
 		</div>
 	</div>
