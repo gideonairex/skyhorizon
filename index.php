@@ -18,7 +18,6 @@
  * theme header and footer files defined for the user as well as the module as 
  * defined by the input parameters.
  ********************************************************************************/
-
 global $entityDel;
 global $display;
 global $category;
@@ -122,7 +121,7 @@ if (is_file('config_override.php'))
 require_once('vtigerversion.php');
 global $adb, $vtiger_current_version;
 if(isset($_SESSION['VTIGER_DB_VERSION']) && isset($_SESSION['authenticated_user_id'])) {
-    if(version_compare($_SESSION['VTIGER_DB_VERSION'], $vtiger_current_version, '!=')) {
+	if(version_compare($_SESSION['VTIGER_DB_VERSION'], $vtiger_current_version, '!=')) {
         unset($_SESSION['VTIGER_DB_VERSION']);
 		echo "<table border='0' cellpadding='5' cellspacing='0' width='100%' height='450px'><tr><td align='center'>";
 		echo "<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 55%; position: relative; z-index: 10000000;'>
@@ -141,10 +140,10 @@ if(isset($_SESSION['VTIGER_DB_VERSION']) && isset($_SESSION['authenticated_user_
     }
 } else {
     $result = $adb->query("SELECT * FROM vtiger_version");
-    $dbversion = $adb->query_result($result, 0, 'current_version');
+		$dbversion = $adb->query_result($result, 0, 'current_version');
     if(version_compare($dbversion, $vtiger_current_version, '=')) {
     	$_SESSION['VTIGER_DB_VERSION']= $dbversion;
-    } else {
+		} else {
 		echo "<table border='0' cellpadding='5' cellspacing='0' width='100%' height='450px'><tr><td align='center'>";
 		echo "<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 55%; position: relative; z-index: 10000000;'>
 

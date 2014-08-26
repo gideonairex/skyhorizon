@@ -47,7 +47,7 @@ requirejs.config({
 			'deps' : [ 'jquery' ]
 		},
 		'marionette': {
-			'deps' : [ 'backbone', 'backbone.wreqr', 'backbone.babysitter', 'backbone.syphon', 'backbone.validation', 'bootstrap', 'bootstrap-datepicker' ]
+			'deps' : [ 'backbone', 'backbone.wreqr', 'backbone.babysitter', 'backbone.syphon', 'bootstrap', 'bootstrap-datepicker' ]
 		},
 		'reports' : {
 			'deps' : [ 'marionette' ]

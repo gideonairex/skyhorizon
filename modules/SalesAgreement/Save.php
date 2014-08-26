@@ -26,8 +26,11 @@ if($_REQUEST['assigntype'] == 'U') {
 	$focus->column_fields['assigned_user_id'] = $_REQUEST['assigned_group_id'];
 }
 
+$focus->column_fields['fee'] = implode( '', explode ( ',', $focus->column_fields['fee'] ) );
+$focus->column_fields['mark_up'] = implode( '', explode ( ',', $focus->column_fields['mark_up'] ) );
+$focus->column_fields['service_fee'] = implode( '', explode ( ',', $focus->column_fields['service_fee'] ) );
 // Compute
-$focus->column_fields['rate_per_pax'] = $focus->column_fields['fee'] + $focus->column_fields['mark_up'] + $focus->column_fields['service_fee'];
+$focus->column_fields['rate_per_pax'] = $focus->column_fields['fee'] + $focus->column_fields['mark_up'] + $focus->column_fields['service_fee'] ;
 $focus->column_fields['vatable_sale'] = round ( $focus->column_fields['rate_per_pax'] / 1.12 , 2);
 $focus->column_fields['vat'] =  round ( $focus->column_fields['vatable_sale'] * 0.12, 2 );
 $focus->column_fields['grand_total'] = $focus->column_fields['rate_per_pax'] *$focus->column_fields['quantity'];

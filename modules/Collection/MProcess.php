@@ -70,6 +70,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 
 	require_once ("modules/Collection/Collection.php");
 	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
+	require_once ("modules/CollectionLogs/CollectionLogs.php");
 	require_once ("modules/ARChecks/ARChecks.php");
 	
 	$focus = new Collection();
@@ -101,7 +102,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 			}
 		}
 	}
-	
+	$clogs = array();
 	foreach ( $data as $ar ){
 
 		$payment += $ar['payment'];
@@ -118,6 +119,10 @@ if( $_REQUEST['func'] == 'searchAR'){
 		$ar_obj->column_fields['awt'] +=  $ar['ewt'];
 		$ar_obj->column_fields['bc'] +=  $ar['bc'];
 		$ar_obj->save('AccountsReceivable');
+
+		$clogs[$ar_obj->id]['payment'] = $ar['payment'];
+		$clogs[$ar_obj->id]['ewt'] = $ar['ewt'];
+		$clogs[$ar_obj->id]['bc'] = $ar['bc'];
 		
 	}
 	
@@ -135,6 +140,19 @@ if( $_REQUEST['func'] == 'searchAR'){
 							);
 							
 	$focus->save( 'Collection' );
+
+	$cl = new CollectionLogs();
+	$cl->setColumns('CollectionLogs');
+	foreach ( $clogs as $ar => $value ) {
+		$cl->column_fields['assigned_user_id'] = $focus->column_fields['assigned_user_id'];
+		$cl->column_fields['amount'] = $value['payment'];
+		$cl->column_fields['ewt'] = $value['ewt'];
+		$cl->column_fields['bc'] = $value['bc'];
+		$cl->column_fields['ar_no'] = $ar;
+		$cl->column_fields['collection_no'] = $focus->id;
+		$cl->column_fields['currency_cl'] = $conversion;
+		$cl->save('CollectionLogs');
+	}
 	$return_id = $focus->id;
 	
 	$total_amount = $payment + $awt + $bc;
