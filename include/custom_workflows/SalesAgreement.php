@@ -20,7 +20,7 @@ function createAR($entity){
 	if( $num_rows >= 1){
 		$ar_obj->mode = 'edit';
 		$ar_obj->id = $adb->query_result( $result, 0 , 'accountsreceivableid');
-		$ar_obj->column_fields['ar_status'] = $adb->query_result( $result, 0 , 'ar_status');
+		$ar_obj->retrieve_entity_info($ar_obj->id, 'AccountsReceivable');
 	}
 	
 	$ar_obj->column_fields['assigned_user_id'] = $assigned_user_id[1];
