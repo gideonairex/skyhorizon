@@ -544,8 +544,8 @@ function sendfile_email()
 														</tr>
 														<tr>
 															<td align="left" style="padding-left:10px;">
-																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
-																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}&no_of_pax={$NOPAX}">Add Purchase Order</a>
+																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}">Add Purchase Order</a>
 															</td>
 														</tr>
 													{/if}
