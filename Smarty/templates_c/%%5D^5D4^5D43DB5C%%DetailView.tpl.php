@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-16 09:51:16
+<?php /* Smarty version 2.6.18, created on 2014-08-28 21:08:26
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -685,11 +685,9 @@ unset($_smarty_tpl_vars);
 														<tr>
 															<td align="left" style="padding-left:10px;">
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
-&no_of_pax=<?php echo $this->_tpl_vars['NOPAX']; ?>
 "><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
 " hspace="5" align="absmiddle"  border="0"/></a>
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no=<?php echo $this->_tpl_vars['ID']; ?>
-&no_of_pax=<?php echo $this->_tpl_vars['NOPAX']; ?>
 ">Add Purchase Order</a>
 															</td>
 														</tr>

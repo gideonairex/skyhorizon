@@ -24,7 +24,8 @@ $tobeCleaned = array(
 'Disbursement',
 'Documents',
 'APChecks',
-'ARChecks'
+'ARChecks',
+'CollectionLogs'
 );
 
 $db = PearDatabase::getInstance();

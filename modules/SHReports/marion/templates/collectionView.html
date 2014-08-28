@@ -63,16 +63,20 @@
 		<tr>
 			<th> AR No. </td>
 			<th> Sales No.</td>
-			<th> Amount </td>
+			<th> Collection Log No. </td>
+			<th> Payment </td>
+			<th> EWT </td>
+			<th> Bank Charge </td>
 		</tr>
-		<% _.each ( Cash_on_hand.details, function ( obj ) { %>
-			<% _.each ( obj.ar, function ( ar ) { %>
+		<% _.each ( Cash_on_hand.details, function ( ar ) { %>
 				<tr>
 					<td> <%= ar.ar_no %></td>
 					<td> <%= ar.sa_no %></td>
-					<td> <%= ar.sales %></td>
+					<td> <%= ar.cl_no %></td>
+					<td> <%= ar.payment %></td>
+					<td> <%= ar.awt %></td>
+					<td> <%= ar.bc %></td>
 				</tr>
-			<% } ); %>
 		<% } ); %>
 		</table>
 		</div>
@@ -85,16 +89,20 @@
 		<tr>
 			<th> AR No. </td>
 			<th> Sales No.</td>
-			<th> Amount </td>
+			<th> Collection Log No. </td>
+			<th> Payment </td>
+			<th> EWT </td>
+			<th> Bank Charge </td>
 		</tr>
-		<% _.each ( Check.details, function ( obj ) { %>
-			<% _.each ( obj.ar, function ( ar ) { %>
+		<% _.each ( Check.details, function ( ar ) { %>
 				<tr>
 					<td> <%= ar.ar_no %></td>
 					<td> <%= ar.sa_no %></td>
-					<td> <%= ar.sales %></td>
+					<td> <%= ar.cl_no %></td>
+					<td> <%= ar.payment %></td>
+					<td> <%= ar.awt %></td>
+					<td> <%= ar.bc %></td>
 				</tr>
-			<% } ); %>
 		<% } ); %>
 		</table>
 		</div>
@@ -107,16 +115,20 @@
 		<tr>
 			<th> AR No. </td>
 			<th> Sales No.</td>
-			<th> Amount </td>
+			<th> Collection Log No. </td>
+			<th> Payment </td>
+			<th> EWT </td>
+			<th> Bank Charge </td>
 		</tr>
-		<% _.each ( Cash_online.details, function ( obj ) { %>
-			<% _.each ( obj.ar, function ( ar ) { %>
+		<% _.each ( Cash_online.details, function ( ar ) { %>
 				<tr>
 					<td> <%= ar.ar_no %></td>
 					<td> <%= ar.sa_no %></td>
-					<td> <%= ar.sales %></td>
+					<td> <%= ar.cl_no %></td>
+					<td> <%= ar.payment %></td>
+					<td> <%= ar.awt %></td>
+					<td> <%= ar.bc %></td>
 				</tr>
-			<% } ); %>
 		<% } ); %>
 		</table>
 		</div>

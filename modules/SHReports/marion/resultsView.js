@@ -21,7 +21,7 @@ define( function( require ) {
 		templateap : _.template( ap ),
 		templatecollection : _.template( collection ),
 		model : new model(),
-		
+	
 		// this is for summarry
 		params : {
 				'sales' : [
@@ -564,6 +564,10 @@ define( function( require ) {
 			}
 		},
 		beforeRendercollection : function () {
+			this.model.set( 'Check', null );
+			this.model.set( 'Cash', null );
+			this.model.set( 'Cash_on_hand', null );
+			this.model.set( 'Cash_online', null );
 			var self = this;
 			var summary = this.collection.models[0].get( 'summary' );
 			var gt = this.collection.models[0].get( 'summary' ).Summary;

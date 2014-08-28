@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-18 22:35:52
+<?php /* Smarty version 2.6.18, created on 2014-08-28 21:08:33
          compiled from PopupContents.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'PopupContents.tpl', 17, false),array('modifier', 'vtiger_imageurl', 'PopupContents.tpl', 69, false),)), $this); ?>
