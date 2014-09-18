@@ -34,7 +34,7 @@
 				{assign var=date value=$DATA.date}
 				{assign var=account_name value=$DATA.account_name}
 				{assign var=conversion value=$DATA.conversion}
-				
+				{assign var=branch value=$DATA.branch}
 				<table class="table">
 					<tr>
 						<td> SA No </td>
@@ -44,6 +44,16 @@
 						<td> Account Name </td>
 						<td> {$account_name} </td>
 					</tr>
+					{if $branch != ''}
+					<tr>
+						<td>
+							Branch
+						</td>
+						<td>
+							{$branch}
+						</td>
+					</tr>
+					{/if}
 					<tr>
 						<td> Contact </td>
 						<td> {$contact} </td>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-28 21:08:26
+<?php /* Smarty version 2.6.18, created on 2014-09-18 07:00:43
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
@@ -639,9 +639,7 @@ unset($_smarty_tpl_vars);
 " target="_blank" >Print Voucher</a>
 																</td>
 															</tr>
-														
 													<?php endif; ?>
-													
 													<?php if ($this->_tpl_vars['MODULE'] == 'SHContacts'): ?>
 														<tr>
 															<td align="left" style="padding-left:10px;">
@@ -652,8 +650,25 @@ unset($_smarty_tpl_vars);
 ">Add Sales Agreement</a>
 															</td>
 														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&contact_person=<?php echo $this->_tpl_vars['ID']; ?>
+&expense_type=Advances to person"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&contact_person=<?php echo $this->_tpl_vars['ID']; ?>
+&expense_type=Advances to person">Create Non-trade Payable</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=NonTradeR&action=EditView&contact_person=<?php echo $this->_tpl_vars['ID']; ?>
+&ntr_type=Advances to person"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=NonTradeR&action=EditView&contact_person=<?php echo $this->_tpl_vars['ID']; ?>
+&ntr_type=Advances to person">Create Non-trade Receivable</a>
+															</td>
+														</tr>
 													<?php endif; ?>
-													
 													<?php if ($this->_tpl_vars['MODULE'] == 'SalesAgreement'): ?>
 														<tr>
 															<td align="left" style="padding-left:10px;">
@@ -691,10 +706,17 @@ unset($_smarty_tpl_vars);
 ">Add Purchase Order</a>
 															</td>
 														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&sales_agreement=<?php echo $this->_tpl_vars['ID']; ?>
+"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&sales_agreement=<?php echo $this->_tpl_vars['ID']; ?>
+">Create Non-trade payable</a>
+															</td>
+														</tr>
 													<?php endif; ?>
-													
 													<?php if ($this->_tpl_vars['MODULE'] == 'PO'): ?>
-													
 														<tr>
 															<td align="left" style="padding-left:10px;">
 																<a class="webMnu" href="index.php?module=PO&action=PrintTemplate&record=<?php echo $this->_tpl_vars['ID']; ?>
@@ -704,7 +726,16 @@ unset($_smarty_tpl_vars);
 &template=1" target="_blank">Print Template</a>
 															</td>
 														</tr>
-														
+
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=NonTradeR&action=EditView&po_no=<?php echo $this->_tpl_vars['ID']; ?>
+&ntr_type=Refund from supplier"><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=NonTradeR&action=EditView&po_no=<?php echo $this->_tpl_vars['ID']; ?>
+&ntr_type=Refund from supplier">Create Non-trade receivable</a>
+															</td>
+														</tr>
 														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -716,11 +747,8 @@ unset($_smarty_tpl_vars);
 																</td>
 															</tr>
 														<?php endif; ?>
-														
 													<?php endif; ?>
-													
 													<?php if ($this->_tpl_vars['MODULE'] == 'AccountsPayable'): ?>
-													
 														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -732,11 +760,8 @@ unset($_smarty_tpl_vars);
 																</td>
 															</tr>
 														<?php endif; ?>
-														
 													<?php endif; ?>
-													
 													<?php if ($this->_tpl_vars['MODULE'] == 'SHExpenses'): ?>
-													
 														<?php if ($this->_tpl_vars['SUBMIT_APRROVED'] == 'true'): ?>
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -748,9 +773,7 @@ unset($_smarty_tpl_vars);
 																</td>
 															</tr>
 														<?php endif; ?>
-														
 													<?php endif; ?>
-													
 													<?php if ($this->_tpl_vars['MODULE'] == 'HomeOwner'): ?>
 														<tr>
 															<td align="left" style="padding-left:10px;">

@@ -9,8 +9,8 @@
  ************************************************************************************/
 
 $mod_strings = Array(
-	'SHExpenses' => 'Expenses',
-	'SINGLE_SHExpenses' => 'Expense',
+	'SHExpenses' => 'Non-trade Payables',
+	'SINGLE_SHExpenses' => 'Non-trade payable',
 	'ModuleName ID' => 'Module Name ID',
 
 	'LBL_CUSTOM_INFORMATION' => 'Custom Information',

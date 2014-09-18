@@ -4,7 +4,6 @@ define( function ( require ){
 	var Marionette = require( 'marionette' );
 	var _ = require( 'underscore' );
 	var template = require( 'text!modules/Collection/marion/templates/selectView.html' );
-	
 	var selectView = Marionette.ItemView.extend({
 		template : _.template( template ),
 		tagName : 'tr',
@@ -20,7 +19,7 @@ define( function ( require ){
 			'change input.bc'  : 'updateBC'
 		},
 		'updatePayment' : function(){
-			this.model.set('payment',this.ui.payment.val());
+			this.model.set('paymentp',this.ui.payment.val());
 			this.trigger('do:updatePayment',this.model);
 		},
 		'updateAWT' : function(){
@@ -28,14 +27,13 @@ define( function ( require ){
 			this.trigger('do:updatePayment',this.model);
 		},
 		'updateBC' : function(){
-			this.model.set('bc',this.ui.bc.val());
+			this.model.set('bcp',this.ui.bc.val());
 			this.trigger('do:updatePayment',this.model);
 		},
 		'removeMe' : function(){
 			this.trigger("do:removeme",this.model);
 		}
 	});
-	
 	return selectView;
 
-}) 
+})

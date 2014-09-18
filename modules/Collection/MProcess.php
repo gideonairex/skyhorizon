@@ -3,7 +3,6 @@ header('Content-Type: application/json');
 global $adb;
 
 if( $_REQUEST['func'] == 'searchAR'){
-	
 	switch ($_REQUEST['filter']) {
 		case 'arno':
 			$filter = " vtiger_accountsreceivable.ar_no = '".$_REQUEST['searchString']."'";
@@ -12,7 +11,6 @@ if( $_REQUEST['func'] == 'searchAR'){
 			$preNumber = explode(",",$_REQUEST['searchString']);
 			$amount = implode("",$preNumber);
 			$number = explode(".",$amount);
-			
 			if( count($number) == 1){
 				$amount = $amount.".00";
 			}
@@ -28,23 +26,19 @@ if( $_REQUEST['func'] == 'searchAR'){
 			$filter = " vtiger_shcontacts.firstname like '%".$_REQUEST['searchString']."%' || vtiger_shcontacts.lastname like '%".$_REQUEST['searchString']."%' ";
 			break;
 	}
-	
-	$query = 'select * from vtiger_accountsreceivable 
+	$query = 'select * from vtiger_accountsreceivable
 			  inner join vtiger_crmentity on vtiger_accountsreceivable.accountsreceivableid = vtiger_crmentity.crmid
 			  inner join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
 			  left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
 			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial") and conversion_ar="'.$_REQUEST['conversion'].'"';
-			   
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
-	
 
 	if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
-	
 		for( $i = 0 ; $i < $num_rows; $i++){
 			$data[$i]['result'] = 1;
 			$data[$i]['id'] = $adb->query_result($result, $i, "accountsreceivableid");
@@ -55,14 +49,13 @@ if( $_REQUEST['func'] == 'searchAR'){
 			$data[$i]['sales_no'] = $adb->query_result($result, $i, "sa_no");
 			$data[$i]['ar_status'] = $adb->query_result($result, $i, "ar_status");
 			$data[$i]['payment'] = $adb->query_result($result, $i, "payment");
-			$data[$i]['balance'] = $adb->query_result($result, $i, "sales") - ( $adb->query_result($result, $i, "payment") + $adb->query_result($result, $i, "awt") );
+			$data[$i]['balance'] = $adb->query_result($result, $i, "sales") - ( $adb->query_result($result, $i, "payment") + $adb->query_result($result, $i, "awt") + $adb->query_result($result, $i, "bc") );
 			$data[$i]['account_name'] = $adb->query_result($result, $i, "account_name");
 			$data[$i]['contact'] = $adb->query_result($result, $i, "firstname").' '.$adb->query_result($result, $i, "lastname");
 			$data[$i]['pax'] = $adb->query_result($result, $i, "pax");
 			$data[$i]['awt'] = $adb->query_result($result, $i, "awt");
 			$data[$i]['bc'] = $adb->query_result($result, $i, "bc");
 		}
-		
 		echo json_encode($data);
 	}
 
@@ -72,22 +65,16 @@ if( $_REQUEST['func'] == 'searchAR'){
 	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
 	require_once ("modules/CollectionLogs/CollectionLogs.php");
 	require_once ("modules/ARChecks/ARChecks.php");
-	
 	$focus = new Collection();
 	$payment_type = $_REQUEST['payment_type'];
 	$receipt_type = $_REQUEST['receipt_type'];
-	
 	$entityBody = file_get_contents('php://input');
 	$data = json_decode($entityBody,true);
-	
 	$payment = 0;
 	$awt = 0;
-	
 	$ar_obj = new AccountsReceivable();
 	$ar_obj->setColumns('AccountsReceivable');
-	
 	$arIds = array();
-	
 	$i = 0;
 	foreach ( $data as $ar ){
 		if ( $i == 0 ){
@@ -105,27 +92,23 @@ if( $_REQUEST['func'] == 'searchAR'){
 	$clogs = array();
 	foreach ( $data as $ar ){
 
-		$payment += $ar['payment'];
+		$payment += $ar['paymentp'];
 		$awt += $ar['ewt'];
-		$bc += $ar['bc'];
-		
+		$bc += $ar['bcp'];
 		$arIds[] = $ar['id'];
 		$id = $ar['id'];
 		$ar_obj->mode = 'edit';
 		$ar_obj->id = $id;
 		$ar_obj->retrieve_entity_info($id, 'AccountsReceivable');
-		
-		$ar_obj->column_fields['payment'] +=  $ar['payment'];
+		$ar_obj->column_fields['payment'] +=  $ar['paymentp'];
 		$ar_obj->column_fields['awt'] +=  $ar['ewt'];
-		$ar_obj->column_fields['bc'] +=  $ar['bc'];
+		$ar_obj->column_fields['bc'] +=  $ar['bcp'];
 		$ar_obj->save('AccountsReceivable');
 
-		$clogs[$ar_obj->id]['payment'] = $ar['payment'];
+		$clogs[$ar_obj->id]['payment'] = $ar['paymentp'];
 		$clogs[$ar_obj->id]['ewt'] = $ar['ewt'];
-		$clogs[$ar_obj->id]['bc'] = $ar['bc'];
-		
+		$clogs[$ar_obj->id]['bc'] = $ar['bcp'];
 	}
-	
 	$focus->column_fields = Array
 							(
 								"CreatedTime" => "",
@@ -138,7 +121,6 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"conversion_c" => $conversion,
 								"bc" => $bc
 							);
-							
 	$focus->save( 'Collection' );
 
 	$cl = new CollectionLogs();
@@ -154,7 +136,6 @@ if( $_REQUEST['func'] == 'searchAR'){
 		$cl->save('CollectionLogs');
 	}
 	$return_id = $focus->id;
-	
 	$total_amount = $payment + $awt + $bc;
 	if ( $payment_type == 'Check') {
 		$archeck_obj = new ARChecks();
@@ -172,20 +153,13 @@ if( $_REQUEST['func'] == 'searchAR'){
 									"amount" => $total_amount,
 									"conversion_rc" => $conversion
 								);
-		
 		$archeck_obj->save( 'ARChecks' );
 	}
-
-	
 	if(!empty($data)) {
-	
 		$focus->save_related_module('Collection', $return_id, 'AccountsReceivable', $arIds);
-		
 	}
-
 	//echo json_encode($HTTP_RAW_POST_DATA);
 	echo json_encode( array( 'id' => $focus->id ) );
-	
 }else{
 	echo json_encode(array('error'=>'invalid action'));
 }

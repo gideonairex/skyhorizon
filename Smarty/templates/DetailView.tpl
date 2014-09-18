@@ -511,9 +511,7 @@ function sendfile_email()
 																	<a class="webMnu" href="index.php?module=Disbursement&action=PrintTemplate&record={$ID}" target="_blank" >Print Voucher</a>
 																</td>
 															</tr>
-														
 													{/if}
-													
 													{if $MODULE eq 'SHContacts'}
 														<tr>
 															<td align="left" style="padding-left:10px;">
@@ -521,8 +519,19 @@ function sendfile_email()
 																<a class="webMnu" href="index.php?module=SalesAgreement&action=EditView&customer={$ID}">Add Sales Agreement</a>
 															</td>
 														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&contact_person={$ID}&expense_type=Advances to person"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&contact_person={$ID}&expense_type=Advances to person">Create Non-trade Payable</a>
+															</td>
+														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=NonTradeR&action=EditView&contact_person={$ID}&ntr_type=Advances to person"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=NonTradeR&action=EditView&contact_person={$ID}&ntr_type=Advances to person">Create Non-trade Receivable</a>
+															</td>
+														</tr>
 													{/if}
-													
 													{if $MODULE eq 'SalesAgreement'}
 														<tr>
 															<td align="left" style="padding-left:10px;">
@@ -548,17 +557,27 @@ function sendfile_email()
 																<a class="webMnu" href="index.php?module=PO&action=EditView&sa_no={$ID}">Add Purchase Order</a>
 															</td>
 														</tr>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&sales_agreement={$ID}"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu" href="index.php?module=SHExpenses&action=EditView&sales_agreement={$ID}">Create Non-trade payable</a>
+															</td>
+														</tr>
 													{/if}
-													
 													{if $MODULE eq 'PO'}
-													
 														<tr>
 															<td align="left" style="padding-left:10px;">
 																<a class="webMnu" href="index.php?module=PO&action=PrintTemplate&record={$ID}&template=1" target="_blank"><img src="{'actionGenerateSalesOrder.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
 																<a class="webMnu"  href="index.php?module=PO&action=PrintTemplate&record={$ID}&template=1" target="_blank">Print Template</a>
 															</td>
 														</tr>
-														
+
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=NonTradeR&action=EditView&po_no={$ID}&ntr_type=Refund from supplier"><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=NonTradeR&action=EditView&po_no={$ID}&ntr_type=Refund from supplier">Create Non-trade receivable</a>
+															</td>
+														</tr>
 														{if $SUBMIT_APRROVED eq 'true'}
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -567,11 +586,8 @@ function sendfile_email()
 																</td>
 															</tr>
 														{/if}
-														
 													{/if}
-													
 													{if $MODULE eq 'AccountsPayable'}
-													
 														{if $SUBMIT_APRROVED eq 'true'}
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -580,11 +596,8 @@ function sendfile_email()
 																</td>
 															</tr>
 														{/if}
-														
 													{/if}
-													
 													{if $MODULE eq 'SHExpenses'}
-													
 														{if $SUBMIT_APRROVED eq 'true'}
 															<tr>
 																<td align="left" style="padding-left:10px;">
@@ -593,9 +606,7 @@ function sendfile_email()
 																</td>
 															</tr>
 														{/if}
-														
 													{/if}
-													
 													{if $MODULE eq 'HomeOwner'}
 														<tr>
 															<td align="left" style="padding-left:10px;">

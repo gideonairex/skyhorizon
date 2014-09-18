@@ -1,7 +1,6 @@
 requirejs.config({
 
     baseUrl: './',
-	
     paths: {
 		'amcharts' : 'include/components/amcharts_components/amcharts/amcharts',
 		'amcharts.pie'      : 'include/components/amcharts_components/amcharts/pie',
@@ -19,7 +18,6 @@ requirejs.config({
 		'bootstrap-datepicker' : 'include/components/bootstrap-datepicker/js/bootstrap-datepicker',
 		'chart' : 'include/components/chartjs/site/assets/Chart'
     },
-	
 	shim : {
 		'amcharts.pie'      : {
             deps: ['amcharts'],
@@ -53,24 +51,18 @@ requirejs.config({
 			'deps' : [ 'marionette' ]
 		}
 	}
-	
 });
 
 ( function () {
 	'use strict';
 
 	define( function ( require ) {
-	
 		require(['marionette', 'backbone'], function( marionette, backbone ){
-		
 			var App = require( 'reports' );
-			var Entities = require( 'modules/SHReports/marion/entities' );			
+			var Entities = require( 'modules/SHReports/marion/entities' );
 			var Controller = require( 'modules/SHReports/marion/controller' );
-
 			App.start();
-			
 		});
-		
 	} );
 
 } )();
