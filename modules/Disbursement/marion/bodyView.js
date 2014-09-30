@@ -7,16 +7,13 @@ define( function( require ){
 	BodyView = Backbone.Marionette.Layout.extend({
 	  template: _.template( template ),
 	  className: "container",
-	  
-	  
 	  regions: {
 		search: "#search",
 		result: "#result",
+		offsets: "#offsets",
 		selected: "#selected"
 	  }
-	  
 	});
 
-	
 	return BodyView;
 });

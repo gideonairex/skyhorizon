@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-08-28 21:08:26
+<?php /* Smarty version 2.6.18, created on 2014-09-25 15:41:09
          compiled from RelatedListContents.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'RelatedListContents.tpl', 140, false),array('modifier', 'replace', 'RelatedListContents.tpl', 149, false),array('modifier', 'vtiger_imageurl', 'RelatedListContents.tpl', 150, false),array('modifier', 'in_array', 'RelatedListContents.tpl', 180, false),)), $this); ?>

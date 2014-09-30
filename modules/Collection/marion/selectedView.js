@@ -91,7 +91,7 @@ define( function ( require ){
 
 			if( c ) {
 				this.$el.find('.create-collection').attr("disabled", "disabled");
-				//App.trigger('collections:create-collections',this.collection,data);
+				App.trigger('collections:create-collections',this.collection,data);
 			} else {
 				alert( "Must all be numeric" );
 			}

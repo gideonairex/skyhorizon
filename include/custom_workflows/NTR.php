@@ -24,6 +24,8 @@ function createAR($entity){
 	$ar_obj->column_fields['sales_no'] = $id[1];
 	$ar_obj->column_fields['sales'] = $entity->data['receivable'];
 	$ar_obj->column_fields['conversion_ar'] = $entity->data['ntr_currency'];
+	$supplier = explode('x',$entity->data['supplier']);
+	$ar_obj->column_fields['supploer'] = $supplier[1];
 	$customer = explode('x',$entity->data['contact_person']);
 	$ar_obj->column_fields['contact'] = $customer[1];
 	$query = "select * from vtiger_shcontacts

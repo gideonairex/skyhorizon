@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-09-17 20:29:38
+<?php /* Smarty version 2.6.18, created on 2014-09-25 14:58:20
          compiled from Settings/LayoutBlockList.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Settings/LayoutBlockList.tpl', 448, false),)), $this); ?>

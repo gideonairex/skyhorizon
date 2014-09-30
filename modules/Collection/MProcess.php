@@ -28,8 +28,8 @@ if( $_REQUEST['func'] == 'searchAR'){
 	}
 	$query = 'select * from vtiger_accountsreceivable
 			  inner join vtiger_crmentity on vtiger_accountsreceivable.accountsreceivableid = vtiger_crmentity.crmid
-			  inner join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
-			  inner join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
+			  left join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
+			  left join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
 			  left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
 			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial") and conversion_ar="'.$_REQUEST['conversion'].'"';
 	$result = $adb->pquery($query,array());

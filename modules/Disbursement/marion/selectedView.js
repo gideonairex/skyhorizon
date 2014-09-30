@@ -6,7 +6,6 @@ define( function ( require ){
 	var template = require( 'text!modules/Disbursement/marion/templates/selectedView.html' );
 	var selectView  = require( 'modules/Disbursement/marion/selectView' );
 	var $ = require( 'jquery' );
-	
 	var selectedView = Marionette.CompositeView.extend({
 		template : _.template( template ),
 		itemView : selectView,
@@ -17,17 +16,19 @@ define( function ( require ){
 			'checkDetails' : '.check-details'
 		},
 		events : {
+			'click .add-offsets' : 'addOffsets',
 			'submit form' : 'createDisbursement',
 		},
-			
 		onRender : function () {
 			this.ui.dateOfCheck.datepicker({
 				'format' : 'yyyy-mm-dd'
 			});
 		},
 
+		addOffsets : function() {
+			App.trigger('offsets:add', this.collection);
+		},
 		updateBalance : function(){
-			
 			var totalBalance = 0;
 			for( var i = 0 ; i < this.collection.length ; i++){
 				var payable = this.collection.models[i].get('payable');
@@ -35,10 +36,8 @@ define( function ( require ){
 				var ewt =  this.collection.models[i].get('ewt');
 				totalBalance = totalBalance + parseFloat(payable) - parseFloat(payment) - parseFloat(ewt);
 			}
-			  
 			this.$el.find('.total-balance').html(totalBalance);
 		},
-		
 		updatePayment : function( model ){
 			var totalPayment = 0;
 			for( var i = 0 ; i < this.collection.length ; i++){
@@ -48,38 +47,44 @@ define( function ( require ){
 			}
 			this.$el.find('.total-payment').html(totalPayment);
 		},
-		
+
 		subtractTotal : function( model ){
 			var totalBalance = parseFloat(this.$el.find('.total-balance').html());
 			var total = parseFloat(this.$el.find('.total-payment').html());
-			
 			var payment = parseFloat( model.get('current_payment') );
 			var ewt = parseFloat( model.get('current_ewt') );
 			var balance = parseFloat( model.get('balance') );
-			
 			payment += ewt;
 			var newTotal = total - payment;
-			
 			totalBalance -= balance;
-			
 			this.$el.find('.total-balance').html(totalBalance);
 			this.$el.find('.total-payment').html(newTotal);
 			model.destroy();
 		},
-		
-		
 		createDisbursement : function ( e ) {
 			e.preventDefault();
 			var data = this.ui.form.serialize();
+			if( this.osIds ) {
+				data += '&offsets='+JSON.stringify( this.osIds );
+			}
 			this.$el.find('.create-disbursement').attr("disabled", "disabled");
 			App.trigger('disbursement:create-disbursement',this.collection,data);
 		},
 		enableCreate : function ( ) {
 			this.$el.find('.create-disbursement').removeAttr("disabled");
+		},
+		insertOffsets : function ( offset ) {
+			var self = this;
+			this.osIds = [];
+			var os = 0;
+			_.each( offset.models, function ( model ) {
+				os += parseFloat( model.get( 'offset' ) );
+				self.osIds.push( model.get( 'id' ) );
+			} );
+
+			this.$el.find('.total-offsets').html(os);
 		}
-		
 	});
-	
 	return selectedView;
 
-})
+});

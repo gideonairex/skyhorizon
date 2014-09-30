@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-09-17 20:29:39
+<?php /* Smarty version 2.6.18, created on 2014-09-25 14:58:20
          compiled from Settings/LayoutBlockEntries.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Settings/LayoutBlockEntries.tpl', 24, false),array('modifier', 'getTranslatedString', 'Settings/LayoutBlockEntries.tpl', 71, false),array('modifier', 'cat', 'Settings/LayoutBlockEntries.tpl', 405, false),array('modifier', 'count', 'Settings/LayoutBlockEntries.tpl', 432, false),)), $this); ?>

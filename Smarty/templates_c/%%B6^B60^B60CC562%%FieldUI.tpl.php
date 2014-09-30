@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-09-17 20:29:39
+<?php /* Smarty version 2.6.18, created on 2014-09-25 14:58:20
          compiled from Settings/FieldUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Settings/FieldUI.tpl', 15, false),array('modifier', 'getTranslatedString', 'Settings/FieldUI.tpl', 28, false),)), $this); ?>

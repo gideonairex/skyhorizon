@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-09-17 21:49:27
+<?php /* Smarty version 2.6.18, created on 2014-09-25 15:54:47
          compiled from com_vtiger_workflow/EditWorkflowIncludes.tpl */ ?>
 
 <script src="modules/<?php echo $this->_tpl_vars['module']->name; ?>

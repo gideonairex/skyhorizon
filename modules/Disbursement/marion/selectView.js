@@ -4,7 +4,6 @@ define( function ( require ){
 	var Marionette = require( 'marionette' );
 	var _ = require( 'underscore' );
 	var template = require( 'text!modules/Disbursement/marion/templates/selectView.html' );
-	
 	var selectView = Marionette.ItemView.extend({
 		template : _.template( template ),
 		tagName : 'tr',
@@ -33,7 +32,6 @@ define( function ( require ){
 			this.trigger("do:removeme",this.model);
 		}
 	});
-	
 	return selectView;
 
-}) 
+})
