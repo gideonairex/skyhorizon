@@ -2,7 +2,7 @@
 
 
 //This is the sharing access privilege file
-$defaultOrgSharingPermission=array('2'=>2,'4'=>2,'6'=>2,'7'=>2,'9'=>3,'13'=>2,'16'=>3,'20'=>2,'21'=>2,'22'=>2,'23'=>2,'26'=>2,'8'=>2,'14'=>2,'36'=>3,'37'=>2,'38'=>2,'41'=>2,'45'=>2,'46'=>2,'47'=>2,'48'=>2,'50'=>2,'54'=>3,'55'=>3,'58'=>3,'59'=>3,);
+$defaultOrgSharingPermission=array('2'=>2,'4'=>2,'6'=>2,'7'=>2,'9'=>3,'13'=>2,'16'=>3,'20'=>2,'21'=>2,'22'=>2,'23'=>2,'26'=>2,'8'=>2,'14'=>2,'36'=>3,'37'=>2,'38'=>2,'41'=>2,'45'=>2,'46'=>2,'47'=>2,'48'=>2,'50'=>2,'54'=>2,'55'=>2,'58'=>3,'59'=>3,);
 
 $related_module_share=array(2=>array(6,),13=>array(6,),20=>array(6,2,),22=>array(6,2,20,),23=>array(6,22,),);
 
@@ -181,5 +181,25 @@ $AccountsPayable_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 $Disbursement_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 $Disbursement_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$ARChecks_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$ARChecks_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$APChecks_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$APChecks_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$SHReports_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$SHReports_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$CollectionLogs_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$CollectionLogs_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$NonTradeR_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$NonTradeR_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 ?>
