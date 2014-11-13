@@ -564,6 +564,14 @@ function sendfile_email()
 															</td>
 														</tr>
 													{/if}
+													{if $MODULE eq 'SHExpenses'}
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<a class="webMnu" href="index.php?module=SHExpenses&action=PrintTemplate&record={$ID}&template=1" target="_blank"><img src="{'actionGenerateSalesOrder.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a>
+																<a class="webMnu"  href="index.php?module=SHExpenses&action=PrintTemplate&record={$ID}&template=1" target="_blank">Print Template</a>
+															</td>
+														</tr>
+													{/if}
 													{if $MODULE eq 'PO'}
 														<tr>
 															<td align="left" style="padding-left:10px;">

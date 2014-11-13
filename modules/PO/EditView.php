@@ -7,8 +7,13 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-
+global $current_user;
 require_once 'modules/Vtiger/EditView.php';
+
+if($focus->column_fields['po_status'] == 'Approved' && $current_user->roleid == RESERVATION ) {
+	echo "Contact Admin or Supervisor to enable edit";
+	die();
+}
 
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
