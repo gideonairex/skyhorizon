@@ -13,7 +13,10 @@ define( function( require ) {
 			'suppliers' : '.suppliers',
 			'users' : '.users',
 			'form' : 'form',
-			'print' : '.print'
+			'print' : '.print',
+			'salestemplate' : '[name="salestemplate"]',
+			'artemplate' : '[name="artemplate"]',
+			'reporttemplate' : '.reporttemplate'
 		},
 		events : {
 			'submit form' : 'generateReport',
@@ -27,16 +30,26 @@ define( function( require ) {
 				this.ui.print.css("display","block");
 				this.ui.accounts.css("display","block");
 				this.ui.suppliers.css("display","none");
+				this.ui.reporttemplate.css("display","block");
+				if( report === "sales" ) {
+					this.ui.salestemplate.css("display","block");
+					this.ui.artemplate.css("display","none");
+				} else {
+					this.ui.salestemplate.css("display","none");
+					this.ui.artemplate.css("display","block");
+				}
 			} else if  ( report === "collection" ){
 				this.ui.accounts.css("display","none");
 				this.ui.users.css("display","none");
 				this.ui.suppliers.css("display","none");
 				this.ui.print.css("display","none");
+				this.ui.reporttemplate.css("display","none");
 			}else {
 				this.ui.users.css("display","block");
 				this.ui.suppliers.css("display","block");
 				this.ui.accounts.css("display","none");
 				this.ui.print.css("display","none");
+				this.ui.reporttemplate.css("display","none");
 			}
 		},
 		printReport : function ( e ) {

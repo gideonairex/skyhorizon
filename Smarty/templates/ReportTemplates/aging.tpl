@@ -4,7 +4,7 @@
 				<div class="col-xs-3">
 				</div>
 				<div class="col-xs-6">
-					<h2 class="text-center"> Statement of Account </h2>
+					<h2 class="text-center"> Aging of Receivables </h2>
 				</div>
 				<div class="col-xs-3">
 				</div>
@@ -34,32 +34,20 @@
 					<th>SA No</th>
 					<th>Account</th>
 					<th>Pax</th>
-					<th>Route</th>
-					<th>Amount Fee</th>
-					<th>Service Fee</th>
-					<th>VAT</th>
-					<th>Vatable Sale</th>
+					<th>Aging</th>
 					<th>Grand Total</th>
 				</tr>
 			{foreach key=ID item=AR from=$ARS}
 				{assign var=account_name value=$AR.account_name}
 				{assign var=sa_no value=$AR.sa_no}
-				{assign var=total_sales_print value=$AR.total_sales_print}
-				{assign var=service_fee value=$AR.service_fee}
-				{assign var=vat value=$AR.vat}
-				{assign var=vatable_sale value=$AR.vatable_sale}
 				{assign var=pax value=$AR.pax}
-				{assign var=details value=$AR.details}
+				{assign var=aging value=$AR.aging}
 				{assign var=grand_total value=$AR.grand_total}
 				<tr>
 					<td>{$sa_no}</td>
 					<td>{$account_name}</td>
 					<td>{$pax}</td>
-					<td>{$details}</td>
-					<td>{$total_sales_print}</td>
-					<td>{$service_fee}</td>
-					<td>{$vat}</td>
-					<td>{$vatable_sale}</td>
+					<td>{$aging} days</td>
 					<td>{$grand_total}</td>
 				</tr>
 			{/foreach}

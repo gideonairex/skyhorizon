@@ -12,14 +12,11 @@
 				return strtotime($a) - strtotime($b);
 			}
 			usort($date, "sortFunction");
-			
 			$start = $date[0]." 00:00:00";
 			$end = $date[ count($date) - 1]." 23:59:59";
-			
 		}
 		$ext .= " and createdtime between '".$start."' and '".$end."' ";
 	}
-	
 	if( $_REQUEST['conversion'] != "" ) {
 		$ext .= "and currency_cl = '".$_REQUEST['conversion']."' ";
 	}
@@ -34,7 +31,6 @@
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
-	
 	if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
@@ -59,10 +55,8 @@
 			$data['summary']['Summary']['payment'] += $adb->query_result($result, $i, "amount");
 			$data['summary']['Summary']['awt'] += $adb->query_result($result, $i, "ewt");
 			$data['summary']['Summary']['bc'] += $adb->query_result($result, $i, "bc");
-			
 		}
 	}
-	
 	echo json_encode($data);
 
 ?>

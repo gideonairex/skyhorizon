@@ -146,7 +146,7 @@ if( $_REQUEST['func'] == 'searchAP'){
 								"CreatedTime" => "",
 								"ModifiedTime" => "",
 								"assigned_user_id" => $_SESSION['authenticated_user_id'],
-								"d_payment_method" => $payment_type,
+								"d_payment_method" => "Check",
 								"payment" => $payment,
 								"ewt" => $ewt,
 								"conversion_d" => $conversion

@@ -10,6 +10,7 @@ define( function( require ) {
 	var ap = require('text!modules/SHReports/marion/templates/apView.html');
 	var outstanding = require('text!modules/SHReports/marion/templates/outstandingView.html');
 	var collection = require('text!modules/SHReports/marion/templates/collectionView.html');
+	var disbursement = require('text!modules/SHReports/marion/templates/disbursementView.html');
 	var model = Backbone.Model.extend({});
 
 	return Marionette.CompositeView.extend( {
@@ -21,6 +22,7 @@ define( function( require ) {
 		templatesales       : _.template( sales ),
 		templateap          : _.template( ap ),
 		templatecollection  : _.template( collection ),
+		templatedisbursement  : _.template( disbursement ),
 		model              : new model(),
 		params : {
 				'sales' : [
@@ -290,6 +292,8 @@ define( function( require ) {
 		},
 		generatecollection : function () {
 		},
+		generatedisbursement : function () {
+		},
 		onBeforeRender : function () {
 			this.template = this[ "template"+this.options.report ];
 			this.paramVar = 'sales';
@@ -479,12 +483,11 @@ define( function( require ) {
 					}
 					if ( !resultsByPOExpenses[purchase_type] ) {
 						resultsByPOExpenses[purchase_type] = {};
-
-						if(	!resultsByPOExpenses[purchase_type][supplier_name] ) {
+					}
+					if(	!resultsByPOExpenses[purchase_type][supplier_name] ) {
 						resultsByPOExpenses[purchase_type][supplier_name] = {};
 						resultsByPOExpenses[purchase_type][supplier_name]['supplier_name'] = supplier_name;
 						resultsByPOExpenses[purchase_type][supplier_name]['balance'] = 0;
-						}
 					}
 					resultsGroupBySupplier[supplier_name]['balance'] += balance;
 					resultsGroupByStatus[ap_status]['balance'] += balance;
@@ -533,15 +536,16 @@ define( function( require ) {
 						resultsGroupByStatus[ap_status]['ap_status'] = ap_status;
 						resultsGroupByStatus[ap_status]['balance'] = 0;
 					}
+
 					if ( !resultsByPOExpenses[purchase_type] ) {
 						resultsByPOExpenses[purchase_type] = {};
-
-						if(	!resultsByPOExpenses[purchase_type][supplier_name] ) {
+					}
+					if(	!resultsByPOExpenses[purchase_type][supplier_name] ) {
 						resultsByPOExpenses[purchase_type][supplier_name] = {};
 						resultsByPOExpenses[purchase_type][supplier_name]['supplier_name'] = supplier_name;
 						resultsByPOExpenses[purchase_type][supplier_name]['balance'] = 0;
-						}
 					}
+
 					resultsGroupBySupplier[supplier_name]['balance'] += balance;
 					resultsGroupByStatus[ap_status]['balance'] += balance;
 					resultsByPOExpenses[purchase_type][supplier_name]['balance'] += balance;
@@ -564,6 +568,17 @@ define( function( require ) {
 			var gt = this.collection.models[0].get( 'summary' ).Summary;
 			_.each( summary, function( obj ) {
 				self.model.set( obj.c_payment_method, obj );
+			} );
+			self.model.set( 'GT', gt );
+		},
+		beforeRenderdisbursement : function () {
+			this.model.set( 'Check', null );
+			this.model.set( 'Cash', null );
+			var self = this;
+			var summary = this.collection.models[0].get( 'summary' );
+			var gt = this.collection.models[0].get( 'summary' ).Summary;
+			_.each( summary, function( obj ) {
+				self.model.set( obj.d_payment_method, obj );
 			} );
 			self.model.set( 'GT', gt );
 		}

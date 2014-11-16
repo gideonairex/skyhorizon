@@ -1,0 +1,72 @@
+<div class="row" >
+	<div class="col-md-2" ></div>
+	<div class="col-md-8" >
+		<h3>Summary</h3>
+		<table class="table table-hover results">
+			<% if ( Cash ) { %>
+				<tr>
+					<th>  Cash Disbursement</th>
+					<td>  <%- Cash.payment %> </td>
+				</tr>
+				<tr>
+					<th class="text-right">  Less: EWT </th>
+					<td>  <%- Cash.awt %> </td>
+				</tr>
+			<% } %>
+			<% if ( Check ) { %>
+				<tr>
+					<th> Check Disbursement </th>
+					<td>  <%- Check.payment %> </td>
+				</tr>
+				<tr>
+					<th class="text-right">  Less: EWT </th>
+					<td>  <%- Check.awt %> </td>
+				</tr>
+			<% } %>
+			<tr>
+				<th> Total Collection </th>
+				<td>  <%- GT.payment %> </td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-2" ></div>
+
+	<% if ( Cash ) { %>
+		<div class="col-md-12" >
+		<h3>Cash Transactions</h3>
+		<table class="table table-hover results">
+		<tr>
+			<th> Voucher No. </td>
+			<th> Payment </td>
+			<th> EWT </td>
+		</tr>
+		<% _.each ( Cash.details, function ( ar ) { %>
+				<tr>
+					<td> <%= ar.disbursement_no %></td>
+					<td> <%= ar.payment %></td>
+					<td> <%= ar.awt %></td>
+				</tr>
+		<% } ); %>
+		</table>
+		</div>
+	<% } %>
+	<% if ( Check ) { %>
+		<div class="col-md-12" >
+		<h3>Check Transactions</h3>
+		<table class="table table-hover results">
+		<tr>
+			<th> Voucher No. </td>
+			<th> Payment </td>
+			<th> EWT </td>
+		</tr>
+		<% _.each ( Check.details, function ( ar ) { %>
+			<tr>
+				<td> <%= ar.disbursement_no %></td>
+				<td> <%= ar.payment %></td>
+				<td> <%= ar.awt %></td>
+			</tr>
+		<% } ); %>
+		</table>
+		</div>
+	<% } %>
+</div>

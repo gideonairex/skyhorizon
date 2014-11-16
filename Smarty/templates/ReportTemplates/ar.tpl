@@ -3,16 +3,12 @@
 			<div class="row">
 				<div class="col-xs-3">
 				</div>
-				
 				<div class="col-xs-6">
-					<h2 class="text-center"> Statement of Account </h2>
+					<h2 class="text-center"> Outstanding Accounts Receivable </h2>
 				</div>
-				
 				<div class="col-xs-3">
 				</div>
 			</div>
-			
-			
 			{if $SHOWLOGO eq 'true'}
 			<div class="row">
 				<div class="col-xs-6">
@@ -31,10 +27,7 @@
 				</div>
 			</div>
 			{/if}
-			
-			
 {foreach key=DATE item=ARS from=$DATA}
-			
 			<h3>{$DATE}</h3>
 			<table class="table table-striped">
 				<tr>
@@ -58,7 +51,6 @@
 				{assign var=pax value=$AR.pax}
 				{assign var=details value=$AR.details}
 				{assign var=grand_total value=$AR.grand_total}
-				
 				<tr>
 					<td>{$sa_no}</td>
 					<td>{$account_name}</td>
@@ -72,7 +64,6 @@
 				</tr>
 			{/foreach}
 			</table>
-			
 {/foreach}
 
 	</div>
