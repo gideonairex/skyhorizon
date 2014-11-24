@@ -8,6 +8,7 @@ define( function( require ) {
 	var outstanding = require('text!modules/SHReports/marion/templates/outstandingResultView.html');
 	var collection = require('text!modules/SHReports/marion/templates/collectionResultView.html');
 	var disbursement = require('text!modules/SHReports/marion/templates/disbursementResultView.html');
+	var arntr = require('text!modules/SHReports/marion/templates/arntrResultView.html');
 
 	return Marionette.ItemView.extend( {
 		templatear          : _.template( ar ),
@@ -17,6 +18,7 @@ define( function( require ) {
 		templateap          : _.template( ap ),
 		templatecollection  : _.template( collection ),
 		templatedisbursement  : _.template( disbursement ),
+		templatearntr  : _.template( arntr ),
 		tagName             : 'tr',
 		onBeforeRender : function () {
 			this.template = this[ "template"+this.options.report ];

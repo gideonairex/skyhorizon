@@ -11,6 +11,7 @@ define( function( require ) {
 	var outstanding = require('text!modules/SHReports/marion/templates/outstandingView.html');
 	var collection = require('text!modules/SHReports/marion/templates/collectionView.html');
 	var disbursement = require('text!modules/SHReports/marion/templates/disbursementView.html');
+	var arntr = require('text!modules/SHReports/marion/templates/arntrView.html');
 	var model = Backbone.Model.extend({});
 
 	return Marionette.CompositeView.extend( {
@@ -23,6 +24,7 @@ define( function( require ) {
 		templateap          : _.template( ap ),
 		templatecollection  : _.template( collection ),
 		templatedisbursement  : _.template( disbursement ),
+		templatearntr       : _.template( arntr ),
 		model              : new model(),
 		params : {
 				'sales' : [
@@ -294,6 +296,8 @@ define( function( require ) {
 		},
 		generatedisbursement : function () {
 		},
+		generatearntr : function () {
+		},
 		onBeforeRender : function () {
 			this.template = this[ "template"+this.options.report ];
 			this.paramVar = 'sales';
@@ -322,7 +326,13 @@ define( function( require ) {
 						if( !results[this.params[paramVar][j]] )
 							results[this.params[paramVar][j]] = 0;
 
-						temp = parseFloat( this.collection.models[i].get(this.params[paramVar][j]) );
+						temp = this.collection.models[i].get(this.params[paramVar][j]);
+						if( temp ) {
+							temp = temp.toString().split(',').join('');
+						} else {
+							temp = 0;
+						}
+						temp = parseFloat( temp );
 						results[this.params[paramVar][j]] += temp;
 						if ( this.params[paramVar][j] === "balance")
 							balance = temp;
@@ -343,7 +353,8 @@ define( function( require ) {
 				this.resultsGroupByAccounts = resultsGroupByAccounts;
 				this.resultsGroupByStatus = resultsGroupByStatus;
 				for ( j =0 ; j < this.params[paramVar].length; j ++ ) {
-					this.model.set( this.params[paramVar][j] , results[this.params[paramVar][j]] );
+					temp = parseFloat( results[this.params[paramVar][j]] ).toFixed(2);
+					this.model.set( this.params[paramVar][j] , temp );
 				}
 			}
 		},
@@ -415,7 +426,13 @@ define( function( require ) {
 						if( !results[this.params[paramVar][j]] )
 							results[this.params[paramVar][j]] = 0;
 
-						temp = parseFloat( this.collection.models[i].get(this.params[paramVar][j]) );
+						temp = this.collection.models[i].get(this.params[paramVar][j]);
+						if( temp ) {
+							temp = temp.toString().split(',').join('');
+						} else {
+							temp = 0;
+						}
+						temp = parseFloat( temp );
 						results[this.params[paramVar][j]] += temp;
 						if ( this.params[paramVar][j] === "grand_total")
 							grand_total = temp;
@@ -438,12 +455,16 @@ define( function( require ) {
 					resultsGroupByAccounts[account_name]['profit'] += profit;
 					resultsGroupByUser[user]['grand_total'] += grand_total;
 					resultsGroupByUser[user]['profit'] += profit;
-				}
+			}
+
 				this.resultsGroupByAccounts = resultsGroupByAccounts;
 				this.resultsGroupByUser = resultsGroupByUser;
+
 				for ( j =0 ; j < this.params[paramVar].length; j ++ ) {
-					this.model.set( this.params[paramVar][j] , results[this.params[paramVar][j]] );
+					temp = parseFloat( results[this.params[paramVar][j]] ).toFixed(2);
+					this.model.set( this.params[paramVar][j] , temp );
 				}
+
 			}
 		},
 		beforeRenderexpenses : function(){
@@ -581,6 +602,9 @@ define( function( require ) {
 				self.model.set( obj.d_payment_method, obj );
 			} );
 			self.model.set( 'GT', gt );
+		},
+		beforeRenderarntr : function () {
+
 		}
 	} );
 } );
