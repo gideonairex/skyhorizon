@@ -61,7 +61,7 @@
 			$data[$i]['vat'] =  number_format( $quantity * $adb->query_result($result, $i, "vat"), 2);
 			$data[$i]['vatable_sale'] =  number_format( $quantity * $adb->query_result($result, $i, "vatable_sale"), 2);
 		 	$data[$i]['grand_total'] =  $adb->query_result($result, $i, "grand_total");
-			$data[$i]['profit'] =  $data[$i]['grand_total'] - $adb->query_result($result, $i, "fee");
+			$data[$i]['profit'] =  $data[$i]['grand_total'] - $data[$i]['fee'];
 			$data[$i]['balance'] =   $adb->query_result($result, $i, "sales") - $adb->query_result($result, $i, "payment") - $adb->query_result($result, $i, "awt");
 			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
 			$data[$i]['total_sales_print'] =  $data[$i]['fee'] + $data[$i]['mark_up'];
