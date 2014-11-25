@@ -55,7 +55,7 @@
 			$quantity = $data[$i]['quantity'];
 			$data[$i]['details'] = $adb->query_result($result, $i, "details");
 			$data[$i]['pax'] = $adb->query_result($result, $i, "pax");
-			$data[$i]['fee'] = $adb->query_result($result, $i, "fee");
+			$data[$i]['fee'] = $quantity * $adb->query_result($result, $i, "fee");
 			$data[$i]['mark_up'] =  $adb->query_result($result, $i, "mark_up");
 			$data[$i]['service_fee'] = $adb->query_result($result, $i, "service_fee");
 			$data[$i]['vat'] =  number_format( $quantity * $adb->query_result($result, $i, "vat"), 2);
