@@ -20,7 +20,6 @@ $data = array();
 if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
-	
 		for( $i = 0 ; $i < $num_rows; $i++){
 			$data[$i]['result'] = 1;
 			$data[$i]['id'] = $adb->query_result($result, $i, "accountspayableid");
@@ -31,7 +30,6 @@ if($num_rows == 0){
 			$data[$i]['ewt'] = ( $adb->query_result($result, $i, "ewt")  ? $adb->query_result($result, $i, "ewt") : 0 );
 			$data[$i]['balance'] = $data[$i]['payable'] - $data[$i]['payment'] - $data[$i]['ewt'];
 			$data[$i]['ap_status'] = $adb->query_result($result, $i, "ap_status");
-			
 			//get per service type
 			$data[$i]['expense_no'] = $adb->query_result($result, $i, "expense_no");
 			$data[$i]['po_no'] = $adb->query_result($result, $i, "po_no");
@@ -46,10 +44,8 @@ if($num_rows == 0){
 
 			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
 		}
-		
 	}
 
-	
 $query = "select * from vtiger_apchecks
 		  inner join vtiger_crmentity on vtiger_apchecks.apchecksid = vtiger_crmentity.crmid
 		  inner join vtiger_disbursement on vtiger_disbursement.disbursementid = vtiger_apchecks.disbursement_no
@@ -76,8 +72,6 @@ for ( $i = 0; $i < count($data); $i++){
 
 $smarty->assign('CHECKDETAILS', $data2);
 $smarty->assign('DATA', $newData);
+$smarty->assign('PREPAREDBY',$current_user->column_fields['first_name'].' '.$current_user->column_fields['last_name'] );
 $smarty->display('ReportTemplates/disbursement.tpl');
-
-
-
 ?>

@@ -31,15 +31,15 @@
 			<h3>{$DATE}</h3>
 			<table class="table table-striped">
 				<tr>
-					<th>SA No</th>
-					<th>Account</th>
-					<th>Pax</th>
-					<th>Route</th>
-					<th>Amount Fee</th>
-					<th>Service Fee</th>
-					<th>VAT</th>
-					<th>Vatable Sale</th>
-					<th>Grand Total</th>
+					<th class="col-md-1">SA No</th>
+					<th class="col-md-2">Account</th>
+					<th class="col-md-2">Pax</th>
+					<th class="col-md-2">Route</th>
+					<th class="col-md-1">Amount Fee</th>
+					<th class="col-md-1">Service Fee</th>
+					<th class="col-md-1">VAT</th>
+					<th class="col-md-1">Vatable Sale</th>
+					<th class="col-md-1">Grand Total</th>
 				</tr>
 			{foreach key=ID item=AR from=$ARS}
 				{assign var=account_name value=$AR.account_name}
@@ -52,18 +52,18 @@
 				{assign var=details value=$AR.details}
 				{assign var=grand_total value=$AR.grand_total}
 				<tr>
-					<td>{$sa_no}</td>
-					<td>{$account_name}</td>
-					<td>{$pax}</td>
-					<td>{$details}</td>
-					<td>{$total_sales_print}</td>
-					<td>{$service_fee}</td>
-					<td>{$vat}</td>
-					<td>{$vatable_sale}</td>
-					<td>{$grand_total}</td>
+					<td class="col-md-1">{$sa_no}</td>
+					<td class="col-md-2">{$account_name}</td>
+					<td class="col-md-2">{$pax}</td>
+					<td class="col-md-2">{$details}</td>
+					<td class="col-md-1">{$total_sales_print}</td>
+					<td class="col-md-1">{$service_fee}</td>
+					<td class="col-md-1">{$vat}</td>
+					<td class="col-md-1">{$vatable_sale}</td>
+					<td class="col-md-1">{$grand_total}</td>
 				</tr>
 			{/foreach}
 			</table>
 {/foreach}
-
+			{include file='ReportTemplates/footer.tpl'}
 	</div>

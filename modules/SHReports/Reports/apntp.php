@@ -23,8 +23,8 @@
 	}
 	$query = 'select * from vtiger_accountspayable
 			  inner join vtiger_crmentity on vtiger_accountspayable.accountspayableid = vtiger_crmentity.crmid
-			  inner join vtiger_po on vtiger_accountspayable.payable_no = vtiger_po.poid
-			  inner join vtiger_shsupplier on  ( vtiger_po.suplier = vtiger_shsupplier.shsupplierid )
+			  left join vtiger_shexpenses on vtiger_accountspayable.payable_no = vtiger_shexpenses.shexpensesid
+			  inner join vtiger_shsupplier on  ( vtiger_shexpenses.expense_name = vtiger_shsupplier.shsupplierid )
 			  where deleted = 0 and ap_status IN ("Unpaid", "Partial", "Pending for clearance") '.$ext;
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
@@ -41,9 +41,9 @@
 			$data[$i]['expense_name'] = $adb->query_result($result, $i, "expense_name");
 			$data[$i]['po_no'] = $adb->query_result($result, $i, "po_no");
 
-			$data[$i]['payable_no'] = $data[$i]['po_no'];
-			$data[$i]['link'] = "index.php?action=DetailView&module=PO&record=".$adb->query_result($result, $i, "payable_no");
-			$data[$i]['purchase_type'] = "po";
+			$data[$i]['payable_no'] = $data[$i]['expense_no'];
+			$data[$i]['link'] = "index.php?action=DetailView&module=SHExpenses&record=".$adb->query_result($result, $i, "payable_no");
+			$data[$i]['purchase_type'] = "expense";
 
 			$data[$i]['supplier_name'] = $adb->query_result($result, $i, "supplier_name");
 			$data[$i]['payable'] = $adb->query_result($result, $i, "payable");

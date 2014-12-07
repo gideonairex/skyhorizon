@@ -40,8 +40,6 @@ $smarty->assign('CATEGORY', $category);
 $smarty->assign('IMAGE_PATH', "themes/$theme/images/");
 $smarty->assign('THEME', $theme);
 $smarty->assign('ID', $focus->id);
-$smarty->assign('PAX', $focus->column_fields['pax']);
-$smarty->assign('NOPAX', $focus->column_fields['quantity']);
 $smarty->assign('MODE', $focus->mode);
 
 $recordName = array_values(getEntityName($currentModule, $focus->id));
@@ -104,28 +102,6 @@ $smarty->assign('CUSTOM_LINKS', Vtiger_Link::getAllByType(getTabid($currentModul
 // Record Change Notification
 $focus->markAsViewed($current_user->id);
 // END
-
-
-/* FIXME: Edit here */
-$contacts_focus = CRMEntity::getInstance('SHContacts');
-$contacts_focus->id = $focus->column_fields['customer'];
-$contacts_focus->retrieve_entity_info($focus->column_fields['customer'], 'SHContacts');
-
-/*
-$emails = array(0=>$contacts_focus->column_fields['email']);
-$smarty->assign('EMAILS',$emails);
-
-$smarty->assign('SENDMAILBUTTON','permitted');
-$cond="LTrim('%s') !=''";
-$condition=array();
-foreach($emails as $key => $value) {
-	$condition[]=sprintf($cond,$value);
-}
-$condition_str=implode("||",$condition);
-$js="if(".$condition_str."){fnvshobj(this,'sendmail_cont');sendmail('SHContacts','".$focus->column_fields['customer']."');}else{OpenCompose('','create');}";
-$smarty->assign('JS',$js);
- */
-/* FIXME: Edit here */
 
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 

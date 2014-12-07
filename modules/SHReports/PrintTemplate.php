@@ -25,11 +25,13 @@ if ( $_REQUEST['accounts'] != 0  &&  ( $_REQUEST['report_name'] == 'sales' || $_
 }
 
 $smarty->assign('DATA', $newData);
-
+$smarty->assign('PREPAREDBY',$current_user->column_fields['first_name'].' '.$current_user->column_fields['last_name'] );
 if( $_REQUEST['report_name'] == 'sales' ) {
 	$smarty->display('ReportTemplates/'.$_REQUEST['salestemplate'].'.tpl');
-} else {
+} elseif ( $_REQUEST['report_name'] == 'ar' ) {
 	$smarty->display('ReportTemplates/'.$_REQUEST['artemplate'].'.tpl');
+} else {
+	$smarty->display('ReportTemplates/'.$_REQUEST['report_name'].'.tpl');
 }
 
 ?>

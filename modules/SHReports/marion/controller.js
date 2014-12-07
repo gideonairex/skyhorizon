@@ -18,10 +18,14 @@ define( function ( require ) {
 		'generateReport' : function ( data, data2 ) {
 			var request = App.request( 'generate:report', data );
 			$.when(request).done(function( reportCollection ){
+				if( data2.report_name === 'apntp' ) {
+					data2.report_name = 'ap';
+				}
+
 				layout.results.show( new resultsView( { collection: reportCollection, report:data2.report_name } ) );
 			} );
 		}
-	}
+	};
 	var Router = Marionette.AppRouter.extend({
 		appRoutes : {
 			'reports/home' : 'showHome'
@@ -30,7 +34,7 @@ define( function ( require ) {
 	App.addInitializer(function(){
 		new Router( {
 			controller : API
-		} )
+		} );
 	});
 	App.on('generate:report',function( data, data2 ){
 		API.generateReport( data, data2 );

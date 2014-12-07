@@ -1,17 +1,13 @@
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
 	<div class="container-fluid">
 		<div class="row">
-		
 			<div class="col-xs-3">
 			</div>
-			
 			<div class="col-xs-6">
 				<h2 class="text-center"> Voucher </h2>
 			</div>
-			
 			<div class="col-xs-3">
 			</div>
-			
 		</div>
 		<div class="row">
 			<div class="col-xs-6">
@@ -53,7 +49,6 @@
 				</table>
 			</div>
 			<div class="col-xs-12">
-			
 {foreach key=DATE item=ARS from=$DATA}
 
 			<h3>{$DATE}</h3>
@@ -82,9 +77,9 @@
 				</tr>
 			{/foreach}
 			</table>
-			
 {/foreach}
 
 			</div>
+			{include file='ReportTemplates/footer.tpl'}
 		</div>
 	</div>

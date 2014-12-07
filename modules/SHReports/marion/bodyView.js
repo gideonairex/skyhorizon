@@ -5,7 +5,7 @@ define( function( require ) {
 	var template = require('text!modules/SHReports/marion/templates/bodyView.html');
 	return Backbone.Marionette.Layout.extend( {
 		template : _.template( template ),
-		className : 'container',
+		className : 'container-fluid',
 		regions : {
 			filters : '#filters',
 			results : '#results'

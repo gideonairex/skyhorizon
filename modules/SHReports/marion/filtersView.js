@@ -44,13 +44,18 @@ define( function( require ) {
 				this.ui.suppliers.css("display","none");
 				this.ui.print.css("display","none");
 				this.ui.reporttemplate.css("display","none");
-			}else {
+			} else {
 				this.ui.users.css("display","block");
 				this.ui.suppliers.css("display","block");
 				this.ui.accounts.css("display","none");
 				this.ui.print.css("display","none");
 				this.ui.reporttemplate.css("display","none");
 			}
+
+			if( report === 'ap' || report === 'apntp' || report === 'purchases' || report === 'expenses' ) {
+				//this.ui.print.css("display","block");
+			}
+
 		},
 		printReport : function ( e ) {
 			e.preventDefault();
@@ -61,11 +66,11 @@ define( function( require ) {
 			e.preventDefault();
 			var data = this.ui.form.serialize();
 			var data2 = this.ui.form.serializeArray();
-			var newData = {}
+			var newData = {};
 			_.each( data2, function ( element ) {
 				var value = _.values(element);
 				newData[ value[0] ] = value[1];
-			} )
+			} );
 			App.trigger('generate:report',data,newData);
 		},
 		onRender : function () {

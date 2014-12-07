@@ -31,10 +31,10 @@
 			<h3>{$DATE}</h3>
 			<table class="table table-striped">
 				<tr>
-					<th>SA No</th>
-					<th>Account</th>
-					<th>Pax</th>
-					<th>Grand Total</th>
+					<th class="col-md-3">SA No</th>
+					<th class="col-md-3">Account</th>
+					<th class="col-md-3">Pax</th>
+					<th class="col-md-3">Grand Total</th>
 				</tr>
 			{foreach key=ID item=AR from=$ARS}
 				{assign var=account_name value=$AR.account_name}
@@ -42,10 +42,10 @@
 				{assign var=pax value=$AR.pax}
 				{assign var=grand_total value=$AR.grand_total}
 				<tr>
-					<td>{$sa_no}</td>
-					<td>{$account_name}</td>
-					<td>{$pax}</td>
-					<td>{$grand_total}</td>
+					<td class="col-md-3">{$sa_no}</td>
+					<td class="col-md-3">{$account_name}</td>
+					<td class="col-md-3">{$pax}</td>
+					<td class="col-md-3">{$grand_total}</td>
 				</tr>
 			{/foreach}
 			</table>

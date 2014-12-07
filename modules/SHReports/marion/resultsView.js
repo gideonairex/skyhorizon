@@ -7,6 +7,7 @@ define( function( require ) {
 	var sales = require('text!modules/SHReports/marion/templates/resultsView.html');
 	var ar = require('text!modules/SHReports/marion/templates/arView.html');
 	var expenses = require('text!modules/SHReports/marion/templates/expensesView.html');
+	var purchases = require('text!modules/SHReports/marion/templates/purchasesView.html');
 	var ap = require('text!modules/SHReports/marion/templates/apView.html');
 	var outstanding = require('text!modules/SHReports/marion/templates/outstandingView.html');
 	var collection = require('text!modules/SHReports/marion/templates/collectionView.html');
@@ -20,6 +21,7 @@ define( function( require ) {
 		templatear          : _.template( ar ) ,
 		templateoutstanding : _.template( outstanding ),
 		templateexpenses    : _.template( expenses ),
+		templatepurchases    : _.template( purchases ),
 		templatesales       : _.template( sales ),
 		templateap          : _.template( ap ),
 		templatecollection  : _.template( collection ),
@@ -59,14 +61,17 @@ define( function( require ) {
 			$('.arCharts').html('');
 			$('.apCharts').html('');
 			$('.expensesChart').html('');
+			$('.purchasesChart').html('');
 			$('.chart').css('height','0px');
 			$('.arCharts').css('height','0px');
 			$('.apChart').css('height','0px');
+			$('.purchasesChart').css('height','0px');
 			$('.expensesChart').css('height','0px');
 			$('.chartHeader').css('display','none');
 			$('.arHeader').css('display','none');
 			$('.apHeader').css('display','none');
 			$('.expensesHeader').css('display','none');
+			$('.purchasesHeader').css('display','none');
 		},
 		generatesales : function(){
 			$('.chart').css('height','400px');
@@ -213,25 +218,8 @@ define( function( require ) {
 		generateexpenses : function () {
 			$('.expensesChart').css('height','400px');
 
-			var data3 = [];
 			var data4 = [];
 			var i = 0;
-			for (key in this.resultsByPOExpenses['po']) {
-				var temp = {};
-				temp.category = this.resultsByPOExpenses['po'][key]['supplier_name'];
-				temp.value = this.resultsByPOExpenses['po'][key]['balance'];
-				data3[i] = temp;
-				i++;
-			}
-			var chart9 = AmCharts.makeChart('chartdiv9',{
-				"type"		: "pie",
-				"titleField"	: "category",
-				"valueField"	: "value",
-				"angle"			: 30,
-				"outlineThickness" : 2,
-				"depth3D"		: 15,
-				"dataProvider"	: data3
-			});
 			var i = 0;
 			for (key in this.resultsByPOExpenses['expense']) {
 				var temp = {};
@@ -250,6 +238,29 @@ define( function( require ) {
 				"dataProvider"	: data4
 			});
 			$(".expensesHeader").css('display','block');
+		},
+		generatepurchases : function () {
+			$('.purchasesChart').css('height','400px');
+
+			var data3 = [];
+			var i = 0;
+			for (key in this.resultsByPOExpenses['po']) {
+				var temp = {};
+				temp.category = this.resultsByPOExpenses['po'][key]['supplier_name'];
+				temp.value = this.resultsByPOExpenses['po'][key]['balance'];
+				data3[i] = temp;
+				i++;
+			}
+			var chart9 = AmCharts.makeChart('chartdiv9',{
+				"type"		: "pie",
+				"titleField"	: "category",
+				"valueField"	: "value",
+				"angle"			: 30,
+				"outlineThickness" : 2,
+				"depth3D"		: 15,
+				"dataProvider"	: data3
+			});
+			$(".purchasesHeader").css('display','block');
 		},
 		generateap : function() {
 			$('.apChart').css('height','400px');
@@ -469,6 +480,62 @@ define( function( require ) {
 		},
 		beforeRenderexpenses : function(){
 			var paramVar = this.paramVar;
+			if ( this.collection ) {
+				var results = {};
+				var i = 0;
+				var j = 0;
+				var temp =0;
+				var ap_status = '';
+				var balance = 0;
+				var resultsGroupByStatus = [];
+				var resultsGroupBySupplier = [];
+				var resultsByPOExpenses = [];
+				for ( i = 0 ; i < this.collection.models.length; i++) {
+					ap_status = this.collection.models[i].get('ap_status');
+					supplier_name = this.collection.models[i].get('supplier_name');
+					purchase_type = this.collection.models[i].get('purchase_type');
+					for ( j =0 ; j < this.params[paramVar].length; j ++ ) {
+						if( !results[this.params[paramVar][j]] )
+							results[this.params[paramVar][j]] = 0;
+
+						temp = parseFloat( this.collection.models[i].get(this.params[paramVar][j]) );
+						results[this.params[paramVar][j]] += temp
+						if ( this.params[paramVar][j] === "balance")
+							balance = temp;
+					}
+					if(	!resultsGroupBySupplier[supplier_name] ) {
+						resultsGroupBySupplier[supplier_name] = {};
+						resultsGroupBySupplier[supplier_name]['supplier_name'] = supplier_name;
+						resultsGroupBySupplier[supplier_name]['balance'] = 0;
+					}
+					if(	!resultsGroupByStatus[ap_status] ) {
+						resultsGroupByStatus[ap_status] = {};
+						resultsGroupByStatus[ap_status]['ap_status'] = ap_status;
+						resultsGroupByStatus[ap_status]['balance'] = 0;
+					}
+					if ( !resultsByPOExpenses[purchase_type] ) {
+						resultsByPOExpenses[purchase_type] = {};
+					}
+					if(	!resultsByPOExpenses[purchase_type][supplier_name] ) {
+						resultsByPOExpenses[purchase_type][supplier_name] = {};
+						resultsByPOExpenses[purchase_type][supplier_name]['supplier_name'] = supplier_name;
+						resultsByPOExpenses[purchase_type][supplier_name]['balance'] = 0;
+					}
+					resultsGroupBySupplier[supplier_name]['balance'] += balance;
+					resultsGroupByStatus[ap_status]['balance'] += balance;
+					resultsByPOExpenses[purchase_type][supplier_name]['balance'] += balance;
+				}
+				this.resultsGroupBySupplier = resultsGroupBySupplier;
+				this.resultsGroupByStatus = resultsGroupByStatus;
+				this.resultsByPOExpenses = resultsByPOExpenses;
+				for ( j =0 ; j < this.params[paramVar].length; j ++ ) {
+					this.model.set( this.params[paramVar][j] , results[this.params[paramVar][j]] );
+				}
+			}
+		},
+
+		beforeRenderpurchases : function(){
+			var paramVar = 'expenses';
 			if ( this.collection ) {
 				var results = {};
 				var i = 0;

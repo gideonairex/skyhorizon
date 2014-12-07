@@ -68,6 +68,7 @@ if( $_REQUEST['func'] == 'searchAP'){
 	require_once ("modules/Disbursement/Disbursement.php");
 	require_once ("modules/AccountsPayable/AccountsPayable.php");
 	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
+	require_once ("modules/DisbursementLogs/DisbursementLogs.php" );
 	require_once ("modules/APChecks/APChecks.php");
 
 
@@ -112,6 +113,7 @@ if( $_REQUEST['func'] == 'searchAP'){
 
 	$dos = $os;
 
+	$dlogs = array();
 	$ap_obj = new AccountsPayable();
 	$ap_obj->setColumns('AccountsPayable');
 	$ap_obj->mode = 'edit';
@@ -137,6 +139,9 @@ if( $_REQUEST['func'] == 'searchAP'){
 
 		$ap_obj->save('AccountsPayable');
 
+		$dlogs[$ap_obj->id]['payment'] = $ap['current_payment'];
+		$dlogs[$ap_obj->id]['ewt'] = $ap['current_ewt'];
+
 	}
 	// This is to add Offset in payments
 	$payment += $dos;
@@ -152,6 +157,21 @@ if( $_REQUEST['func'] == 'searchAP'){
 								"conversion_d" => $conversion
 							);
 	$focus->save( 'Disbursement' );
+
+
+	$dl = new DisbursementLogs();
+	$dl->setColumns('DisbursementLogs');
+
+	foreach ( $dlogs as $ap => $value ) {
+		$dl->column_fields['assigned_user_id'] = $focus->column_fields['assigned_user_id'];
+		$dl->column_fields['amount'] = $value['payment'];
+		$dl->column_fields['ewt'] = $value['ewt'];
+		$dl->column_fields['ap_no'] = $ap;
+		$dl->column_fields['disbursement'] = $focus->id;
+		$dl->column_fields['dl_currency'] = $conversion;
+		$dl->save('DisbursementLogs');
+	}
+
 	$return_id = $focus->id;
 	$totalPayment = $payment + $ewt;
 	$archeck_obj = new APChecks();
