@@ -24,4 +24,7 @@ $emm = new VTEntityMethodManager($adb);
 //$emm->addEntityMethod("SHExpenses", "createAP", "include/custom_workflows/SHExpenses.php", "createAP");
 //$emm->addEntityMethod("AccountsReceivable", "updateReceivable", "include/custom_workflows/AccountsReceivable.php", "updateReceivable");
 //$emm->addEntityMethod("AccountsPayable", "updateStatus", "include/custom_workflows/AccountsPayable.php", "updateStatus");
+
+$emm->addEntityMethod("SalesAgreement", "deleteAR", "include/custom_workflows/AccountsReceivable.php", "deleteAR");
+$emm->addEntityMethod("PO", "deleteAP", "include/custom_workflows/AccountsPayable.php", "deleteAP");
 ?>

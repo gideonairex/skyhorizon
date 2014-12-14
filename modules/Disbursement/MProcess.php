@@ -127,6 +127,7 @@ if( $_REQUEST['func'] == 'searchAP'){
 		$ap_obj->retrieve_entity_info($id, 'AccountsPayable');
 		$ap_obj->column_fields['payment'] +=  $ap['current_payment'];
 		$ap_obj->column_fields['ewt'] +=  $ap['current_ewt'];
+		$ap_obj->column_fields['ap_status'] = 'Pending for clearance';
 		$ap_balance = $ap_obj->column_fields['payable'] - $ap_obj->column_fields['payment'] - $ap_obj->column_fields['ewt'];
 
 		if( $os >= $ap_balance ) {

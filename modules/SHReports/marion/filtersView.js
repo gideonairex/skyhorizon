@@ -52,8 +52,8 @@ define( function( require ) {
 				this.ui.reporttemplate.css("display","none");
 			}
 
-			if( report === 'ap' || report === 'apntp' || report === 'purchases' || report === 'expenses' ) {
-				//this.ui.print.css("display","block");
+			if( report === 'ap' || report === 'apntp' ) {
+				this.ui.print.css("display","block");
 			}
 
 		},

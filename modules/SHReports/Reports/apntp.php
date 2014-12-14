@@ -51,9 +51,12 @@
 			$data[$i]['ewt'] =  $adb->query_result($result, $i, "ewt");
 			$data[$i]['ap_status'] = $adb->query_result($result, $i, "ap_status");
 			$data[$i]['balance'] =  $data[$i]['payable'] - $data[$i]['payment'] - $data[$i]['ewt'];
-			$data[$i]['createdtime'] =  $adb->query_result($result, $i, "createdtime");
+			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
 		}
-		echo json_encode($data);
+
+		if ( $_REQUEST['mode'] != "print" ) {
+			echo json_encode($data);
+		}
 	}
 
 ?>

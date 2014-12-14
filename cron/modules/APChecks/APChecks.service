@@ -1,0 +1,66 @@
+<?php
+
+global $adb;
+
+$sql = "select * from vtiger_apchecks inner join vtiger_crmentity on vtiger_apchecks.apchecksid = vtiger_crmentity.crmid where deleted = 0 and apchk_status='Released'";
+$result = $adb->pquery( $sql, array() );
+$num_rows = $adb->num_rows( $result );
+
+$Dids = array();
+
+require_once ("modules/APChecks/APChecks.php");
+$apcheck = new APChecks();
+$apcheck->setColumns('APChecks');
+$apcheck->mode = 'edit';
+
+if( $num_rows > 0 ) {
+
+	for( $i = 0; $i < $num_rows; $i++ ) {
+		$id = $adb->query_result( $result, $i, 'apchecksid' );
+		$apcheck->id = $id;
+		$apcheck->retrieve_entity_info($id, 'APChecks');
+
+		$checkdate = date("F j, Y", strtotime( $apcheck->column_fields['date_of_check'] ) );
+		$datenow = date("F j, Y");
+
+		if( strtotime($checkdate) <= strtotime($datenow) ) {
+			$Dids[$i] = $adb->query_result( $result, $i, 'disbursement_no' );
+			$apcheck->column_fields['apchk_status'] = 'Cleared';
+			$apcheck->save('APChecks');
+		}
+	}
+
+	$didstrings = implode( ',', $Dids );
+	$query = "SELECT vtiger_crmentity.*, vtiger_accountspayable.*, CASE WHEN (vtiger_users.user_name NOT LIKE '') THEN CONCAT(vtiger_users.first_name,' ',vtiger_users.last_name) ELSE vtiger_groups.groupname END AS user_name, vtiger_accountspayablecf.* FROM vtiger_accountspayable INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_accountspayable.accountspayableid INNER JOIN vtiger_crmentityrel ON (vtiger_crmentityrel.relcrmid = vtiger_crmentity.crmid OR vtiger_crmentityrel.crmid =
+	vtiger_crmentity.crmid) LEFT JOIN vtiger_accountspayablecf ON vtiger_accountspayablecf.accountspayableid = vtiger_accountspayable.accountspayableid LEFT JOIN vtiger_users ON vtiger_users.id = vtiger_crmentity.smownerid LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid WHERE vtiger_crmentity.deleted = 0 AND (vtiger_crmentityrel.crmid in (".$didstrings.") OR vtiger_crmentityrel.relcrmid = (".$didstrings."))";
+
+	$accounts_payable = $adb->pquery( $query, array() );
+	$numOfRecords = $adb->num_rows($accounts_payable);
+
+	$apIds = array();
+	require_once ("modules/AccountsPayable/AccountsPayable.php");
+	$ap_obj = new AccountsPayable();
+	$ap_obj->setColumns('AccountsPayable');
+	$ap_obj->mode = 'edit';
+
+	for ($i = 0; $i < $numOfRecords; $i++) {
+		$id = $adb->query_result( $accounts_payable, $i, 'accountspayableid' );
+		$ap_obj->id = $id;
+		$ap_obj->retrieve_entity_info($id, 'AccountsPayable');
+
+		$payment = $ap_obj->column_fields['payment'] + $ap_obj->column_fields['ewt'];
+		if( $payment == 0 ){
+			$status = 'Unpaid';
+		}else{
+			$status = 'Paid';
+			if( $payment < $ap_obj->column_fields['payable'] ){
+				$status = 'Partial';
+			}
+		}
+
+		$ap_obj->column_fields['ap_status'] = $status;
+		$ap_obj->save('AccountsPayable');
+	}
+
+}
+?>

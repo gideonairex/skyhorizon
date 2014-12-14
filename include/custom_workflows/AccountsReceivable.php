@@ -20,4 +20,28 @@ function updateReceivable($entity){
 	$ar_obj->saveentity('AccountsReceivable');
 
 }
+
+function deleteAR($entity){
+
+	global $adb;
+
+	$sales_no = explode('x',$entity->data['id']);
+	$query = "select * from vtiger_crmentity
+		inner join vtiger_accountsreceivable on vtiger_crmentity.crmid = vtiger_accountsreceivable.accountsreceivableid
+		where sales_no = ".$sales_no[1]." and deleted = 0";
+
+	$result = $adb->pquery($query,array());
+	$num_rows = $adb->num_rows($result);
+
+	if($num_rows == 0){
+		//echo json_encode(0);
+	}else{
+		$arid= $adb->query_result($result, 0, "accountsreceivableid");
+	}
+
+	require_once ("modules/AccountsReceivable/AccountsReceivable.php");
+	$ar_obj = new AccountsReceivable();
+	DeleteEntity('AccountsReceivable', 'AccountsReceivable', $ar_obj, $arid, '');
+
+}
 ?>

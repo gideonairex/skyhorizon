@@ -9,12 +9,12 @@
  ********************************************************************************/
 
 
-
 /**
  * Start the cron services configured.
  */
 include_once 'vtlib/Vtiger/Cron.php';
 require_once 'config.inc.php';
+
 if(PHP_SAPI === "cli" || (isset($_SESSION["authenticated_user_id"]) &&	isset($_SESSION["app_unique_key"]) && $_SESSION["app_unique_key"] == $application_unique_key)){
 
 $cronTasks = false;
@@ -28,9 +28,11 @@ else {
 }
 
 foreach ($cronTasks as $cronTask) {
+
 	try {
 		$cronTask->setBulkMode(true);
 
+		checkFileAccess($cronTask->getHandlerFile());
 		// Not ready to run yet?
 		if (!$cronTask->isRunnable()) {
 			echo sprintf("[INFO]: %s - not ready to run as the time to run again is not completed\n", $cronTask->getName());
@@ -38,25 +40,24 @@ foreach ($cronTasks as $cronTask) {
 }
 
 		// Timeout could happen if intermediate cron-tasks fails
-		// and affect the next task. Which need to be handled in this cycle.				
+		// and affect the next task. Which need to be handled in this cycle.
 		if ($cronTask->hadTimedout()) {
 			echo sprintf("[INFO]: %s - cron task had timedout as it is not completed last time it run- restarting\n", $cronTask->getName());
 }
 
-		// Mark the status - running		
+		// Mark the status - running
 		$cronTask->markRunning();
-		
-		checkFileAccess($cronTask->getHandlerFile());		
+
+		checkFileAccess($cronTask->getHandlerFile());
 		require_once $cronTask->getHandlerFile();
-		
 		// Mark the status - finished
 		$cronTask->markFinished();
-		
+
 	} catch (Exception $e) {
 		echo sprintf("[ERROR]: %s - cron task execution throwed exception.\n", $cronTask->getName());
 		echo $e->getMessage();
 		echo "\n";
-	}		
+	}
 }
 }
 

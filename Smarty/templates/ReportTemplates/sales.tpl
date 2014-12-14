@@ -65,5 +65,8 @@
 			{/foreach}
 			</table>
 {/foreach}
+		<div class="col-xs-12">
+			<p>note: please disregard payment if already paid.</p>
+		</div>
 			{include file='ReportTemplates/footer.tpl'}
 	</div>
