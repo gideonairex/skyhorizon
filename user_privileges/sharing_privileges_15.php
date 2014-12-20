@@ -202,4 +202,8 @@ $NonTradeR_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 $NonTradeR_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 
+$DisbursementLogs_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$DisbursementLogs_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
 ?>

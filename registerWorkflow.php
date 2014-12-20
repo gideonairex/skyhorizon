@@ -1,4 +1,5 @@
 <?php
+die();
 require_once 'include/utils/utils.php';
 require 'modules/com_vtiger_workflow/VTEntityMethodManager.inc';
 $emm = new VTEntityMethodManager($adb); 

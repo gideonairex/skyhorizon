@@ -1,4 +1,5 @@
 <?php
+die();
 $Vtiger_Utils_Log = true;
 include_once('vtlib/Vtiger/Cron.php');
 

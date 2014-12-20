@@ -1,4 +1,5 @@
 <?php
+die();
 global $adb;
 
 $tobeCleaned = array(

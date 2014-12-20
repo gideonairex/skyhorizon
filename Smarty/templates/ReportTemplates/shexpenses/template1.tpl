@@ -19,6 +19,7 @@
 				{assign var=expense_name value=$DATA.expense_name}
 				{assign var=expense_status value=$DATA.expense_status}
 				{assign var=date value=$DATA.date}
+				{assign var=particulars value=$DATA.particulars}
 				{assign var=expense_type value=$DATA.expense_type}
 				{assign var=ntp_currency value=$DATA.ntp_currency}
 				{assign var=date value=$DATA.date}
@@ -58,6 +59,10 @@
 			<div class="col-xs-6">
 				<h3>Total Amount</h3>
 				<table class="table table-striped">
+					<tr>
+						<th>Particulars</th>
+						<td>{$particulars}</td>
+					</tr>
 					<tr>
 						<th>Cost</th>
 						<td>{$ntp_currency} {$cost}</td>

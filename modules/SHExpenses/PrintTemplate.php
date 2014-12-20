@@ -32,6 +32,7 @@ if($num_rows == 0){
 	$data['cost'] = $adb->query_result($result, 0, "cost");
 	$data['expense_status'] = $adb->query_result($result, 0, "expense_status");
 	$data['expense_type'] = $adb->query_result($result, 0, "expense_type");
+	$data['particulars'] = $adb->query_result($result, 0, "particulars");
 	$data['ntp_currency'] = $adb->query_result($result, 0, "ntp_currency");
 	$data['user'] =  $users[$adb->query_result($result, 0, "smownerid")];
 	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, 0, "modifiedtime") ) );

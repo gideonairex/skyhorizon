@@ -47,7 +47,7 @@ $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
 $dbconfig['db_server'] = 'localhost';
 $dbconfig['db_port'] = ':3306';
 $dbconfig['db_username'] = 'root';
-$dbconfig['db_password'] = 'root';
+$dbconfig['db_password'] = '';
 $dbconfig['db_name'] = 'skyhorizon';
 $dbconfig['db_type'] = 'mysql';
 $dbconfig['db_status'] = 'true';
@@ -79,10 +79,10 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://localhost:8888/skyhorizon';
+$site_URL = 'http://calbayog.skyhorizon.ph';
 
 // root directory path
-$root_directory = '/Applications/MAMP/htdocs/skyhorizon/';
+$root_directory = '/var/www/html/skyhorizon/';
 
 // cache direcory path
 $cache_dir = 'cache/';
