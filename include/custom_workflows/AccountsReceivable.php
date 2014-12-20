@@ -16,8 +16,11 @@ function updateReceivable($entity){
 	$ar_obj->mode = 'edit';
 	$ar_obj->id = $id[1];
 	$ar_obj->retrieve_entity_info($id[1], 'AccountsReceivable');
-	$ar_obj->column_fields['ar_status'] = $status;
-	$ar_obj->saveentity('AccountsReceivable');
+
+	if( $ar_obj->column_fields['ar_status'] != 'Pending for clearance' ) {
+		$ar_obj->column_fields['ar_status'] = $status;
+		$ar_obj->saveentity('AccountsReceivable');
+	}
 
 }
 

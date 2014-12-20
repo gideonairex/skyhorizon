@@ -90,6 +90,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 		}
 	}
 	$clogs = array();
+
 	foreach ( $data as $ar ){
 
 		$payment += $ar['paymentp'];
@@ -103,6 +104,9 @@ if( $_REQUEST['func'] == 'searchAR'){
 		$ar_obj->column_fields['payment'] +=  $ar['paymentp'];
 		$ar_obj->column_fields['awt'] +=  $ar['ewt'];
 		$ar_obj->column_fields['bc'] +=  $ar['bcp'];
+		if( $payment_type === 'Check' ) {
+			$ar_obj->column_fields['ar_status'] = 'Pending for clearance';
+		}
 		$ar_obj->save('AccountsReceivable');
 
 		$clogs[$ar_obj->id]['payment'] = $ar['paymentp'];
