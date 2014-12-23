@@ -21,9 +21,9 @@ if ( $_REQUEST['accounts'] != 0  &&  ( $_REQUEST['report_name'] == 'sales' || $_
 		$account['account_name'] = $adb->query_result($result, 0, "account_name");
 	}
 	$smarty->assign('ACCOUNT', $account);
-	$smarty->assign('SHOWLOGO', 'true');
 }
-
+$smarty->assign('SHOWLOGO', 'true');
+$smarty->assign('GRANDTOTAL', $gt );
 $smarty->assign('DATA', $newData);
 $smarty->assign('PREPAREDBY',$current_user->column_fields['first_name'].' '.$current_user->column_fields['last_name'] );
 

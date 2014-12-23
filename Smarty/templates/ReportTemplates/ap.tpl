@@ -9,6 +9,22 @@
 				<div class="col-xs-3">
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-xs-6">
+					{include file='ReportTemplates/logo.tpl'}
+				</div>
+				<div class="col-xs-6">
+				<h3> Details </h3>
+
+					<table class="table">
+						<tr>
+							<td> Grand Balance Total </td>
+							<td> {$GRANDTOTAL} </td>
+						</tr>
+					</table>
+				</div>
+			</div>
 {foreach key=DATE item=APS from=$DATA}
 			<h3>{$DATE}</h3>
 			<table class="table table-striped">

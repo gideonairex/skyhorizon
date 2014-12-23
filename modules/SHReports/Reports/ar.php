@@ -36,11 +36,11 @@
 			  inner join vtiger_accountsreceivable on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_shcontacts.shcontactsid = vtiger_salesagreement.customer
 			  inner join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where deleted = 0 and ar_status IN ("Unpaid","Partial") '.$ext;
+			  where deleted = 0 and sa_status="Approved" and ar_status IN ("Unpaid","Partial") '.$ext;
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
-
+	$gt = 0;
 	if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
@@ -67,6 +67,7 @@
 			$data[$i]['total_sales_print'] =  $data[$i]['fee'] + $data[$i]['mark_up'];
 			$data[$i]['user'] =  $users[$adb->query_result($result, $i, "smownerid")];
 			$data[$i]['aging'] =intval ( ( strtotime("now") - strtotime($data[$i]['createdtime']) ) / (60 * 60 * 24) ) ;
+			$gt += $data[$i]['grand_total'];
 		}
 		if ( $_REQUEST['mode'] != "print" ) {
 			echo json_encode($data);

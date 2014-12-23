@@ -30,6 +30,7 @@
 	$num_rows = $adb->num_rows($result);
 	$data = array();
 
+	$gt = 0;
 	if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
@@ -52,6 +53,8 @@
 			$data[$i]['ap_status'] = $adb->query_result($result, $i, "ap_status");
 			$data[$i]['balance'] =  $data[$i]['payable'] - $data[$i]['payment'] - $data[$i]['ewt'];
 			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
+
+			$gt += $data[$i]['balance'];
 		}
 
 		if ( $_REQUEST['mode'] != "print" ) {

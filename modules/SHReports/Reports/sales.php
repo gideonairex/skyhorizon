@@ -36,6 +36,7 @@
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
+	$gt = 0;
 	if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
@@ -61,6 +62,7 @@
 			$data[$i]['total_sales_print'] =  $data[$i]['fee'] + $data[$i]['mark_up'];
 			$data[$i]['user'] =  $users[$adb->query_result($result, $i, "smownerid")];
 			$data[$i]['assigned_user_id'] =  $adb->query_result($result, $i, "smownerid");
+			$gt += $data[$i]['grand_total'];
 		}
 
 		if ( $_REQUEST['mode'] != "print" ) {

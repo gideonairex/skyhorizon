@@ -9,24 +9,27 @@
 				<div class="col-xs-3">
 				</div>
 			</div>
-			{if $SHOWLOGO eq 'true'}
 			<div class="row">
 				<div class="col-xs-6">
 					{include file='ReportTemplates/logo.tpl'}
 				</div>
 				<div class="col-xs-6">
 				<h3> Details </h3>
-					{assign var=account_name value=$ACCOUNT.account_name}
-
 					<table class="table">
+					{if $ACCOUNT}
+						{assign var=account_name value=$ACCOUNT.account_name}
+							<tr>
+								<td> Account Name </td>
+								<td> {$account_name} </td>
+							</tr>
+					{/if}
 						<tr>
-							<td> Account Name </td>
-							<td> {$account_name} </td>
+							<td> Grand Total </td>
+							<td> {$GRANDTOTAL} </td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			{/if}
 {foreach key=DATE item=ARS from=$DATA}
 			<h3>{$DATE}</h3>
 			<table class="table table-striped">

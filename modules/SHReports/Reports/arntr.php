@@ -31,7 +31,7 @@
 	$query = 'select * from vtiger_nontrader
 			  inner join vtiger_crmentity on vtiger_nontrader.nontraderid = vtiger_crmentity.crmid
 			  inner join vtiger_accountsreceivable on vtiger_accountsreceivable.sales_no = vtiger_nontrader.nontraderid
-			  where deleted = 0 and ar_status IN ("Unpaid","Partial") '.$ext;
+			  where deleted = 0 and ntr_status="Approved" and ar_status IN ("Unpaid","Partial") '.$ext;
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
