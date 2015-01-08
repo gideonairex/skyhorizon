@@ -30,9 +30,9 @@ if($num_rows == 0){
 	//echo json_encode(0);
 }else{
 	$data['po_no'] = $adb->query_result($result, 0, "po_no");
-	$data['pax'] = $adb->query_result($result, 0, "pax");
+	$data['pax'] =nl2br( $adb->query_result($result, 0, "pax") );
 	$data['no_of_pax'] = $adb->query_result($result, 0, "no_of_pax");
-	$data['description'] = $adb->query_result($result, 0, "description");
+	$data['description'] = nl2br ( $adb->query_result($result, 0, "description") );
 	$data['supplier'] =  $adb->query_result($result, 0, "supplier_name");
 	$data['discount'] =  $adb->query_result($result, 0, "discount");
 	$data['cost'] =  $adb->query_result($result, 0, "cost");
@@ -48,7 +48,6 @@ if($num_rows == 0){
 		$data['confirmation'] = 'Not Confirmed';
 	}
 }
-
 
 $smarty->assign('DATA', $data);
 $smarty->display('ReportTemplates/po/template'.$_REQUEST["template"].'.tpl');

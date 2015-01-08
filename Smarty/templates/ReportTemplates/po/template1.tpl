@@ -1,17 +1,13 @@
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
 	<div class="container-fluid">
 		<div class="row">
-		
 			<div class="col-xs-3">
 			</div>
-			
 			<div class="col-xs-6">
 				<h2 class="text-center"> Purchase Order </h2>
 			</div>
-			
 			<div class="col-xs-3">
 			</div>
-			
 		</div>
 		<div class="row">
 			<div class="col-xs-6">
@@ -21,15 +17,11 @@
 			<h3> Details </h3>
 				{assign var=po_no value=$DATA.po_no}
 				{assign var=supplier value=$DATA.supplier}
-				
 				{assign var=pax value=$DATA.pax}
 				{assign var=no_of_pax value=$DATA.no_of_pax}
 				{assign var=description value=$DATA.description}
-				
-
 				{assign var=cost value=$DATA.cost}
 				{assign var=discount value=$DATA.discount}
-				
 				{assign var=service_fee value=$DATA.service_fee}
 				{assign var=rate_per_pax value=$DATA.rate_per_pax}
 				{assign var=grand_total value=$DATA.grand_total}
@@ -37,11 +29,9 @@
 				{assign var=confirmation value=$DATA.confirmation}
 				{assign var=conversion_po value=$DATA.conversion_po}
 				{assign var=user value=$DATA.user}
-				
-				
 				<table class="table">
 					<tr>
-						<td> Purchase Number </td>
+						<td> Purchase No. </td>
 						<td> <strong> {$po_no} </strong> </td>
 					</tr>
 					<tr>
@@ -58,12 +48,11 @@
 						<td> <strong> {$confirmation} </strong> </td>
 					</tr>
 					<tr>
-						<td> Prepared By: </td>
+						<td> Preparer: </td>
 						<td> {$user} </td>
 					</tr>
 				</table>
 			</div>
-			
 			<div class="col-xs-8">
 				<h3>Particulars</h3>
 				<div class="panel panel-default">
@@ -78,10 +67,8 @@
 					{$description}
 				  </div>
 				</div>
-				
 			</div>
 			<div class="col-xs-4">
-			
 				<h3>Total Amount</h3>
 				<table class="table table-striped">
 
@@ -89,17 +76,14 @@
 						<th>Cost</th>
 						<td>{$conversion_po} {$cost}</td>
 					</tr>
-					
 					<tr>
 						<th>Discount</th>
 						<td>{$discount}</td>
 					</tr>
-					
 					<tr>
 						<th>Service Fee</th>
 						<td>{$service_fee}</td>
 					</tr>
-					
 					<tr>
 						<th>Quantity</th>
 						<td>{$no_of_pax}</td>
@@ -114,7 +98,6 @@
 					</tr>
 				</table>
 			</div>
-			
 			<div class="col-xs-8">
 				<p>
 					<strong> To our valued suppliers: </strong> We are strictly implementing a no P.O. number issuance policy. Please avoid issuance or finalizing transactions without the <strong> Confirmation Code </strong>.

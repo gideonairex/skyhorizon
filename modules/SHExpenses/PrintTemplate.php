@@ -38,6 +38,12 @@ if($num_rows == 0){
 	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, 0, "modifiedtime") ) );
 }
 
+
+$query = 'select * from vtiger_shsupplier where shsupplierid = ' . $data[ 'expense_name' ];
+$result = $adb->pquery($query,array());
+$num_rows = $adb->num_rows($result);
+$data[ 'expense_name' ] = $adb->query_result( $result, 0, "supplier_name" );
+
 $smarty->assign('DATA', $data);
 $smarty->display('ReportTemplates/shexpenses/template'.$_REQUEST["template"].'.tpl');
 

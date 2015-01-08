@@ -19,9 +19,9 @@ if($num_rows == 0){
 }else{
 	$data['sa_no'] = $adb->query_result($result, 0, "sa_no");
 	$data['account_name'] = $adb->query_result($result, 0, "account_name");
-	$data['details'] = $adb->query_result($result, 0, "details");
+	$data['details'] = nl2br( $adb->query_result($result, 0, "details") );
 	$data['quantity'] = $adb->query_result($result, 0, "quantity");
-	$data['pax'] = $adb->query_result($result, 0, "pax");
+	$data['pax'] = nl2br ( $adb->query_result($result, 0, "pax") );
 	$data['contact'] =  $adb->query_result($result, 0, "firstname").' '. $adb->query_result($result, 0, "lastname");
 	$data['af'] = $data['quantity'] * ( $adb->query_result($result, 0, "fee") + $adb->query_result($result, 0, "mark_up") );
 	$data['sf'] = $adb->query_result($result, 0, "service_fee");

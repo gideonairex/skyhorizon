@@ -105,11 +105,9 @@ $focus->markAsViewed($current_user->id);
 
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
-
 if ( $focus->column_fields['payable_approval'] == 'Pending' ) {
 	$smarty->assign('SUBMIT_APRROVED', 'true');
 }
-
 
 $smarty->display('DetailView.tpl');
 
