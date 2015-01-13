@@ -45,6 +45,12 @@ define( function( require ) {
 					'payment',
 					'ewt',
 					'balance'
+				],
+				'purchases' : [
+					'no_of_pax',
+					'cost',
+					'service_fee',
+					'grand_total'
 				]
 		},
 		itemViewOptions : function(){
@@ -247,7 +253,7 @@ define( function( require ) {
 			for (key in this.resultsByPOExpenses['po']) {
 				var temp = {};
 				temp.category = this.resultsByPOExpenses['po'][key]['supplier_name'];
-				temp.value = this.resultsByPOExpenses['po'][key]['balance'];
+				temp.value = this.resultsByPOExpenses['po'][key]['grand_total'];
 				data3[i] = temp;
 				i++;
 			}
@@ -535,39 +541,39 @@ define( function( require ) {
 		},
 
 		beforeRenderpurchases : function(){
-			var paramVar = 'expenses';
+			var paramVar = 'purchases';
 			if ( this.collection ) {
 				var results = {};
 				var i = 0;
 				var j = 0;
 				var temp =0;
-				var ap_status = '';
-				var balance = 0;
+				var po_status = '';
 				var resultsGroupByStatus = [];
 				var resultsGroupBySupplier = [];
 				var resultsByPOExpenses = [];
 				for ( i = 0 ; i < this.collection.models.length; i++) {
-					ap_status = this.collection.models[i].get('ap_status');
+					po_status = this.collection.models[i].get('po_status');
 					supplier_name = this.collection.models[i].get('supplier_name');
 					purchase_type = this.collection.models[i].get('purchase_type');
 					for ( j =0 ; j < this.params[paramVar].length; j ++ ) {
-						if( !results[this.params[paramVar][j]] )
+						if( !results[this.params[paramVar][j]] ) {
 							results[this.params[paramVar][j]] = 0;
+						}
 
 						temp = parseFloat( this.collection.models[i].get(this.params[paramVar][j]) );
-						results[this.params[paramVar][j]] += temp
-						if ( this.params[paramVar][j] === "balance")
-							balance = temp;
+						results[this.params[paramVar][j]] += temp;
+						if( this.params[ paramVar ][ j ] === 'grand_total' ) {
+							grand_total = temp;
+						}
 					}
+
 					if(	!resultsGroupBySupplier[supplier_name] ) {
 						resultsGroupBySupplier[supplier_name] = {};
 						resultsGroupBySupplier[supplier_name]['supplier_name'] = supplier_name;
-						resultsGroupBySupplier[supplier_name]['balance'] = 0;
 					}
-					if(	!resultsGroupByStatus[ap_status] ) {
-						resultsGroupByStatus[ap_status] = {};
-						resultsGroupByStatus[ap_status]['ap_status'] = ap_status;
-						resultsGroupByStatus[ap_status]['balance'] = 0;
+					if(	!resultsGroupByStatus[po_status] ) {
+						resultsGroupByStatus[po_status] = {};
+						resultsGroupByStatus[po_status]['po_status'] = po_status;
 					}
 					if ( !resultsByPOExpenses[purchase_type] ) {
 						resultsByPOExpenses[purchase_type] = {};
@@ -575,11 +581,10 @@ define( function( require ) {
 					if(	!resultsByPOExpenses[purchase_type][supplier_name] ) {
 						resultsByPOExpenses[purchase_type][supplier_name] = {};
 						resultsByPOExpenses[purchase_type][supplier_name]['supplier_name'] = supplier_name;
-						resultsByPOExpenses[purchase_type][supplier_name]['balance'] = 0;
+						resultsByPOExpenses[purchase_type][supplier_name]['grand_total'] = 0;
 					}
-					resultsGroupBySupplier[supplier_name]['balance'] += balance;
-					resultsGroupByStatus[ap_status]['balance'] += balance;
-					resultsByPOExpenses[purchase_type][supplier_name]['balance'] += balance;
+
+					resultsByPOExpenses[purchase_type][supplier_name]['grand_total'] += grand_total;
 				}
 				this.resultsGroupBySupplier = resultsGroupBySupplier;
 				this.resultsGroupByStatus = resultsGroupByStatus;

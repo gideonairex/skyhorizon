@@ -52,7 +52,7 @@ define( function( require ) {
 				this.ui.reporttemplate.css("display","none");
 			}
 
-			if( report === 'ap' || report === 'apntp' ) {
+			if( report === 'ap' || report === 'apntp' || report === 'purchases' ) {
 				this.ui.print.css("display","block");
 			}
 
