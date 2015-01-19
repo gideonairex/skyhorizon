@@ -30,7 +30,7 @@ if($num_rows == 0){
 	$data['gt'] = $adb->query_result($result, 0, "grand_total");
 	$data['conversion'] = $adb->query_result($result, 0, "conversion");
 	$data['rate_per_pax'] = $adb->query_result($result, 0, "rate_per_pax");
-	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, 0, "modifiedtime") ) );
+	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, 0, "createdtime") ) );
 	$data['main'] = $adb->query_result($result,0,"main");
 	$data['branch'] = '';
 }
