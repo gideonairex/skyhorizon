@@ -4,7 +4,7 @@
 				<div class="col-xs-3">
 				</div>
 				<div class="col-xs-6">
-					<h2 class="text-center"> Purchases </h2>
+					<h2 class="text-center"> Purchase Journal </h2>
 				</div>
 				<div class="col-xs-3">
 				</div>
@@ -40,12 +40,8 @@
 			<table class="table table-striped">
 				<tr>
 					<th class="col-md-1">PO No</th>
-					<th class="col-md-2">Created time</th>
-					<th class="col-md-2">Supplier name</th>
-					<th class="col-md-2">No. of pax</th>
+					<th class="col-md-2">Suppliers name</th>
 					<th class="col-md-2">Pax</th>
-					<th class="col-md-1">Cost</th>
-					<th class="col-md-1">Service fee</th>
 					<th class="col-md-1">Grand Total</th>
 				</tr>
 			{foreach key=ID item=PO from=$POS}
@@ -59,16 +55,12 @@
 				{assign var=grand_total value=$PO.grand_total}
 				<tr>
 					<td class="col-md-1">{$po_no}</td>
-					<td class="col-md-2">{$createdtime}</td>
 					<td class="col-md-2">{$supplier_name}</td>
-					<td class="col-md-2">{$no_of_pax}</td>
 					<td class="col-md-2">{$pax}</td>
-					<td class="col-md-1">{$cost}</td>
-					<td class="col-md-1">{$service_fee}</td>
 					<td class="col-md-1">{$grand_total}</td>
 				</tr>
 			{/foreach}
 			</table>
 {/foreach}
-			{include file='ReportTemplates/footer.tpl'}
+			{include file='ReportTemplates/footerpurchase.tpl'}
 	</div>

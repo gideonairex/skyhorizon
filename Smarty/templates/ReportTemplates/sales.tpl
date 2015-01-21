@@ -28,6 +28,10 @@
 							<td> Grand Total </td>
 							<td> {$GRANDTOTAL} </td>
 						</tr>
+						<tr>
+							<td> Preparer </td>
+							<td> {$PREPAREDBY} </td>
+						</tr>
 					</table>
 				</div>
 			</div>

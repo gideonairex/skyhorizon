@@ -16,6 +16,7 @@ define( function( require ) {
 			'print' : '.print',
 			'salestemplate' : '[name="salestemplate"]',
 			'artemplate' : '[name="artemplate"]',
+			'purchasetemplate' : '[name="purchasetemplate"]',
 			'reporttemplate' : '.reporttemplate'
 		},
 		events : {

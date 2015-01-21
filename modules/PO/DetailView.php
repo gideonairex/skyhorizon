@@ -123,12 +123,14 @@ $smarty->assign('JS',$js);
 
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
+/*
 if( ($current_user->roleid == SUPERVISOR 
 	|| $current_user->roleid == RESERVATION 
 	|| $current_user->roleid == ADMIN) 
 	&& $focus->column_fields['po_status'] == 'Pending' ){
 	$smarty->assign('SUBMIT_APRROVED', 'true');
-}
+	}
+*/
 
 if ( $current_user->roleid != ADMIN && $focus->column_fields['po_status'] == 'Approved' ) {
 	$smarty->assign('EDIT_DUPLICATE', 'not_permitted');

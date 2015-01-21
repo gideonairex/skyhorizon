@@ -44,10 +44,6 @@
 						<td> {$date} </td>
 					</tr>
 					<tr>
-						<td> Confirmation Code </td>
-						<td> <strong> {$confirmation} </strong> </td>
-					</tr>
-					<tr>
 						<td> Preparer: </td>
 						<td> {$user} </td>
 					</tr>
@@ -100,7 +96,7 @@
 			</div>
 			<div class="col-xs-8">
 				<p>
-					<strong> To our valued suppliers: </strong> We are strictly implementing a no P.O. number issuance policy. Please avoid issuance or finalizing transactions without the <strong> Confirmation Code </strong>.
+					<strong> To our valued suppliers: </strong> We are strictly implementing a no P.O. number no issuance policy.
 				</p>
 				<p class="text-right">
 					Thank you for your cooperation.

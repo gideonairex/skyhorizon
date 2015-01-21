@@ -102,13 +102,13 @@ $smarty->assign('CUSTOM_LINKS', Vtiger_Link::getAllByType(getTabid($currentModul
 // Record Change Notification
 $focus->markAsViewed($current_user->id);
 // END
-
+/*
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
 if ( $focus->column_fields['payable_approval'] == 'Pending' ) {
 	$smarty->assign('SUBMIT_APRROVED', 'true');
 }
-
+ */
 $smarty->display('DetailView.tpl');
 
 ?>

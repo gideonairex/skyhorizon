@@ -21,10 +21,15 @@
 				{assign var=check_no value=$CHECKDETAILS.check_no}
 				{assign var=date_of_check value=$CHECKDETAILS.date_of_check}
 				{assign var=amount value=$CHECKDETAILS.amount}
+				{assign var=supplier_name value=$CHECKDETAILS.supplier_name}
 				<table class="table">
 					<tr>
 						<td> Voucher No </td>
 						<td> {$disbursement_no} </td>
+					</tr>
+					<tr>
+						<td> Supplier </td>
+						<td> {$supplier_name} </td>
 					</tr>
 					<tr>
 						<td> Check No </td>
@@ -33,10 +38,6 @@
 					<tr>
 						<td> Bank </td>
 						<td> {$bank} </td>
-					</tr>
-					<tr>
-						<td> APCHECK </td>
-						<td> {$apchk_no} </td>
 					</tr>
 					<tr>
 						<td> Date of Check </td>
@@ -57,7 +58,6 @@
 					<th>AP No</th>
 					<th>Payable No</th>
 					<th>Amount Paid</th>
-					<th>Supplier</th>
 				</tr>
 			{foreach key=ID item=AR from=$ARS}
 				{assign var=ap_no value=$AR.ap_no}
@@ -71,13 +71,12 @@
 					<td>{$ap_no}</td>
 					<td>{$payable_no}</td>
 					<td>{$payable}</td>
-					<td>{$supplier_name}</td>
 				</tr>
 			{/foreach}
 			</table>
 {/foreach}
 
 			</div>
-			{include file='ReportTemplates/footer.tpl'}
+			{include file='ReportTemplates/footerwithpresident.tpl'}
 		</div>
 	</div>

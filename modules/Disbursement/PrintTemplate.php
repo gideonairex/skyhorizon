@@ -43,6 +43,7 @@ if($num_rows == 0){
 			}
 
 			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
+			$supplier_name = $data[$i]['supplier_name' ];
 		}
 	}
 
@@ -60,9 +61,10 @@ if($num_rows == 0){
 	$data2['bank'] = $adb->query_result($result, 0, "bank");
 	$data2['apchk_no'] = $adb->query_result($result, 0, "apchk_no");
 	$data2['check_no'] = $adb->query_result($result, 0, "check_no");
-	$data2['date_of_check'] = $adb->query_result($result, 0, "date_of_check");
+	$data2['date_of_check'] = date( "F j, Y", strtotime($adb->query_result($result, 0, "date_of_check") ) );
 	$data2['amount'] = $adb->query_result($result, 0, "amount");
 }
+$data2['supplier_name'] = $supplier_name;
 
 $newData = array();
 
