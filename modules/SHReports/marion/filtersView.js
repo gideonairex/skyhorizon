@@ -14,6 +14,7 @@ define( function( require ) {
 			'users' : '.users',
 			'form' : 'form',
 			'print' : '.print',
+			'excel' : '.excel',
 			'salestemplate' : '[name="salestemplate"]',
 			'artemplate' : '[name="artemplate"]',
 			'purchasetemplate' : '[name="purchasetemplate"]',
@@ -22,10 +23,13 @@ define( function( require ) {
 		events : {
 			'submit form' : 'generateReport',
 			'change @ui.report_name' : 'toggleAccountsSuppliers',
-			'click @ui.print' : 'printReport'
+			'click @ui.print' : 'printReport',
+			'click @ui.excel' : 'exportExcel'
 		},
 		toggleAccountsSuppliers : function () {
 			var report = this.ui.report_name.val();
+			this.ui.excel.css("display","none");
+
 			if ( report === "sales" || report === "ar" ) {
 				this.ui.users.css("display","block");
 				this.ui.print.css("display","block");
@@ -34,6 +38,7 @@ define( function( require ) {
 				this.ui.reporttemplate.css("display","block");
 				if( report === "sales" ) {
 					this.ui.salestemplate.css("display","block");
+					this.ui.excel.css("display","block");
 					this.ui.artemplate.css("display","none");
 				} else {
 					this.ui.salestemplate.css("display","none");
@@ -43,7 +48,6 @@ define( function( require ) {
 				this.ui.accounts.css("display","none");
 				this.ui.users.css("display","none");
 				this.ui.suppliers.css("display","none");
-				this.ui.print.css("display","none");
 				this.ui.reporttemplate.css("display","none");
 			} else {
 				this.ui.users.css("display","block");
@@ -62,6 +66,11 @@ define( function( require ) {
 			e.preventDefault();
 			var data = this.ui.form.serialize();
 			window.open( 'index.php?module=SHReports&action=PrintTemplate&'+data,'_blank' );
+		},
+		exportExcel : function ( e ) {
+			e.preventDefault();
+			var data = this.ui.form.serialize();
+			window.open( 'index.php?module=SHReports&action=exportExcel&'+data,'_blank' );
 		},
 		generateReport : function( e ) {
 			e.preventDefault();

@@ -64,16 +64,23 @@
 			<th> Payment </td>
 			<th> EWT </td>
 			<th> Bank Charge </td>
+			<th> Total </td>
 		</tr>
-		<% _.each ( Cash_on_hand.details, function ( ar ) { %>
-				<tr>
-					<td> <%= ar.ar_no %></td>
-					<td> <%= ar.sa_no %></td>
-					<td> <%= ar.cl_no %></td>
-					<td> <%= ar.payment %></td>
-					<td> <%= ar.awt %></td>
-					<td> <%= ar.bc %></td>
-				</tr>
+		<% _.each ( Cash_on_hand.details, function ( element, index, list ) { %>
+			<tr>
+				<th colspan=7><%= index %></th>
+			</tr>
+			<% _.each ( element, function( ar ) { %>
+					<tr>
+						<td> <%= ar.ar_no %></td>
+						<td> <%= ar.sa_no %></td>
+						<td> <%= ar.cl_no %></td>
+						<td> <%= ar.payment %></td>
+						<td> <%= ar.awt %></td>
+						<td> <%= ar.bc %></td>
+						<td> <%= ar.total %></td>
+					</tr>
+			<% } ); %>
 		<% } ); %>
 		</table>
 		</div>
@@ -89,16 +96,23 @@
 			<th> Payment </td>
 			<th> EWT </td>
 			<th> Bank Charge </td>
+			<th> Total </td>
 		</tr>
-		<% _.each ( Check.details, function ( ar ) { %>
-				<tr>
-					<td> <%= ar.ar_no %></td>
-					<td> <%= ar.sa_no %></td>
-					<td> <%= ar.cl_no %></td>
-					<td> <%= ar.payment %></td>
-					<td> <%= ar.awt %></td>
-					<td> <%= ar.bc %></td>
-				</tr>
+		<% _.each ( Check.details, function ( element, index, list ) { %>
+			<tr>
+				<th colspan=7><%= index %></th>
+			</tr>
+			<% _.each ( element, function( ar ) { %>
+					<tr>
+						<td> <%= ar.ar_no %></td>
+						<td> <%= ar.sa_no %></td>
+						<td> <%= ar.cl_no %></td>
+						<td> <%= ar.payment %></td>
+						<td> <%= ar.awt %></td>
+						<td> <%= ar.bc %></td>
+						<td> <%= ar.total %></td>
+					</tr>
+			<% } ); %>
 		<% } ); %>
 		</table>
 		</div>
@@ -114,16 +128,23 @@
 			<th> Payment </td>
 			<th> EWT </td>
 			<th> Bank Charge </td>
+			<th> Total </td>
 		</tr>
-		<% _.each ( Cash_online.details, function ( ar ) { %>
-				<tr>
-					<td> <%= ar.ar_no %></td>
-					<td> <%= ar.sa_no %></td>
-					<td> <%= ar.cl_no %></td>
-					<td> <%= ar.payment %></td>
-					<td> <%= ar.awt %></td>
-					<td> <%= ar.bc %></td>
-				</tr>
+		<% _.each ( Cash_online.details, function ( element, index, list ) { %>
+			<tr>
+				<th colspan=7><%= index %></th>
+			</tr>
+			<% _.each ( element, function( ar ) { %>
+					<tr>
+						<td> <%= ar.ar_no %></td>
+						<td> <%= ar.sa_no %></td>
+						<td> <%= ar.cl_no %></td>
+						<td> <%= ar.payment %></td>
+						<td> <%= ar.awt %></td>
+						<td> <%= ar.bc %></td>
+						<td> <%= ar.total %></td>
+					</tr>
+			<% } ); %>
 		<% } ); %>
 		</table>
 		</div>

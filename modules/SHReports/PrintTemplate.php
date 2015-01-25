@@ -6,7 +6,9 @@ $smarty->assign('MODULE', $currentModule);
 
 $_REQUEST['mode'] = 'print';
 require('modules/SHReports/Reports/'.$_REQUEST['report_name'].'.php');
-require('modules/SHReports/TemplateMaker/'.$_REQUEST['report_name'].'.php');
+if( $_REQUEST[ 'report_name' ] != 'collection' ) {
+	require('modules/SHReports/TemplateMaker/'.$_REQUEST['report_name'].'.php');
+}
 
 if ( $_REQUEST['accounts'] != 0  &&  ( $_REQUEST['report_name'] == 'sales' || $_REQUEST['report_name'] == 'ar')  ){
 	$query = 'select * from vtiger_shaccounts
@@ -23,8 +25,13 @@ if ( $_REQUEST['accounts'] != 0  &&  ( $_REQUEST['report_name'] == 'sales' || $_
 	$smarty->assign('ACCOUNT', $account);
 }
 $smarty->assign('SHOWLOGO', 'true');
-$smarty->assign('GRANDTOTAL', $gt );
-$smarty->assign('DATA', $newData);
+if( $_REQUEST[ 'report_name' ] == 'collection' ) {
+	$smarty->assign('DATA', $data);
+} else {
+	$smarty->assign('GRANDTOTAL', $gt );
+	$smarty->assign('DATA', $newData);
+}
+
 $smarty->assign('PREPAREDBY',$current_user->column_fields['first_name'].' '.$current_user->column_fields['last_name'] );
 
 if( $_REQUEST['report_name'] == 'sales' ) {

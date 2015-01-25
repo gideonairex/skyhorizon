@@ -637,7 +637,8 @@ if( $action == 'MCollection'
 	|| $action == 'MProcess' 
 	|| $action == 'MDisbursement'
 	|| $action == 'MReports' 
-	|| $action == 'PrintTemplate' ) {
+	|| $action == 'PrintTemplate' 
+  || $action == 'exportExcel' ) {
 	$skipHeaders = true;
 }
 

@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 global $adb;
 
 if( $_REQUEST['func'] == 'getFilters'){
-	$query = 'select * from vtiger_users where status= "Active"';
+	$query = 'select * from vtiger_users where status= "Active" order by last_name';
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
@@ -18,7 +18,7 @@ if( $_REQUEST['func'] == 'getFilters'){
 	}
 	$query = 'select * from vtiger_shaccounts
 			  inner join vtiger_crmentity on vtiger_shaccounts.shaccountsid = vtiger_crmentity.crmid
-			  where deleted = 0';
+			  where deleted = 0 order by account_name';
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 
@@ -33,7 +33,7 @@ if( $_REQUEST['func'] == 'getFilters'){
 	}
 	$query = 'select * from vtiger_shsupplier
 			  inner join vtiger_crmentity on vtiger_shsupplier.shsupplierid = vtiger_crmentity.crmid
-			  where deleted = 0';
+			  where deleted = 0 order by supplier_name';
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 
