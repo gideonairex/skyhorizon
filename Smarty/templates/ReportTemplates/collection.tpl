@@ -90,26 +90,20 @@
 										<th colspan=1> {$CollectionNo} </th>
 									</tr>
 									<tr>
-										<th> AR No. </td>
 										<th> Sales No.</td>
-										<th> Collection Log No. </td>
 										<th> Payment </td>
 										<th> EWT </td>
 										<th> Bank Charge </td>
 										<th> Total </td>
 									</tr>
-								{foreach key=ID item=AR from=$ARS}
-									{assign var=ar_no_ value=$AR.ar_no_}
+								{foreach key=ID item=AR from=$ARS.lists}
 									{assign var=sa_no_ value=$AR.sa_no_}
-									{assign var=cl_no_ value=$AR.cl_no_}
 									{assign var=payment value=$AR.payment}
 									{assign var=awt value=$AR.awt}
 									{assign var=bc value=$AR.bc}
 									{assign var=total value=$AR.total}
 									<tr>
-										<td> {$ar_no_}</td>
 										<td> {$sa_no_}</td>
-										<td> {$cl_no_}</td>
 										<td> {$payment}</td>
 										<td> {$awt}</td>
 										<td> {$bc}</td>
@@ -125,29 +119,23 @@
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Check.details}
 								<table class="table table-striped">
 									<tr>
-										<th colspan=1> {$CollectionNo} </th>
+										<th colspan=1> {$CollectionNo} &nbsp; {$ARS.detail.chk_no} - {$ARS.detail.bank} - {$ARS.detail.date_of_chk} </th>
 									</tr>
 									<tr>
-										<th> AR No. </td>
 										<th> Sales No.</td>
-										<th> Collection Log No. </td>
 										<th> Payment </td>
 										<th> EWT </td>
 										<th> Bank Charge </td>
 										<th> Total </td>
 									</tr>
-								{foreach key=ID item=AR from=$ARS}
-									{assign var=ar_no_ value=$AR.ar_no_}
+								{foreach key=ID item=AR from=$ARS.lists}
 									{assign var=sa_no_ value=$AR.sa_no_}
-									{assign var=cl_no_ value=$AR.cl_no_}
 									{assign var=payment value=$AR.payment}
 									{assign var=awt value=$AR.awt}
 									{assign var=bc value=$AR.bc}
 									{assign var=total value=$AR.total}
 									<tr>
-										<td> {$ar_no_}</td>
 										<td> {$sa_no_}</td>
-										<td> {$cl_no_}</td>
 										<td> {$payment}</td>
 										<td> {$awt}</td>
 										<td> {$bc}</td>
@@ -166,15 +154,13 @@
 										<th colspan=1> {$CollectionNo} </th>
 									</tr>
 									<tr>
-										<th> AR No. </td>
 										<th> Sales No.</td>
-										<th> Collection Log No. </td>
 										<th> Payment </td>
 										<th> EWT </td>
 										<th> Bank Charge </td>
 										<th> Total </td>
 									</tr>
-								{foreach key=ID item=AR from=$ARS}
+								{foreach key=ID item=AR from=$ARS.lists}
 									{assign var=ar_no_ value=$AR.ar_no_}
 									{assign var=sa_no_ value=$AR.sa_no_}
 									{assign var=cl_no_ value=$AR.cl_no_}
@@ -183,9 +169,7 @@
 									{assign var=bc value=$AR.bc}
 									{assign var=total value=$AR.total}
 									<tr>
-										<td> {$ar_no_}</td>
 										<td> {$sa_no_}</td>
-										<td> {$cl_no_}</td>
 										<td> {$payment}</td>
 										<td> {$awt}</td>
 										<td> {$bc}</td>
@@ -196,5 +180,6 @@
 					{/foreach}
 			{/if}
 			</div>
+			{include file='ReportTemplates/footercollection.tpl'}
 		</div>
 	</div>
