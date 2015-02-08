@@ -27,8 +27,10 @@ if ( $_REQUEST['accounts'] != 0  &&  ( $_REQUEST['report_name'] == 'sales' || $_
 $smarty->assign('SHOWLOGO', 'true');
 if( $_REQUEST[ 'report_name' ] == 'collection' ) {
 	$smarty->assign('DATA', $data);
+	$smarty->assign( 'CDATE', date("F j, Y", strtotime( $start ) ) );
 } else {
 	$smarty->assign('GRANDTOTAL', $gt );
+	$smarty->assign('BALANCE', $bt );
 	$smarty->assign('DATA', $newData);
 }
 

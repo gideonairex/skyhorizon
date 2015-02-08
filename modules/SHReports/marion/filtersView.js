@@ -36,18 +36,21 @@ define( function( require ) {
 				this.ui.accounts.css("display","block");
 				this.ui.suppliers.css("display","none");
 				this.ui.reporttemplate.css("display","block");
+				// Export to excel
+				this.ui.excel.css("display","block");
 				if( report === "sales" ) {
 					this.ui.salestemplate.css("display","block");
-					this.ui.excel.css("display","block");
 					this.ui.artemplate.css("display","none");
 				} else {
 					this.ui.salestemplate.css("display","none");
 					this.ui.artemplate.css("display","block");
 				}
+
 			} else if  ( report === "collection" ){
 				this.ui.accounts.css("display","none");
 				this.ui.users.css("display","none");
 				this.ui.suppliers.css("display","none");
+				this.ui.print.css("display","block");
 				this.ui.reporttemplate.css("display","none");
 			} else {
 				this.ui.users.css("display","block");

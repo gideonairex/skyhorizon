@@ -36,11 +36,12 @@
 			  inner join vtiger_accountsreceivable on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_shcontacts.shcontactsid = vtiger_salesagreement.customer
 			  inner join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where deleted = 0 and sa_status="Approved" and ar_status IN ("Unpaid","Partial") '.$ext;
+			  where deleted = 0 and sa_status="Approved" and ar_status IN ("Unpaid","Partial") '.$ext.' order by vtiger_crmentity.createdtime desc';
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
 	$gt = 0;
+	$bt = 0;
 	if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
@@ -62,12 +63,14 @@
 			$data[$i]['vatable_sale'] =  number_format( $quantity * $adb->query_result($result, $i, "vatable_sale"), 2);
 		 	$data[$i]['grand_total'] =  $adb->query_result($result, $i, "grand_total");
 			$data[$i]['profit'] =  $data[$i]['grand_total'] - $data[$i]['fee'];
+			$data[$i]['collection'] = $adb->query_result($result, $i, "payment" );
 			$data[$i]['balance'] =   $adb->query_result($result, $i, "sales") - $adb->query_result($result, $i, "payment") - $adb->query_result($result, $i, "awt");
 			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
 			$data[$i]['total_sales_print'] =  $data[$i]['fee'] + $data[$i]['mark_up'];
 			$data[$i]['user'] =  $users[$adb->query_result($result, $i, "smownerid")];
 			$data[$i]['aging'] =intval ( ( strtotime("now") - strtotime($data[$i]['createdtime']) ) / (60 * 60 * 24) ) ;
 			$gt += $data[$i]['grand_total'];
+			$bt += $data[$i]['balance'];
 		}
 		if ( $_REQUEST['mode'] != "print" ) {
 			echo json_encode($data);

@@ -1,4 +1,5 @@
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
+{include file='ReportTemplates/header.tpl'}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-3">

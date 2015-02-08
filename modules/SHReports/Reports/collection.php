@@ -74,5 +74,4 @@
 	if ( $_REQUEST['mode'] != "print" ) {
 		echo json_encode($data);
 	}
-
 ?>

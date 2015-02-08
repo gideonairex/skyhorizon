@@ -1,4 +1,5 @@
 <link type="text/css" rel="stylesheet" href="include/components/bootstrap/dist/css/bootstrap.css" />
+{include file='ReportTemplates/header.tpl'}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-3">
@@ -16,7 +17,7 @@
 			<div class="col-xs-6">
 				<table class="table">
 				<tr>
-					<th colspan=3> Summary </th>
+					<th colspan=3> Summary - {$CDATE}</th>
 				</tr>
 				{if $DATA.summary.Cash_on_hand }
 					<tr> <th colspan=3>Cash Transaction </th></tr>
