@@ -40,11 +40,12 @@ if($num_rows == 0){
 	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, 0, "createdtime") ) );
 }
 
-
-$query = 'select * from vtiger_shsupplier where shsupplierid = ' . $data[ 'supplier' ];
-$result = $adb->pquery($query,array());
-$num_rows = $adb->num_rows($result);
-$data[ 'supplier' ] = $adb->query_result( $result, 0, "supplier_name" );
+if( $data[ 'supplier' ] ) {
+	$query = 'select * from vtiger_shsupplier where shsupplierid = ' . $data[ 'supplier' ];
+	$result = $adb->pquery($query,array());
+	$num_rows = $adb->num_rows($result);
+	$data[ 'supplier' ] = $adb->query_result( $result, 0, "supplier_name" );
+}
 
 $smarty->assign('DATA', $data);
 $smarty->display('ReportTemplates/nontrader/template'.$_REQUEST["template"].'.tpl');
