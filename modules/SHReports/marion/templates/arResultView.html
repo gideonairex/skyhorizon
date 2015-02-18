@@ -1,10 +1,22 @@
-<td> <a href="<%- link %>" target="_blank"> <%- sa_no %></a></td>
-<td> <%- account_name %> </td>
-<td> <%- createdtime %> </td>
-<td> <%- aging %> days </td>
-<td> <%- quantity %> </td>
-<td> <%- pax %> </td>
-<td> <%- details %> </td>
-<td> <%- grand_total %> </td>
-<td> <%- collection %> </td>
-<td> <%- balance %> </td>
+<td class="col-md-1"> <a href="<%- link %>" target="_blank"> <%- sa_no %></a></td>
+<td class="col-md-1"> <%- account_name %> </td>
+<!-- td> <%- createdtime %> </td -->
+<td class="col-md-1"> <%- aging %> days </td>
+<td class="col-md-1"> <%- quantity %> </td>
+<td class="col-md-2"> <%- pax %> </td>
+<td class="col-md-1"> <%- details %> </td>
+<td class="col-md-1"> <%- grand_total %> </td>
+<td class="col-md-1"> <%- collection %> </td>
+<td class="col-md-1"> <%- balance %> </td>
+<td class="col-md-2">
+	<span class="editview" style="display:none">
+		<textarea class="form-control" name="remarks"><%- remarks %></textarea>
+		<button class="save btn btn-success">Save</button>
+		<button class="cancel btn btn-danger">Cancel</button>
+	</span>
+	<span class="remarks">
+		<span class="remarks-details"><%- remarks %> </span>
+		<br>
+		<button class="edit btn btn-success">Edit</button>
+	</span>
+</td>

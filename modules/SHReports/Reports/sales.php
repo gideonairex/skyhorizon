@@ -28,6 +28,11 @@
 		}
 		$ext .= " and createdtime between '".$start."' and '".$end."' ";
 	}
+
+	if( $_REQUEST[ 'pax' ] != "" ) {
+		$ext .= " and pax like '%".$_REQUEST[ 'pax' ]."%' ";
+	}
+
 	$query = 'select * from vtiger_salesagreement
 			  inner join vtiger_crmentity on vtiger_salesagreement.salesagreementid = vtiger_crmentity.crmid
 			  inner join vtiger_shcontacts on vtiger_shcontacts.shcontactsid = vtiger_salesagreement.customer
@@ -62,6 +67,7 @@
 			$data[$i]['total_sales_print'] =  $data[$i]['fee'] + $data[$i]['mark_up'];
 			$data[$i]['user'] =  $users[$adb->query_result($result, $i, "smownerid")];
 			$data[$i]['assigned_user_id'] =  $adb->query_result($result, $i, "smownerid");
+			$data[$i]['remarks'] =  $adb->query_result($result, $i, "remarks");
 			$gt += $data[$i]['grand_total'];
 		}
 

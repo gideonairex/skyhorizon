@@ -31,12 +31,17 @@
 		}
 		$ext .= " and createdtime between '".$start."' and '".$end."' ";
 	}
+
+	if( $_REQUEST[ 'pax' ] != "" ) {
+		$ext .= " and vtiger_salesagreement.pax like '%".$_REQUEST[ 'pax' ]."%' ";
+	}
+
 	$query = 'select * from vtiger_salesagreement
 			  inner join vtiger_crmentity on vtiger_salesagreement.salesagreementid = vtiger_crmentity.crmid
 			  inner join vtiger_accountsreceivable on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  inner join vtiger_shcontacts on vtiger_shcontacts.shcontactsid = vtiger_salesagreement.customer
 			  inner join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where deleted = 0 and sa_status="Approved" and ar_status IN ("Unpaid","Partial") '.$ext.' order by vtiger_crmentity.createdtime desc';
+			  where deleted = 0 and sa_status="Approved" and ar_status IN ("Unpaid","Partial") '.$ext.' order by vtiger_crmentity.createdtime asc';
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
@@ -69,6 +74,7 @@
 			$data[$i]['total_sales_print'] =  $data[$i]['fee'] + $data[$i]['mark_up'];
 			$data[$i]['user'] =  $users[$adb->query_result($result, $i, "smownerid")];
 			$data[$i]['aging'] =intval ( ( strtotime("now") - strtotime($data[$i]['createdtime']) ) / (60 * 60 * 24) ) ;
+			$data[$i]['remarks'] =  $adb->query_result($result, $i, "remarks");
 			$gt += $data[$i]['grand_total'];
 			$bt += $data[$i]['balance'];
 		}

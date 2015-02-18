@@ -61,7 +61,19 @@ if( $_REQUEST['func'] == 'getFilters'){
 	echo json_encode($data);
 } else if ( $_REQUEST['func'] == 'generateReport' ) {
 	require ("modules/SHReports/Reports/".$_REQUEST['report_name'].".php");
-}else{
+} else if ( $_REQUEST['func'] == 'saveAr' ) {
+
+	require_once ("modules/SalesAgreement/SalesAgreement.php");
+	$sa_obj = new SalesAgreement();
+	$sa_obj->setColumns('SalesAgreement');
+	$sa_obj->mode = 'edit';
+	$sa_obj->id = $_REQUEST[ 'id' ];
+	$sa_obj->retrieve_entity_info($sa_obj->id, 'SalesAgreement');
+	$sa_obj->column_fields[ 'remarks' ] = $_REQUEST[ 'remarks' ];
+	$sa_obj->save('SalesAgreement' );
+	echo json_encode( array( 'status'=> 'good' ) );
+
+} else{
 	echo json_encode(array('error'=>'invalid action'));
 }
 

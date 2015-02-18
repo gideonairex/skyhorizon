@@ -24,6 +24,13 @@ define( function ( require ) {
 
 				layout.results.show( new resultsView( { collection: reportCollection, report:data2.report_name } ) );
 			} );
+		},
+		'saveAr' : function ( data, cb ) {
+			var str = 'remarks=' + data.remarks + '&id=' + data.id;
+			var request = App.request( 'save:ar', str );
+			$.when( request ).done( function ( result ) {
+				cb( result );
+			} );
 		}
 	};
 	var Router = Marionette.AppRouter.extend({
@@ -39,6 +46,11 @@ define( function ( require ) {
 	App.on('generate:report',function( data, data2 ){
 		API.generateReport( data, data2 );
 	});
+
+	App.on('save:ar',function( data, cb ){
+		API.saveAr( data, cb );
+	});
+
 	App.on('reports:home',function(){
 		App.navigate("reports/home");
 		API.showHome();

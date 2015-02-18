@@ -17,9 +17,9 @@ for( $i = 0 ; $i < $num_rows; $i++){
 
 $id = $_REQUEST['record'];
 
-$query = "select * from vtiger_shexpenses
-		  inner join vtiger_crmentity on vtiger_crmentity.crmid = vtiger_shexpenses.shexpensesid
-		  where deleted =0 and shexpensesid =".$id;
+$query = "select * from vtiger_nontrader
+		  inner join vtiger_crmentity on vtiger_crmentity.crmid = vtiger_nontrader.nontraderid
+		  where deleted =0 and nontraderid =".$id;
 $result = $adb->pquery($query,array());
 $num_rows = $adb->num_rows($result);
 $data = array();
@@ -27,24 +27,26 @@ $data = array();
 if($num_rows == 0){
 	//echo json_encode(0);
 }else{
-	$data['expense_no'] = $adb->query_result($result, 0, "expense_no");
-	$data['expense_name'] = $adb->query_result($result, 0, "expense_name");
-	$data['cost'] = $adb->query_result($result, 0, "cost");
-	$data['expense_status'] = $adb->query_result($result, 0, "expense_status");
-	$data['expense_type'] = $adb->query_result($result, 0, "expense_type");
+	$data['ntr_no'] = $adb->query_result($result, 0, "ntr_no");
+	$data['ntr_type'] = $adb->query_result($result, 0, "ntr_type");
+	$data['other'] = $adb->query_result($result, 0, "other");
+	$data['ntr_currency'] = $adb->query_result($result, 0, "ntr_currency");
+	$data['supplier'] = $adb->query_result($result, 0, "supplier");
+	$data['ntr_status'] = $adb->query_result($result, 0, "ntr_status");
+	$data['receivable'] = $adb->query_result($result, 0, "receivable");
 	$data['particulars'] = $adb->query_result($result, 0, "particulars");
-	$data['ntp_currency'] = $adb->query_result($result, 0, "ntp_currency");
 	$data['user'] =  $users[$adb->query_result($result, 0, "smownerid")];
+	$data['total'] = $data['receivable'] + $data['other'];
 	$data['date'] = date("F j, Y", strtotime( $adb->query_result($result, 0, "createdtime") ) );
 }
 
 
-$query = 'select * from vtiger_shsupplier where shsupplierid = ' . $data[ 'expense_name' ];
+$query = 'select * from vtiger_shsupplier where shsupplierid = ' . $data[ 'supplier' ];
 $result = $adb->pquery($query,array());
 $num_rows = $adb->num_rows($result);
-$data[ 'expense_name' ] = $adb->query_result( $result, 0, "supplier_name" );
+$data[ 'supplier' ] = $adb->query_result( $result, 0, "supplier_name" );
 
 $smarty->assign('DATA', $data);
-$smarty->display('ReportTemplates/shexpenses/template'.$_REQUEST["template"].'.tpl');
+$smarty->display('ReportTemplates/nontrader/template'.$_REQUEST["template"].'.tpl');
 
 ?>
