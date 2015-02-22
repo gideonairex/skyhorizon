@@ -86,6 +86,7 @@
 			{if $DATA.summary.Cash_on_hand }
 					<h3>Cash Transactions</h3>
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Cash_on_hand.details}
+								{assign var=subtotal value=$ARS.detail.total}
 								<table class="table table-striped">
 									<tr>
 										<th colspan=1> {$CollectionNo} </th>
@@ -111,6 +112,10 @@
 										<td> {$total}</td>
 									</tr>
 								{/foreach}
+								<tr>
+									<th colspan=4 style="text-align:right" > Sub Total: </th>
+									<th> {$subtotal} </th>
+								</tr>
 								</table>
 					{/foreach}
 			{/if}
@@ -118,6 +123,7 @@
 			{if $DATA.summary.Check }
 				<h3>Check Transactions</h3>
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Check.details}
+								{assign var=subtotal value=$ARS.detail.total}
 								<table class="table table-striped">
 									<tr>
 										<th colspan=1> {$CollectionNo} &nbsp; {$ARS.detail.chk_no} - {$ARS.detail.bank} - {$ARS.detail.date_of_chk} </th>
@@ -143,6 +149,10 @@
 										<td> {$total}</td>
 									</tr>
 								{/foreach}
+								<tr>
+									<th colspan=4 style="text-align:right" > Sub Total: </th>
+									<th> {$subtotal} </th>
+								</tr>
 								</table>
 					{/foreach}
 			{/if}
@@ -150,6 +160,7 @@
 			{if $DATA.summary.Cash_online }
 				<h3>Cash Online Transactions</h3>
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Cash_online.details}
+								{assign var=subtotal value=$ARS.detail.total}
 								<table class="table table-striped">
 									<tr>
 										<th colspan=1> {$CollectionNo} </th>
@@ -177,6 +188,10 @@
 										<td> {$total}</td>
 									</tr>
 								{/foreach}
+								<tr>
+									<th colspan=4 style="text-align:right" > Sub Total: </th>
+									<th> {$subtotal} </th>
+								</tr>
 								</table>
 					{/foreach}
 			{/if}

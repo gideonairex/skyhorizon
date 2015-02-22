@@ -35,6 +35,8 @@ define( function( require ) {
 					'cancel'   : '.cancel',
 					'save'   : '.save'
 				};
+			} else {
+				return {};
 			}
 
 		},
@@ -46,6 +48,8 @@ define( function( require ) {
 					'click @ui.cancel'   : 'cancel',
 					'click @ui.save'   : 'save'
 				};
+			} else {
+				return {};
 			}
 
 		},

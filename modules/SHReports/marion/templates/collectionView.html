@@ -46,8 +46,8 @@
 				</tr>
 			<% } %>
 			<tr>
-				<th> Total Collection </th>
 				<td>  <%- GT.payment %> </td>
+				<th> Total Collection </th>
 			</tr>
 		</table>
 	</div>
@@ -64,7 +64,7 @@
 			<th> Bank Charge </td>
 			<th> Total </td>
 		</tr>
-		<% _.each ( Cash_on_hand.details, function ( element, index, list ) { %>
+		<% _.each ( Cash_on_hand.details, function ( element, index, list ) { var subtotal=0; %>
 			<tr>
 				<th colspan=5><%= index %></th>
 			</tr>
@@ -76,8 +76,13 @@
 						<td> <%= ar.bc %></td>
 						<td> <%= ar.total %></td>
 					</tr>
-			<% } ); %>
+			<% subtotal += ar.total; } ); %>
+			<tr>
+				<th colspan=4 style="text-align:right"> Sub Total: </td>
+				<th> <%= subtotal %></td>
+			</tr>
 		<% } ); %>
+
 		</table>
 		</div>
 	<% } %>
@@ -92,7 +97,7 @@
 			<th> Bank Charge </td>
 			<th> Total </td>
 		</tr>
-		<% _.each ( Check.details, function ( element, index, list ) { %>
+		<% _.each ( Check.details, function ( element, index, list ) { var subtotal=0; %>
 			<tr>
 				<th colspan=5><%= index %>&nbsp;<%= element.detail.chk_no %> - <%= element.detail.bank %> - <%= element.detail.date_of_chk %> </th>
 			</tr>
@@ -104,7 +109,11 @@
 						<td> <%= ar.bc %></td>
 						<td> <%= ar.total %></td>
 					</tr>
-			<% } ); %>
+			<% subtotal += ar.total; } ); %>
+			<tr>
+				<th colspan=4 style="text-align:right"> Sub Total: </td>
+				<th> <%= subtotal %></td>
+			</tr>
 		<% } ); %>
 		</table>
 		</div>
@@ -120,7 +129,7 @@
 			<th> Bank Charge </td>
 			<th> Total </td>
 		</tr>
-		<% _.each ( Cash_online.details, function ( element, index, list ) { %>
+		<% _.each ( Cash_online.details, function ( element, index, list ) { var subtotal=0; %>
 			<tr>
 				<th colspan=5><%= index %></th>
 			</tr>
@@ -132,7 +141,11 @@
 						<td> <%= ar.bc %></td>
 						<td> <%= ar.total %></td>
 					</tr>
-			<% } ); %>
+			<% subtotal += ar.total; } ); %>
+			<tr>
+				<th colspan=4 style="text-align:right"> Sub Total: </td>
+				<th> <%= subtotal %></td>
+			</tr>
 		<% } ); %>
 		</table>
 		</div>
