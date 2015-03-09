@@ -21,7 +21,7 @@
 		$ext .= "and currency_cl = '".$_REQUEST['conversion']."' ";
 	}
 
-	$query = "select *, vtiger_collection.collection_no as `collection_no_`, 
+	$query = "select *, vtiger_collection.collection_no as `collection_no_`,
 		vtiger_collectionlogs.amount as `amount_`,
 		vtiger_collectionlogs.ewt as `ewt_`,
 		vtiger_collectionlogs.bc as `bc_`
@@ -65,7 +65,14 @@
 			$data['summary'][$method]['details'][$collection_no]['lists'][$i]['cl_no'] = "<a href='index.php?module=CollectionLogs&action=DetailView&record=".$adb->query_result($result, $i, "collectionlogsid")."' target=_blank >".$adb->query_result($result, $i, "collection_log_no")."</a>";
 			$data['summary'][$method]['details'][$collection_no]['lists'][$i]['cl_no_'] = $adb->query_result($result, $i, "collection_log_no");
 			$data['summary'][$method]['details'][$collection_no]['lists'][$i]['sales'] = $adb->query_result($result, $i, "sales");
+			// sub total
 			$data['summary'][$method]['details'][$collection_no]['detail']['total'] = $data['summary'][$method]['details'][$collection_no]['lists'][$i]['total'] + $data['summary'][$method]['details'][$collection_no]['detail']['total'];
+			// sub payment
+			$data['summary'][$method]['details'][$collection_no]['detail']['payment'] = $data['summary'][$method]['details'][$collection_no]['lists'][$i]['payment'] + $data['summary'][$method]['details'][$collection_no]['detail']['payment'];
+			// sub awt
+			$data['summary'][$method]['details'][$collection_no]['detail']['awt'] = $data['summary'][$method]['details'][$collection_no]['lists'][$i]['awt'] + $data['summary'][$method]['details'][$collection_no]['detail']['awt'];
+			// sub bc
+			$data['summary'][$method]['details'][$collection_no]['detail']['bc'] = $data['summary'][$method]['details'][$collection_no]['lists'][$i]['bc'] + $data['summary'][$method]['details'][$collection_no]['detail']['bc'];
 			$data['summary']['Summary']['payment'] += $adb->query_result($result, $i, "amount_");
 			$data['summary']['Summary']['awt'] += $adb->query_result($result, $i, "ewt_");
 			$data['summary']['Summary']['bc'] += $adb->query_result($result, $i, "bc_");

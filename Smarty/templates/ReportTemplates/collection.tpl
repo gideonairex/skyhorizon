@@ -87,6 +87,9 @@
 					<h3>Cash Transactions</h3>
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Cash_on_hand.details}
 								{assign var=subtotal value=$ARS.detail.total}
+								{assign var=subPayment value=$ARS.detail.payment}
+								{assign var=subAwt value=$ARS.detail.awt}
+								{assign var=subBc value=$ARS.detail.bc}
 								<table class="table table-striped">
 									<tr>
 										<th colspan=1> {$CollectionNo} </th>
@@ -113,7 +116,10 @@
 									</tr>
 								{/foreach}
 								<tr>
-									<th colspan=4 style="text-align:right" > Sub Total: </th>
+									<th style="text-align:right" > Sub Total: </th>
+									<th> {$subPayment} </th>
+									<th> {$subAwt} </th>
+									<th> {$subBc} </th>
 									<th> {$subtotal} </th>
 								</tr>
 								</table>
@@ -124,9 +130,12 @@
 				<h3>Check Transactions</h3>
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Check.details}
 								{assign var=subtotal value=$ARS.detail.total}
+								{assign var=subPayment value=$ARS.detail.payment}
+								{assign var=subAwt value=$ARS.detail.awt}
+								{assign var=subBc value=$ARS.detail.bc}
 								<table class="table table-striped">
 									<tr>
-										<th colspan=1> {$CollectionNo} &nbsp; {$ARS.detail.chk_no} - {$ARS.detail.bank} - {$ARS.detail.date_of_chk} </th>
+										<th colspan=5> {$CollectionNo} &nbsp; {$ARS.detail.chk_no} - {$ARS.detail.bank} - {$ARS.detail.date_of_chk} </th>
 									</tr>
 									<tr>
 										<th> Sales No.</td>
@@ -150,7 +159,10 @@
 									</tr>
 								{/foreach}
 								<tr>
-									<th colspan=4 style="text-align:right" > Sub Total: </th>
+									<th style="text-align:right" > Sub Total: </th>
+									<th> {$subPayment} </th>
+									<th> {$subAwt} </th>
+									<th> {$subBc} </th>
 									<th> {$subtotal} </th>
 								</tr>
 								</table>
@@ -161,6 +173,9 @@
 				<h3>Cash Online Transactions</h3>
 					{foreach key=CollectionNo item=ARS from=$DATA.summary.Cash_online.details}
 								{assign var=subtotal value=$ARS.detail.total}
+								{assign var=subPayment value=$ARS.detail.payment}
+								{assign var=subAwt value=$ARS.detail.awt}
+								{assign var=subBc value=$ARS.detail.bc}
 								<table class="table table-striped">
 									<tr>
 										<th colspan=1> {$CollectionNo} </th>
@@ -189,7 +204,10 @@
 									</tr>
 								{/foreach}
 								<tr>
-									<th colspan=4 style="text-align:right" > Sub Total: </th>
+									<th style="text-align:right" > Sub Total: </th>
+									<th> {$subPayment} </th>
+									<th> {$subAwt} </th>
+									<th> {$subBc} </th>
 									<th> {$subtotal} </th>
 								</tr>
 								</table>
