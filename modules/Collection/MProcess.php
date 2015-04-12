@@ -68,6 +68,7 @@ if( $_REQUEST['func'] == 'searchAR'){
 	$focus = new Collection();
 	$payment_type = $_REQUEST['payment_type'];
 	$receipt_type = $_REQUEST['receipt_type'];
+	$receipt_number = $_REQUEST['receipt_no'];
 	$entityBody = file_get_contents('php://input');
 	$data = json_decode($entityBody,true);
 	$payment = 0;
@@ -123,7 +124,8 @@ if( $_REQUEST['func'] == 'searchAR'){
 								"awt" => $awt,
 								"receipt_type" => $receipt_type,
 								"conversion_c" => $conversion,
-								"bc" => $bc
+								"bc" => $bc,
+								'receipt_number' => $receipt_number
 							);
 	$focus->save( 'Collection' );
 

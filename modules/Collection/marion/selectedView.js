@@ -12,10 +12,11 @@ define( function ( require ){
 		itemView : selectView,
 		itemViewContainer : 'table.here',
 		ui : {
-			'dateOfCheck' : '.date-of-check',
-			'paymentType' : '.payment_type',
-			'form' : 'form',
-			'checkDetails' : '.check-details'
+			'dateOfCheck'    : '.date-of-check',
+			'paymentType'    : '.payment_type',
+			'form'           : 'form',
+			'checkDetails'   : '.check-details',
+			'orNumber'       : '.receipt-no'
 		},
 		events : {
 			'submit form' : 'createCollection',
@@ -28,10 +29,10 @@ define( function ( require ){
 			});
 		},
 		toggleCheckDetails : function() {
-			if( this.ui.paymentType.val() == 'Check') {
-				this.ui.checkDetails.css('display','')
+			if( this.ui.paymentType.val() === 'Check') {
+				this.ui.checkDetails.css('display','');
 			}else {
-				this.ui.checkDetails.css('display','none')
+				this.ui.checkDetails.css('display','none');
 			}
 		},
 		updateBalance : function(){
