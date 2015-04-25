@@ -92,7 +92,10 @@
 								{assign var=subBc value=$ARS.detail.bc}
 								<table class="table table-striped">
 									<tr>
-										<th colspan=1> {$CollectionNo} </th>
+										<th colspan=5> {$CollectionNo}</th>
+									</tr>
+									<tr>
+										<th colspan=5> {$ARS.detail.receipt_type} - {$ARS.detail.receipt_number} </th>
 									</tr>
 									<tr>
 										<th> Sales No.</td>
@@ -138,6 +141,9 @@
 										<th colspan=5> {$CollectionNo} &nbsp; {$ARS.detail.chk_no} - {$ARS.detail.bank} - {$ARS.detail.date_of_chk} </th>
 									</tr>
 									<tr>
+										<th colspan=5> {$ARS.detail.receipt_type} - {$ARS.detail.receipt_number} </th>
+									</tr>
+									<tr>
 										<th> Sales No.</td>
 										<th> Payment </td>
 										<th> EWT </td>
@@ -179,6 +185,9 @@
 								<table class="table table-striped">
 									<tr>
 										<th colspan=1> {$CollectionNo} </th>
+									</tr>
+									<tr>
+										<th colspan=5> {$ARS.detail.receipt_type} - {$ARS.detail.receipt_number} </th>
 									</tr>
 									<tr>
 										<th> Sales No.</td>

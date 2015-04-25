@@ -68,6 +68,9 @@
 			<tr>
 				<th colspan=5><%= index %></th>
 			</tr>
+			<tr>
+				<th colspan=5><%= element.detail.receipt_type %> - <%= element.detail.receipt_number %> </th>
+			</tr>
 			<% _.each ( element.lists, function( ar ) { %>
 					<tr>
 						<td> <%= ar.sa_no %></td>
@@ -104,6 +107,9 @@
 			<tr>
 				<th colspan=5><%= index %>&nbsp;<%= element.detail.chk_no %> - <%= element.detail.bank %> - <%= element.detail.date_of_chk %> </th>
 			</tr>
+			<tr>
+				<th colspan=5><%= element.detail.receipt_type %> - <%= element.detail.receipt_number %> </th>
+			</tr>
 			<% _.each ( element.lists, function( ar ) { %>
 					<tr>
 						<td> <%= ar.sa_no %></td>
@@ -138,6 +144,9 @@
 		<% _.each ( Cash_online.details, function ( element, index, list ) { var subtotal=0; var subPayment=0; var subAwt=0; var subBc=0; %>
 			<tr>
 				<th colspan=5><%= index %></th>
+			</tr>
+			<tr>
+				<th colspan=5><%= element.detail.receipt_type %> - <%= element.detail.receipt_number %> </th>
 			</tr>
 			<% _.each ( element.lists, function( ar ) { %>
 					<tr>

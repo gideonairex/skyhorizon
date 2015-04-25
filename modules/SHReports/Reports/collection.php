@@ -52,6 +52,8 @@
 
 			$data['summary'][$method]['details'][$collection_no]['detail']['chk_no'] = $adb->query_result($result, $i, "chk_no");
 			$data['summary'][$method]['details'][$collection_no]['detail']['bank'] = $adb->query_result($result, $i, "bank");
+			$data['summary'][$method]['details'][$collection_no]['detail']['receipt_type'] = $adb->query_result($result, $i, "receipt_type");
+			$data['summary'][$method]['details'][$collection_no]['detail']['receipt_number'] = $adb->query_result($result, $i, "receipt_number");
 			$data['summary'][$method]['details'][$collection_no]['detail']['date_of_chk'] = date("F j, Y", strtotime( $adb->query_result($result, $i, "date_of_chk") ) );
 			$data['summary'][$method]['details'][$collection_no]['detail']['arhk_status'] = $adb->query_result($result, $i, "arhk_status");
 			$data['summary'][$method]['details'][$collection_no]['lists'][$i]['payment'] = $adb->query_result($result, $i, "amount_");
