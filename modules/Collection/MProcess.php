@@ -7,6 +7,9 @@ if( $_REQUEST['func'] == 'searchAR'){
 		case 'arno':
 			$filter = " vtiger_accountsreceivable.ar_no = '".$_REQUEST['searchString']."'";
 			break;
+		case 'sales_no':
+			$filter = " ( vtiger_salesagreement.sa_no = '".$_REQUEST['searchString']."' || vtiger_nontrader.ntr_no = '".$_REQUEST['searchString']."' ) ";
+			break;
 		case 'amount':
 			$preNumber = explode(",",$_REQUEST['searchString']);
 			$amount = implode("",$preNumber);
@@ -30,8 +33,9 @@ if( $_REQUEST['func'] == 'searchAR'){
 			  inner join vtiger_crmentity on vtiger_accountsreceivable.accountsreceivableid = vtiger_crmentity.crmid
 			  left join vtiger_salesagreement on vtiger_accountsreceivable.sales_no = vtiger_salesagreement.salesagreementid
 			  left join vtiger_shcontacts on vtiger_salesagreement.customer = vtiger_shcontacts.shcontactsid
-			  left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
-			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial") and conversion_ar="'.$_REQUEST['conversion'].'"';
+				left join vtiger_shaccounts on vtiger_shaccounts.shaccountsid = vtiger_shcontacts.company
+				left join vtiger_nontrader on vtiger_nontrader.nontraderid = vtiger_accountsreceivable.sales_no
+			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ar_status in ("Unpaid","Partial","Pending for clearance") and conversion_ar="'.$_REQUEST['conversion'].'" order by sales_no';
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();

@@ -2,7 +2,9 @@
 
 <div class="col-md-8" >
 	<form class="form-horizontal" role="form">
-	  <div class="form-group">
+
+	<!-- Report name -->
+	<div class="form-group">
 		<label class="col-md-3 control-label">Report Name</label>
 		<div class="col-md-6">
 			<select name="report_name" class="form-control report_name">
@@ -19,20 +21,45 @@
 			</select>
 		</div>
 		<div class="col-md-3"></div>
-	  </div>
-	   <div class="form-group users">
-		<label class="col-md-3 control-label">User</label>
+	</div>
+
+	<!-- Report type -->
+	<div class="form-group report_type">
+		<label class="col-md-3 control-label">Report Type</label>
 		<div class="col-md-6">
-			<select name="user" class="form-control">
-				<option value="0"> All </option>
-				 <% _.each(users, function(item){ %>
-					<option value="<%= item.id %>"> <%= item.name %> </option>
-					<% }); %>
+
+			<!-- If report === purchase -->
+			<select name="purchase_report_type" class="form-control purchase_report_type">
+				<option value="supplier" > by Supplier </option>
+				<option value="service_type" > by Service Type</option>
 			</select>
+
+			<!-- If report === expenses -->
+			<select name="expenses_report_type" class="form-control expenses_report_type">
+				<option value="supplier" > by Supplier </option>
+				<option value="ntp_type" > by NTP Type</option>
+			</select>
+
 		</div>
 		<div class="col-md-3"></div>
-	  </div>
-	  <div class="form-group accounts">
+	</div>
+
+	<!-- Users -->
+	 <div class="form-group users">
+			<label class="col-md-3 control-label">User</label>
+			<div class="col-md-6">
+				<select name="user" class="form-control">
+					<option value="0"> All </option>
+					 <% _.each(users, function(item){ %>
+						<option value="<%= item.id %>"> <%= item.name %> </option>
+						<% }); %>
+				</select>
+			</div>
+			<div class="col-md-3"></div>
+	</div>
+
+	<!-- Accounts -->
+	<div class="form-group accounts">
 		<label class="col-md-3 control-label">Accounts</label>
 		<div class="col-md-6">
 			<select name="accounts" class="form-control">
@@ -43,16 +70,18 @@
 			</select>
 		</div>
 		<div class="col-md-3"></div>
-
 		<div class="col-md-3"></div>
-	  </div>
-	  <div class="form-group accounts">
+	</div>
+
+	<!-- Pax -->
+	<div class="form-group accounts">
 		<label class="col-md-3 control-label">Pax</label>
 		<div class="col-md-6"><input type="text" name="pax" class="form-control" placeholder="Ex: Gideon Rosales"></div>
 		<div class="col-md-3"></div>
+	</div>
 
-	  </div>
-	   <div class="form-group  suppliers">
+	<!-- Suppiers -->
+	<div class="form-group  suppliers">
 		<label class="col-md-3 control-label">Suppliers</label>
 		<div class="col-md-6">
 			<select name="suppliers" class="form-control">
@@ -63,65 +92,106 @@
 			</select>
 		</div>
 		<div class="col-md-3"></div>
-	  </div>
-	   <div class="form-group  conversion">
-		<label class="col-md-3 control-label">Conversion</label>
+	</div>
+
+	<!-- NTP types -->
+	<div class="form-group ntp-types">
+		<label class="col-md-3 control-label">Non-Trade Payables Type</label>
 		<div class="col-md-6">
-			<select name="conversion" class="form-control">
-				 <% _.each(conversion, function(item2){ %>
-					<option value="<%= item2.name %>"> <%= item2.name %> </option>
+			<select name="ntp_type" class="form-control">
+				<option value="0"> All </option>
+				 <% _.each(expense_type, function(value, key){ %>
+					 <option value="<%= key %>"> <%= value %></option>
 					<% }); %>
 			</select>
 		</div>
 		<div class="col-md-3"></div>
-	  </div>
-	   <div class="form-group year">
+	</div>
+
+	<!-- Service types -->
+	<div class="form-group service-types">
+		<label class="col-md-3 control-label">Service Types</label>
+		<div class="col-md-6">
+			<select name="service_type" class="form-control">
+				<option value="0"> All </option>
+				 <% _.each(service_type, function(value, key){ %>
+				 <option value="<%= key %>"> <b> <%= value.name %> </b></option>
+						<% _.each(value.fields, function(value2, key2){ %>
+							<option value="<%= key + '_' + key2 %>"> &nbsp;<%= value2 %> </option>
+						<% }); %>
+					<% }); %>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+	<!-- Conversion -->
+	<div class="form-group  conversion">
+		<label class="col-md-3 control-label">Conversion</label>
+		<div class="col-md-6">
+			<select name="conversion" class="form-control">
+			<% _.each(conversion, function(item2){ %>
+				<option value="<%= item2.name %>"> <%= item2.name %> </option>
+			<% }); %>
+			</select>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+	<!-- Date -->
+	<div class="form-group year">
 		<label class="col-md-3 control-label">Date</label>
 		<div class="col-md-6">  <input name="date" class="form-control date"  placeholder="Select"> </div>
 		<div class="col-md-3"></div>
-	  </div>
-	  <div class="form-group">
+	</div>
+
+	<!-- Generate -->
+	<div class="form-group">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<div class="col-md-6">
 				<button type="submit" class="success btn btn-default">Generate</button>
 			</div>
-			<div class="col-md-6">
-			</div>
+			<div class="col-md-6"></div>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
 
+	<!-- Report templates -->
 	<div class="form-group reporttemplate">
 		<label class="col-md-3 control-label">Report template</label>
 		<div class="col-md-6">
 
+			<!-- If report is sales -->
 			<select name="salestemplate" class="form-control">
-				<option value="sales"> Statement of Account </option>
-				<option value="salesjournal"> Sales Journal </option>
+			<option value="sales"> Statement of Account </option>
+			<option value="salesjournal"> Sales Journal </option>
 			</select>
 
+			<!-- If report is AR -->
 			<select name="artemplate" class="form-control">
-				<option value="ar"> Outstanding Accounts Receivables </option>
-				<option value="aging"> Aging of Receivables </option>
+			<option value="ar"> Outstanding Accounts Receivables </option>
+			<option value="aging"> Aging of Receivables </option>
 			</select>
 
 		</div>
 		<div class="col-md-3"></div>
 	</div>
 
-	  <div class="form-group">
+	<!-- Print or excel -->
+	<div class="form-group">
 		<div class="col-md-3"></div>
-		<div class="col-md-6">
 			<div class="col-md-6">
-				<a class="success btn btn-default print">Print</a>
-			</div>
+				<div class="col-md-6">
+					<a class="success btn btn-default print">Print</a>
+				</div>
 			<div class="col-md-6">
-				<a class="success btn btn-default excel">Excel</a>
+					<a class="success btn btn-default excel">Excel</a>
+				</div>
 			</div>
-		</div>
 		<div class="col-md-3"></div>
-	  </div>
+	</div>
+
 	</form>
 </div>
 

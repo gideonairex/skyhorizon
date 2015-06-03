@@ -28,7 +28,7 @@ if( $_REQUEST['func'] == 'searchAP'){
 			  left join vtiger_shexpenses on vtiger_accountspayable.payable_no = vtiger_shexpenses.shexpensesid
 			  left join vtiger_po on vtiger_accountspayable.payable_no = vtiger_po.poid
 			  left join vtiger_shsupplier on  ( vtiger_po.suplier = vtiger_shsupplier.shsupplierid || vtiger_shexpenses.expense_name = vtiger_shsupplier.shsupplierid )
-			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ap_status in ("Unpaid","Partial") and conversion_ap="'.$_REQUEST['conversion'].'"';
+			  where vtiger_crmentity.deleted = 0 and '.$filter.' and ap_status in ("Unpaid","Partial","Pending for clearance") and conversion_ap="'.$_REQUEST['conversion'].'"';
 
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);

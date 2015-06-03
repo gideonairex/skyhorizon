@@ -4,6 +4,7 @@ requirejs.config({
     paths: {
 		'amcharts' : 'include/components/amcharts_components/amcharts/amcharts',
 		'amcharts.pie'      : 'include/components/amcharts_components/amcharts/pie',
+		// 'amcharts.funnel'      : 'include/components/amcharts_components/amcharts/funnel',
         jquery : 'include/components/jquery/dist/jquery',
 		underscore : 'include/components/underscore/underscore',
 		backbone : 'include/components/backbone/backbone',
@@ -26,6 +27,15 @@ requirejs.config({
                 AmCharts.isReady = true;
             }
         },
+		/*
+		'amcharts.funnel'      : {
+            deps: ['amcharts'],
+            exports: 'AmCharts',
+            init: function() {
+                AmCharts.isReady = true;
+            }
+        },
+		*/
 		'jquery' : {
 			'exports' : '$'
 		},

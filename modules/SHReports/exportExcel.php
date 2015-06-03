@@ -1,6 +1,6 @@
 <?php
 header('Content-type: application/vnd.ms-excel');
-header("Content-Disposition: attachment; filename=statement.xls");
+header("Content-Disposition: attachment; filename=".$_REQUEST['report_name'].".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 $_REQUEST['mode'] = 'print';

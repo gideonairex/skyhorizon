@@ -3,8 +3,21 @@
 	$ext = ' and conversion_ap= "'.$_REQUEST['conversion'].'"';
 	if( $_REQUEST['user'] != 0)
 		$ext = ' and smownerid ='.$_REQUEST['user'];
-	if( $_REQUEST['suppliers'] != 0 )
-		$ext .= ' and  shsupplierid ='.$_REQUEST['suppliers'].' ';
+
+	// Get report type
+	$report_type = $_REQUEST[ 'expenses_report_type' ];
+
+	if( $report_type == 'supplier' ) {
+		if( $_REQUEST['suppliers'] != 0 ) {
+			$ext .= ' and  shsupplierid ='.$_REQUEST['suppliers'].' ';
+		}
+	} elseif ( $report_type == 'ntp_type' ) {
+		$ntp_type = $_REQUEST[ 'ntp_type' ];
+		if( !is_numeric($ntp_type)) {
+			$ext .= ' and expense_type ="'.$ntp_type.'"';
+		}
+	}
+
 	if( $_REQUEST['date'] != "" ) {
 		$date = explode(",",$_REQUEST['date']);
 
@@ -21,11 +34,12 @@
 		}
 		$ext .= " and createdtime between '".$start."' and '".$end."' ";
 	}
+	// All approved ntps
 	$query = 'select * from vtiger_accountspayable
 			  inner join vtiger_crmentity on vtiger_accountspayable.accountspayableid = vtiger_crmentity.crmid
 			  left join vtiger_shexpenses on vtiger_accountspayable.payable_no = vtiger_shexpenses.shexpensesid
 			  inner join vtiger_shsupplier on  ( vtiger_shexpenses.expense_name = vtiger_shsupplier.shsupplierid )
-			  where deleted = 0 and ap_status IN ("Unpaid", "Partial","Pending for clearance") '.$ext;
+			  where deleted = 0 and expense_status = "Approved"'.$ext;
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
@@ -39,6 +53,7 @@
 			//get per service type
 			$data[$i]['expense_no'] = $adb->query_result($result, $i, "expense_no");
 			$data[$i]['expense_name'] = $adb->query_result($result, $i, "expense_name");
+			$data[$i]['expense_type'] = $adb->query_result($result, $i, "expense_type");
 			$data[$i]['po_no'] = $adb->query_result($result, $i, "po_no");
 			$data[$i]['payable_no'] = $data[$i]['expense_no'];
 			$data[$i]['link'] = "index.php?action=DetailView&module=SHExpenses&record=".$adb->query_result($result, $i, "payable_no");
@@ -52,7 +67,9 @@
 			$data[$i]['createdtime'] =  $adb->query_result($result, $i, "createdtime");
 		}
 
-		echo json_encode($data);
+		if ( $_REQUEST['mode'] != "print" ) {
+			echo json_encode($data);
+		}
 	}
 
 ?>

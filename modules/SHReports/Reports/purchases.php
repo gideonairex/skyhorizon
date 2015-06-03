@@ -1,10 +1,48 @@
 <?php
-	global $adb;
+global $adb;
+
 	$ext = ' and conversion_po= "'.$_REQUEST['conversion'].'"';
 	if( $_REQUEST['user'] != 0)
 		$ext = ' and smownerid ='.$_REQUEST['user'];
-	if( $_REQUEST['suppliers'] != 0 )
-		$ext .= ' and  shsupplierid ='.$_REQUEST['suppliers'].' ';
+
+	// Get report type
+	$report_type = $_REQUEST[ 'purchase_report_type' ];
+
+	if( $report_type == 'supplier' ) {
+		if( $_REQUEST['suppliers'] != 0 ) {
+			$ext .= ' and  shsupplierid ='.$_REQUEST['suppliers'].' ';
+		}
+	} elseif ( $report_type == 'service_type' ) {
+		$service_type_arr = explode('_',$_REQUEST[ 'service_type' ]);
+
+		// If all from a certain service
+		if( count( $service_type_arr ) == 1 ) {
+			$service_type = $service_type_arr[ 0 ];
+
+			$service_name = 'name';
+			if( $service_type == 'iat' || $service_type == 'dat' ) {
+				$service_name = 'airlines';
+			}
+
+			$query = 'select * from vtiger_'.$service_type.'
+						inner join vtiger_crmentity on vtiger_'.$service_type.'.'.$service_type.'id = vtiger_crmentity.crmid
+						where deleted = 0';
+			$result = $adb->pquery($query,array());
+			$num_rows = $adb->num_rows($result);
+			if($num_rows > 0){
+				for( $i = 0 ; $i < $num_rows; $i++){
+					$serviceIds[ $i ] = $adb->query_result( $result, $i, $service_type."id" );
+					$serviceGroups[ $adb->query_result( $result, $i, $service_type."id" ) ] = $adb->query_result( $result, $i, $service_name );
+				}
+				$ext .= ' and po_servicetype in ('. implode( $serviceIds,',' ) . ')';
+			}
+		} elseif ( count( $service_type_arr ) == 2 ) {
+			$service_type_id = $service_type_arr[ 1 ];
+			$ext .= ' and po_servicetype ='. $service_type_id;
+		}
+
+	}
+
 	if( $_REQUEST['date'] != "" ) {
 		$date = explode(",",$_REQUEST['date']);
 
@@ -23,8 +61,9 @@
 	}
 	$query = 'select * from vtiger_po
 			  inner join vtiger_crmentity on vtiger_po.poid = vtiger_crmentity.crmid
-			  inner join vtiger_shsupplier on  ( vtiger_po.suplier = vtiger_shsupplier.shsupplierid )
-			  where deleted = 0 and po_status IN ("Approved") '.$ext;
+				inner join vtiger_shsupplier on  ( vtiger_po.suplier = vtiger_shsupplier.shsupplierid )
+				left join vtiger_accountspayable on vtiger_accountspayable.payable_no = vtiger_po.poid
+				where deleted = 0 and po_status IN ("Approved") '.$ext;
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
@@ -42,9 +81,12 @@
 			$data[$i]['link'] = "index.php?action=DetailView&module=PO&record=".$adb->query_result($result, $i, "poid");
 			$data[$i]['purchase_type'] = "po";
 			$data[$i]['supplier_name'] = $adb->query_result($result, $i, "supplier_name");
+			$data[$i]['po_servicetype'] = $adb->query_result($result, $i, "po_servicetype");
+			$data[$i]['servicetype'] = $serviceGroups[ $adb->query_result($result, $i, "po_servicetype") ];
 			$data[$i]['cost'] = $adb->query_result($result, $i, "cost");
 			$data[$i]['service_fee'] = $adb->query_result($result, $i, "service_fee");
 			$data[$i]['grand_total'] = $adb->query_result($result, $i, "grand_total");
+			$data[$i]['ap_no'] = $adb->query_result($result, $i, "ap_no");
 			$data[$i]['createdtime'] =  date("F j, Y", strtotime( $adb->query_result($result, $i, "createdtime") ) );
 			$gt += $data[$i]['grand_total'];
 		}
