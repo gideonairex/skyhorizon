@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '-1');
 global $adb;
 
 	$ext = ' and conversion_po= "'.$_REQUEST['conversion'].'"';
@@ -59,11 +60,32 @@ global $adb;
 		}
 		$ext .= " and createdtime between '".$start."' and '".$end."' ";
 	}
-	$query = 'select * from vtiger_po
+	$query = 'select * from (
+    	select
+    		vtiger_po.poid,
+    		vtiger_po.po_no,
+    		vtiger_po.sa_no,
+    		vtiger_po.po_servicetype,
+    		vtiger_po.cost,
+    		vtiger_po.service_fee,
+    		vtiger_po.grand_total,
+    		vtiger_po.po_status,
+    		vtiger_po.description,
+    		vtiger_po.suplier,
+    		vtiger_po.pax,
+    		vtiger_po.no_of_pax,
+    		vtiger_po.vat,
+    		vtiger_po.vatable_sale,
+    		vtiger_po.access,
+    		vtiger_po.conversion_po,
+    		vtiger_po.rate_per_pax,
+    		vtiger_po.discount,
+    		crmid from vtiger_po
 			  inner join vtiger_crmentity on vtiger_po.poid = vtiger_crmentity.crmid
-				inner join vtiger_shsupplier on  ( vtiger_po.suplier = vtiger_shsupplier.shsupplierid )
-				left join vtiger_accountspayable on vtiger_accountspayable.payable_no = vtiger_po.poid
-				where deleted = 0 and po_status IN ("Approved") '.$ext;
+              where deleted = 0 and po_status IN ("Approved") '.$ext.') as `cut`
+				inner join vtiger_shsupplier on  ( cut.suplier = vtiger_shsupplier.shsupplierid )
+				left join vtiger_accountspayable on vtiger_accountspayable.payable_no = cut.poid';
+
 	$result = $adb->pquery($query,array());
 	$num_rows = $adb->num_rows($result);
 	$data = array();
