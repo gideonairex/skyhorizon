@@ -1,4 +1,5 @@
 <?php
+	ini_set('memory_limit', '-1');
 	global $adb;
 	$query = 'select * from vtiger_users where status= "Active"';
 	$result = $adb->pquery($query,array());
