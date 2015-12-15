@@ -79,7 +79,8 @@ global $adb;
     		vtiger_po.access,
     		vtiger_po.conversion_po,
     		vtiger_po.rate_per_pax,
-    		vtiger_po.discount,
+				vtiger_po.discount,
+				createdtime,
     		crmid from vtiger_po
 			  inner join vtiger_crmentity on vtiger_po.poid = vtiger_crmentity.crmid
               where deleted = 0 and po_status IN ("Approved") '.$ext.') as `cut`
