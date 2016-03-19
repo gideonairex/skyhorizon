@@ -1,5 +1,6 @@
 Smarty/templates_c/
 config.inc.php
-user_privileges/
+user_privileges
 logs/
 include/components/
+storage
