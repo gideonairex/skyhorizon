@@ -4,3 +4,4 @@ user_privileges
 logs/
 include/components/
 storage
+Smarty/templates/ReportTemplates/logo.tpl
