@@ -6,9 +6,9 @@ $smarty->assign('MODULE', $currentModule);
 
 $id = $_REQUEST['record'];
 
-$query = "select * from vtiger_crmentityrel 
-			  inner join vtiger_crmentity on vtiger_crmentityrel.crmid = vtiger_crmentity.crmid 
-			  inner join vtiger_disbursement on vtiger_disbursement.disbursementid = vtiger_crmentityrel.crmid 
+$query = "select * from vtiger_crmentityrel
+			  inner join vtiger_crmentity on vtiger_crmentityrel.crmid = vtiger_crmentity.crmid
+			  inner join vtiger_disbursement on vtiger_disbursement.disbursementid = vtiger_crmentityrel.crmid
 			  inner join vtiger_accountspayable on vtiger_accountspayable.accountspayableid = vtiger_crmentityrel.relcrmid
 			  left join vtiger_po on vtiger_accountspayable.payable_no = vtiger_po.poid
 			  left join vtiger_shexpenses on vtiger_accountspayable.payable_no = vtiger_shexpenses.shexpensesid
@@ -17,6 +17,7 @@ $query = "select * from vtiger_crmentityrel
 $result = $adb->pquery($query,array());
 $num_rows = $adb->num_rows($result);
 $data = array();
+$totalPaid = 0;
 if($num_rows == 0){
 		//echo json_encode(0);
 	}else{
@@ -29,6 +30,8 @@ if($num_rows == 0){
 			$data[$i]['payment'] = ( $adb->query_result($result, $i, "payment") ? $adb->query_result($result, $i, "payment") : 0 );
 			$data[$i]['ewt'] = ( $adb->query_result($result, $i, "ewt")  ? $adb->query_result($result, $i, "ewt") : 0 );
 			$data[$i]['balance'] = $data[$i]['payable'] - $data[$i]['payment'] - $data[$i]['ewt'];
+			$data[$i]['total_paid'] = $data[$i]['payment'] + $data[$i]['ewt'];
+			$totalPaid += $data[$i]['payment'] + $data[$i]['ewt'];
 			$data[$i]['ap_status'] = $adb->query_result($result, $i, "ap_status");
 			//get per service type
 			$data[$i]['expense_no'] = $adb->query_result($result, $i, "expense_no");
@@ -63,6 +66,7 @@ if($num_rows == 0){
 	$data2['check_no'] = $adb->query_result($result, 0, "check_no");
 	$data2['date_of_check'] = date( "F j, Y", strtotime($adb->query_result($result, 0, "date_of_check") ) );
 	$data2['amount'] = $adb->query_result($result, 0, "amount");
+	$data2['total_paid'] = $totalPaid;
 }
 $data2['supplier_name'] = $supplier_name;
 
