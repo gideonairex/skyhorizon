@@ -15,7 +15,7 @@
 				{include file='ReportTemplates/logo.tpl'}
 			</div>
 			<div class="col-xs-6">
-			<h3> Check Details </h3>
+			<h3> Details </h3>
 				{assign var=disbursement_no value=$CHECKDETAILS.disbursement_no}
 				{assign var=bank value=$CHECKDETAILS.bank}
 				{assign var=apchk_no value=$CHECKDETAILS.apchk_no}
@@ -23,6 +23,7 @@
 				{assign var=date_of_check value=$CHECKDETAILS.date_of_check}
 				{assign var=amount value=$CHECKDETAILS.amount}
 				{assign var=supplier_name value=$CHECKDETAILS.supplier_name}
+				{assign var=total_paid value=$CHECKDETAILS.total_paid}
 				<table class="table">
 					<tr>
 						<td> Voucher No </td>
@@ -46,7 +47,7 @@
 					</tr>
 					<tr>
 						<td> Amount </td>
-						<td> {$amount} </td>
+						<td> {$total_paid} </td>
 					</tr>
 				</table>
 			</div>
@@ -58,20 +59,25 @@
 				<tr>
 					<th>AP No</th>
 					<th>Payable No</th>
+					<th>Payable</th>
 					<th>Amount Paid</th>
 				</tr>
 			{foreach key=ID item=AR from=$ARS}
 				{assign var=ap_no value=$AR.ap_no}
 				{assign var=payable_no value=$AR.payable_no}
 				{assign var=payable value=$AR.payable}
+				{assign var=payment value=$AR.payment}
+				{assign var=ewt value=$AR.ewt}
 				{assign var=balance value=$AR.balance}
 				{assign var=ap_status value=$AR.ap_status}
 				{assign var=supplier_name value=$AR.supplier_name}
+				{assign var=total_paid value=$AR.total_paid}
 
 				<tr>
 					<td>{$ap_no}</td>
 					<td>{$payable_no}</td>
 					<td>{$payable}</td>
+					<td>{$total_paid}</td>
 				</tr>
 			{/foreach}
 			</table>

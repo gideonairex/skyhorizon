@@ -69,7 +69,7 @@
 			</table>
 {/foreach}
 		<div class="col-xs-12">
-			<p>note: please disregard statement if already paid.</p>
+			<p>Note: If transmittal has recently been made please accept our thanks and disregard billing.</p>
 		</div>
 			{include file='ReportTemplates/footer.tpl'}
 	</div>

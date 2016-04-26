@@ -96,17 +96,10 @@
 			</div>
 			<div class="col-xs-8">
 				<p>
-					<strong> To our valued suppliers: </strong> We are strictly implementing a no P.O. number no issuance policy.
-				</p>
-				<p class="text-right">
-					Thank you for your cooperation.
-				</p>
-				<p  class="text-right">
-					 <strong> Management </strong>
+					<strong> To our valued suppliers: </strong> We strictly implement a no-P.O. and no-issuance policy.
 				</p>
 			</div>
 			<div class="col-xs-4">
-				
 			</div>
 		</div>
 	</div>

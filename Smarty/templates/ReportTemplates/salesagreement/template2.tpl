@@ -48,7 +48,7 @@
 					{if $branch != ''}
 					<tr>
 						<td>
-							Branch
+							Dept.
 						</td>
 						<td>
 							{$branch}
@@ -66,7 +66,6 @@
 					</tr>
 				</table>
 			</div>
-			
 			<div class="col-xs-8">
 				<h3>Particulars</h3>
 				<div class="panel panel-default">
@@ -81,17 +80,10 @@
 					{$details}
 				  </div>
 				</div>
-				
 			</div>
 			<div class="col-xs-4">
-			
 				<h3>Total Amount</h3>
 				<table class="table table-striped">
-					
-					<tr>
-						<th>Quantity</th>
-						<td>{$quantity}</td>
-					</tr>
 					<tr>
 						<th>Rate per Pax</th>
 						<td>{$rate_per_pax}</td>
@@ -104,7 +96,10 @@
 						<th>Service Fee</th>
 						<td>{$sf}</td>
 					</tr>
-					
+					<tr>
+						<th>Quantity</th>
+						<td>{$quantity}</td>
+					</tr>
 					<tr>
 						<th>Grand Total</th>
 						<td>{$conversion} <strong>{$gt}</strong></td>
@@ -114,13 +109,14 @@
 			
 			<div class="col-xs-8">
 				<p>
-					<strong> Important Notice: </strong> After issuance of Tickets & Hotel Voucher. In case of voluntary cancellations or revisions of airline tickets & voucher. I hereby agree to pay all the penalties that applies. Thank you
+					<strong> Notice: </strong> In case of voluntary cancellations or revisions of tickets and or vouchers after issuance, passenger will be of penalties that applies.
 				</p>
 			</div>
 			<div class="col-xs-4">
-				<p> Name of Flight Details Verfified Correct: </p>
+				<p> Name and details verified correct: </p>
 				<br>
-				<p style="border-top:1px solid black" class="text-center"> Signed over Printed Name Date</p>
+				<p>Signed over Printed Name</p>
+				Date:<p style="border-top:1px solid black;width: 80%;margin-left: 20%;" class="text-center"></p>
 			</div>
 		</div>
 	</div>
