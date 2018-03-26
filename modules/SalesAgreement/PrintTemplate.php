@@ -19,6 +19,8 @@ if($num_rows == 0){
 }else{
 	$data['sa_no'] = $adb->query_result($result, 0, "sa_no");
 	$data['account_name'] = $adb->query_result($result, 0, "account_name");
+	$data['address'] = $adb->query_result($result, 0, "address");
+	$data['tin'] = $adb->query_result($result, 0, "tin");
 	$data['details'] = nl2br( $adb->query_result($result, 0, "details") );
 	$data['quantity'] = $adb->query_result($result, 0, "quantity");
 	$data['pax'] = nl2br ( $adb->query_result($result, 0, "pax") );
